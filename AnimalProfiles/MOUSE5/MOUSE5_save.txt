@@ -1,0 +1,8 @@
+002FBE7305E7
+MOUSE5
+5
+67465
+1
+LEFT
+44
+/home/silasi/HomeCageSinglePellet/AnimalProfiles/MOUSE5/

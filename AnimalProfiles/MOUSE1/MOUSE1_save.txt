@@ -1,0 +1,8 @@
+00782ABAS
+MOUSE1
+1
+67465
+2
+RIGHT
+37
+/home/silasi/HomeCageSinglePellet/AnimalProfiles/MOUSE1/

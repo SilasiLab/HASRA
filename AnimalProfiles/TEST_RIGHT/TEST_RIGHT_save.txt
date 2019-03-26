@@ -1,0 +1,8 @@
+00782B1884CF
+TEST_RIGHT
+5
+45567
+3
+RIGHT
+6
+/home/silasi/HomeCageSinglePellet/AnimalProfiles/TEST_RIGHT/

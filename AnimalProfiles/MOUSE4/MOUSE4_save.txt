@@ -1,0 +1,8 @@
+002FBE7326C4
+MOUSE4
+4
+67465
+0
+RIGHT
+65
+/home/silasi/HomeCageSinglePellet/AnimalProfiles/MOUSE4/

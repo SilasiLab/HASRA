@@ -1,0 +1,8 @@
+002FBE728D6E
+MOUSE3
+3
+67465
+1
+LEFT
+33
+/home/silasi/HomeCageSinglePellet/AnimalProfiles/MOUSE3/

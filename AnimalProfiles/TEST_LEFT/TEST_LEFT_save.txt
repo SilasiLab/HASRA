@@ -1,0 +1,8 @@
+00782B19C08A
+TEST_LEFT
+6
+45567
+0
+LEFT
+27
+/home/silasi/HomeCageSinglePellet/AnimalProfiles/TEST_LEFT/

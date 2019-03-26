@@ -1,0 +1,8 @@
+002FBE737B99
+MOUSE2
+2
+67465
+1
+LEFT
+70
+/home/silasi/HomeCageSinglePellet/AnimalProfiles/MOUSE2/
