@@ -2,7 +2,7 @@
 MOUSE5
 5
 67465
-1
-LEFT
-44
+4
+RIGHT
+4872
 /home/silasi/HomeCageSinglePellet/AnimalProfiles/MOUSE5/

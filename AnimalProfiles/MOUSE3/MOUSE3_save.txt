@@ -2,7 +2,7 @@
 MOUSE3
 3
 67465
-1
-LEFT
-33
+4
+RIGHT
+6525
 /home/silasi/HomeCageSinglePellet/AnimalProfiles/MOUSE3/

@@ -1,8 +1,8 @@
-00782ABAS
+002FBE722AC9
 MOUSE1
 1
 67465
-2
+4
 RIGHT
-37
+12619
 /home/silasi/HomeCageSinglePellet/AnimalProfiles/MOUSE1/

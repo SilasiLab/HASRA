@@ -2,7 +2,7 @@
 MOUSE4
 4
 67465
-0
+4
 RIGHT
-65
+6567
 /home/silasi/HomeCageSinglePellet/AnimalProfiles/MOUSE4/
