@@ -5,4 +5,4 @@ MOUSE5
 4
 RIGHT
 4872
-/home/silasi/HomeCageSinglePellet/AnimalProfiles/MOUSE5/
+/home/silasi/HomeCageSinglePellet_server/AnimalProfiles/MOUSE5/

@@ -5,4 +5,4 @@ MOUSE2
 4
 RIGHT
 11972
-/home/silasi/HomeCageSinglePellet/AnimalProfiles/MOUSE2/
+/home/silasi/HomeCageSinglePellet_server/AnimalProfiles/MOUSE2/

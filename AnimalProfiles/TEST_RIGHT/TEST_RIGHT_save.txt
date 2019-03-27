@@ -5,4 +5,4 @@ TEST_RIGHT
 3
 RIGHT
 6
-/home/silasi/HomeCageSinglePellet/AnimalProfiles/TEST_RIGHT/
+/home/silasi/HomeCageSinglePellet_server/AnimalProfiles/TEST_RIGHT/

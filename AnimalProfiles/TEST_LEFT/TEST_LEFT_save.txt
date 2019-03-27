@@ -5,4 +5,4 @@ TEST_LEFT
 0
 LEFT
 27
-/home/silasi/HomeCageSinglePellet/AnimalProfiles/TEST_LEFT/
+/home/silasi/HomeCageSinglePellet_server/AnimalProfiles/TEST_LEFT/
