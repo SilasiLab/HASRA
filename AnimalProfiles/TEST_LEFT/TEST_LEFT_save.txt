@@ -3,6 +3,6 @@ TEST_LEFT
 6
 45567
 0
-LEFT
-27
-/home/silasi/HomeCageSinglePellet_server/AnimalProfiles/TEST_LEFT/
+BOTH
+42
+/mnt/1T/HomeCageSinglePellet_server/AnimalProfiles/TEST_LEFT/

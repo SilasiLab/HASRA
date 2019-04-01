@@ -2,7 +2,7 @@
 TEST_RIGHT
 5
 45567
-3
-RIGHT
-6
-/home/silasi/HomeCageSinglePellet_server/AnimalProfiles/TEST_RIGHT/
+0
+BOTH
+51
+/mnt/1T/HomeCageSinglePellet_server/AnimalProfiles/TEST_RIGHT/

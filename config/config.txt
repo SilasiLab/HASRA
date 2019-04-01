@@ -7,4 +7,4 @@ FPS=140
 EXPOSURE=200
 BITRATE=8000000
 DISPLAY_PREVIEW=0
-PROFILE_SAVE_DIRECTORY=/home/silasi/HomeCageSinglePellet_server/AnimalProfiles/
+PROFILE_SAVE_DIRECTORY=/mnt/1T/HomeCageSinglePellet_server/AnimalProfiles/

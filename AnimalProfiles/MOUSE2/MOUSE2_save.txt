@@ -1,8 +1,8 @@
 002FBE737B99
 MOUSE2
 2
-67465
-4
-RIGHT
-11972
-/home/silasi/HomeCageSinglePellet_server/AnimalProfiles/MOUSE2/
+85136
+0
+BOTH
+2
+/mnt/1T/HomeCageSinglePellet_server/AnimalProfiles/MOUSE2/

@@ -1,8 +1,8 @@
-002FBE7305E7
+002FBE797F35
 MOUSE5
 5
 67465
 4
-RIGHT
+BOTH
 4872
-/home/silasi/HomeCageSinglePellet_server/AnimalProfiles/MOUSE5/
+/mnt/1T/HomeCageSinglePellet_server/AnimalProfiles/MOUSE5/

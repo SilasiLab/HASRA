@@ -19,6 +19,8 @@ import os
 import cv2
 import random
 import datetime
+import shutil
+from copy import copy
 
 
 systemCheck.check_directory_structure()
@@ -317,6 +319,8 @@ class SessionController(object):
             self.arduino_client.serialInterface.write(b'1')
         elif profile.dominant_hand == "RIGHT":
             self.arduino_client.serialInterface.write(b'2')
+        elif profile.dominant_hand == "BOTH":
+            self.arduino_client.serialInterface.write(b'4')
 
         trial_count = 1
         sleep(6)
@@ -332,6 +336,9 @@ class SessionController(object):
                     self.arduino_client.serialInterface.write(b'1')
                 elif profile.dominant_hand == "RIGHT":
                     self.arduino_client.serialInterface.write(b'2')
+                elif profile.dominant_hand == "BOTH":
+                    self.arduino_client.serialInterface.write(b'4')
+
                 now = time.time()
                 trial_count += 1
 
@@ -487,6 +494,84 @@ def main():
 
 
 
+def copyLargeFile(src, dest, buffer_size=16000):
+    with open(src, 'rb') as fsrc:
+        with open(dest, 'wb') as fdest:
+            shutil.copyfileobj(fsrc, fdest, buffer_size)
+
+def googleDriveManager(interval=20, cage_id=85136, mice_n=4):
+
+    gdrive_rootDir = os.path.join("/mnt/gooleTeamDrive/HomeCages/", "cage_"+str(cage_id))
+    gdrive_profilesDir = os.path.join(gdrive_rootDir, 'AnimalProfiles')
+    check_dir_list = [gdrive_rootDir, gdrive_profilesDir]
+    for i in range(1, mice_n + 1):
+        check_dir_list.append(os.path.join(gdrive_profilesDir, "MOUSE" + str(i)))
+        check_dir_list.append(os.path.join(gdrive_profilesDir, "MOUSE" + str(i), "Videos"))
+        check_dir_list.append(os.path.join(gdrive_profilesDir, "MOUSE" + str(i), "Logs"))
+        check_dir_list.append(os.path.join(gdrive_profilesDir, "MOUSE" + str(i), "Analyses"))
+        check_dir_list.append(os.path.join(gdrive_profilesDir, "MOUSE" + str(i), "Temp"))
+
+    for dir_item in check_dir_list:
+        if not os.path.exists(dir_item):
+            os.mkdir(dir_item)
+    local_profileDir = "../../AnimalProfiles/"
+
+    print(os.listdir(local_profileDir))
+    while True:
+        uploading_list = []
+        for i in range(1, mice_n + 1):
+            flag = False
+            video_root_dir = os.path.join(local_profileDir, 'MOUSE' + str(i), 'Videos')
+            logs_root_dir = os.path.join(local_profileDir, 'MOUSE' + str(i), 'Logs')
+            video_list = os.listdir(video_root_dir)
+            for file_item in video_list:
+                if file_item.endswith('.avi'):
+                    uploading_list.append(os.path.join(video_root_dir, file_item))
+                    flag = True
+            if flag:
+                for file_item in os.listdir(logs_root_dir):
+                    if file_item.endswith('.csv'):
+                        uploading_list.append(os.path.join(logs_root_dir, file_item))
+
+        for item in uploading_list:
+            upload_success = False
+            retry_count = 0
+            origin_dir = copy(item)
+            basename = item.replace('../../', '')
+            target_dir = os.path.join(gdrive_rootDir, basename)
+            while not upload_success:
+
+                try:
+                    copyLargeFile(origin_dir, target_dir)
+                    sleep(2)
+                except IOError as e:
+                    print("Failed, retry times: %d" % retry_count)
+                    os.remove(target_dir)
+                    sleep(2)
+                    retry_count += 1
+
+                if os.path.exists(target_dir):
+                    size_origin = os.path.getsize(origin_dir)
+                    size_target = os.path.getsize(target_dir)
+                    print(size_origin, size_target)
+                    if size_origin == size_target:
+                        upload_success = True
+                        print("File uploaded as: %s successfully!" % target_dir)
+                        if origin_dir.endswith('.avi'):
+                            os.remove(origin_dir)
+                            print("Original file:%s deleted." % origin_dir)
+        sleep(interval)
+
+
+
+
+
+
 # Python convention for launching main() function.
 if __name__ == "__main__":
-    main()
+    p1 = multiprocessing.Process(target=googleDriveManager, args=(20, 85136, 4,))
+    p2 = multiprocessing.Process(target=main)
+    p1.start()
+    p2.start()
+    p1.join()
+    p2.join()

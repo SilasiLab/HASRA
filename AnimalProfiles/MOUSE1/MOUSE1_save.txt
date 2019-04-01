@@ -1,8 +1,8 @@
-002FBE722AC9
+002FBE7305E7
 MOUSE1
 1
-67465
-4
-RIGHT
-12619
-/home/silasi/HomeCageSinglePellet_server/AnimalProfiles/MOUSE1/
+85136
+0
+BOTH
+3
+/mnt/1T/HomeCageSinglePellet_server/AnimalProfiles/MOUSE1/
