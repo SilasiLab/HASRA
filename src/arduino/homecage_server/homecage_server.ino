@@ -383,6 +383,7 @@ int startSession() {
             default:
               break;  
             }
+          break;
         case ('4'):
           displayPellet(left);
           displayPellet(right);

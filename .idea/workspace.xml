@@ -3,17 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="9d0609cd-0b84-47be-81bf-56f2da79cf2a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE1/Logs/MOUSE1_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE1/Logs/MOUSE1_session_history.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE1/MOUSE1_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE1/MOUSE1_save.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE2/Logs/MOUSE2_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE2/Logs/MOUSE2_session_history.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE2/MOUSE2_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE2/MOUSE2_save.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE3/Logs/MOUSE3_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE3/Logs/MOUSE3_session_history.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE3/MOUSE3_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE3/MOUSE3_save.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE4/Logs/MOUSE4_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE4/Logs/MOUSE4_session_history.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE4/MOUSE4_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE4/MOUSE4_save.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AnimalProfiles/TEST_RIGHT/Logs/TEST_RIGHT_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/TEST_RIGHT/Logs/TEST_RIGHT_session_history.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AnimalProfiles/TEST_RIGHT/TEST_RIGHT_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/TEST_RIGHT/TEST_RIGHT_save.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arduino/homecage_server/homecage_server.ino" beforeDir="false" afterPath="$PROJECT_DIR$/src/arduino/homecage_server/homecage_server.ino" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,12 +14,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/client/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="556" column="51" lean-forward="true" selection-start-line="556" selection-start-column="51" selection-end-line="556" selection-end-column="51" />
+            <state relative-caret-position="-364">
+              <caret line="281" column="41" lean-forward="true" selection-start-line="281" selection-start-column="41" selection-end-line="281" selection-end-column="41" />
               <folding>
                 <element signature="e#122#132#0" expanded="true" />
               </folding>
@@ -63,7 +55,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="550" />
     <option name="y" value="195" />
     <option name="width" value="596" />
@@ -74,7 +66,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -91,6 +82,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -151,26 +143,38 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="550" y="195" width="596" height="450" extended-state="0" />
+    <frame x="65" y="-4" width="1215" height="1028" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.591623" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12080537" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.91354465" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32972974" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.46702704" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/client/main.py</url>
+          <line>414</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/anaconda3/envs/HCSP/lib/python3.7/multiprocessing/popen_fork.py">
@@ -182,8 +186,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="556" column="51" lean-forward="true" selection-start-line="556" selection-start-column="51" selection-end-line="556" selection-end-column="51" />
+        <state relative-caret-position="-364">
+          <caret line="281" column="41" lean-forward="true" selection-start-line="281" selection-start-column="41" selection-end-line="281" selection-end-column="41" />
           <folding>
             <element signature="e#122#132#0" expanded="true" />
           </folding>

@@ -4,5 +4,5 @@ TEST_RIGHT
 45567
 0
 BOTH
-56
+61
 /mnt/1T/HomeCageSinglePellet_server/AnimalProfiles/TEST_RIGHT/
