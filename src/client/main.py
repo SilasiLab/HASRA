@@ -546,7 +546,8 @@ def googleDriveManager(interval=20, cage_id=85136, mice_n=4):
                     sleep(2)
                 except IOError as e:
                     print("Failed, retry times: %d" % retry_count)
-                    os.remove(target_dir)
+                    if os.path.exists(target_dir):
+                        os.remove(target_dir)
                     sleep(2)
                     retry_count += 1
 

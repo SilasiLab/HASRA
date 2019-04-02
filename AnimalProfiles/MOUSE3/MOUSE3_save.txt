@@ -4,5 +4,5 @@ MOUSE3
 85136
 0
 BOTH
-1
+5
 /mnt/1T/HomeCageSinglePellet_server/AnimalProfiles/MOUSE3/

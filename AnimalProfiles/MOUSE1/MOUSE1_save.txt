@@ -2,7 +2,7 @@
 MOUSE1
 1
 85136
-0
+2
 BOTH
-3
+20
 /mnt/1T/HomeCageSinglePellet_server/AnimalProfiles/MOUSE1/
