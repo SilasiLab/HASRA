@@ -501,7 +501,7 @@ def copyLargeFile(src, dest, buffer_size=16000):
 
 def googleDriveManager(interval=20, cage_id=85136, mice_n=4):
 
-    gdrive_rootDir = os.path.join("/mnt/gooleTeamDrive/HomeCages/", "cage_"+str(cage_id))
+    gdrive_rootDir = os.path.join("/mnt/googleTeamDrive/HomeCages/", "cage_"+str(cage_id))
     gdrive_profilesDir = os.path.join(gdrive_rootDir, 'AnimalProfiles')
     check_dir_list = [gdrive_rootDir, gdrive_profilesDir]
     for i in range(1, mice_n + 1):
