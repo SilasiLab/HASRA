@@ -2,17 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d0609cd-0b84-47be-81bf-56f2da79cf2a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE1/Logs/MOUSE1_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE1/Logs/MOUSE1_session_history.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE1/MOUSE1_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE1/MOUSE1_save.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE2/Logs/MOUSE2_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE2/Logs/MOUSE2_session_history.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE2/MOUSE2_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE2/MOUSE2_save.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE3/Logs/MOUSE3_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE3/Logs/MOUSE3_session_history.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE3/MOUSE3_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE3/MOUSE3_save.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE4/Logs/MOUSE4_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE4/Logs/MOUSE4_session_history.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE4/MOUSE4_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE4/MOUSE4_save.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimalProfiles/TEST_RIGHT/Logs/TEST_RIGHT_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/TEST_RIGHT/Logs/TEST_RIGHT_session_history.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimalProfiles/TEST_RIGHT/TEST_RIGHT_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/TEST_RIGHT/TEST_RIGHT_save.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/client/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="550" column="66" lean-forward="true" selection-start-line="550" selection-start-column="66" selection-end-line="550" selection-end-column="66" />
+            <state relative-caret-position="587">
+              <caret line="104" selection-start-line="104" selection-end-line="104" />
               <folding>
                 <element signature="e#122#132#0" expanded="true" />
               </folding>
@@ -210,8 +199,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="550" column="66" lean-forward="true" selection-start-line="550" selection-start-column="66" selection-end-line="550" selection-end-column="66" />
+        <state relative-caret-position="587">
+          <caret line="104" selection-start-line="104" selection-end-line="104" />
           <folding>
             <element signature="e#122#132#0" expanded="true" />
           </folding>

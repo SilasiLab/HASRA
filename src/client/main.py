@@ -102,7 +102,7 @@ def loadAnimalProfiles(profile_save_directory):
 
         # Build save file path
         load_file = profile_save_directory + profile + "/" + profile + "_save.txt"
-        print(load_file)
+
         profile_state = []
 
         # Open the save file
