@@ -3,9 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="9d0609cd-0b84-47be-81bf-56f2da79cf2a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE1/Logs/MOUSE1_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE1/Logs/MOUSE1_session_history.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE1/MOUSE1_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE1/MOUSE1_save.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE2/Logs/MOUSE2_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE2/Logs/MOUSE2_session_history.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE2/MOUSE2_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE2/MOUSE2_save.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE3/Logs/MOUSE3_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE3/Logs/MOUSE3_session_history.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE3/MOUSE3_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE3/MOUSE3_save.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE4/Logs/MOUSE4_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE4/Logs/MOUSE4_session_history.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AnimalProfiles/MOUSE4/MOUSE4_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/MOUSE4/MOUSE4_save.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AnimalProfiles/TEST_RIGHT/Logs/TEST_RIGHT_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/TEST_RIGHT/Logs/TEST_RIGHT_session_history.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AnimalProfiles/TEST_RIGHT/TEST_RIGHT_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/TEST_RIGHT/TEST_RIGHT_save.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arduino/homecage_server/homecage_server.ino" beforeDir="false" afterPath="$PROJECT_DIR$/src/arduino/homecage_server/homecage_server.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,10 +26,22 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/client/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-364">
-              <caret line="281" column="41" lean-forward="true" selection-start-line="281" selection-start-column="41" selection-end-line="281" selection-end-column="41" />
+            <state relative-caret-position="212">
+              <caret line="550" column="66" lean-forward="true" selection-start-line="550" selection-start-column="66" selection-end-line="550" selection-end-column="66" />
               <folding>
                 <element signature="e#122#132#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3/multiprocessing/managers.pyi">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="555">
+              <caret line="42" column="28" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="28" />
+              <folding>
+                <element signature="e#69#81#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -33,6 +53,10 @@
     <findStrings>
       <find>sleep</find>
       <find>remove</find>
+      <find>print_session_start_information</find>
+      <find>startSession</find>
+      <find>Output</find>
+      <find>recording_video_name</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -143,7 +167,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1215" height="1028" extended-state="6" />
+    <frame x="64" y="-4" width="1217" height="1029" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12080537" />
@@ -151,7 +175,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32972974" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32972974" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.46702704" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -186,10 +210,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-364">
-          <caret line="281" column="41" lean-forward="true" selection-start-line="281" selection-start-column="41" selection-end-line="281" selection-end-column="41" />
+        <state relative-caret-position="212">
+          <caret line="550" column="66" lean-forward="true" selection-start-line="550" selection-start-column="66" selection-end-line="550" selection-end-column="66" />
           <folding>
             <element signature="e#122#132#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3/multiprocessing/managers.pyi">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="42" column="28" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="28" />
+          <folding>
+            <element signature="e#69#81#0" expanded="true" />
           </folding>
         </state>
       </provider>

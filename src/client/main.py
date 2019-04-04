@@ -516,8 +516,8 @@ def googleDriveManager(interval=20, cage_id=85136, mice_n=4):
             os.mkdir(dir_item)
     local_profileDir = "../../AnimalProfiles/"
 
-    print(os.listdir(local_profileDir))
     while True:
+        n_video = 0
         uploading_list = []
         for i in range(1, mice_n + 1):
             flag = False
@@ -527,11 +527,13 @@ def googleDriveManager(interval=20, cage_id=85136, mice_n=4):
             for file_item in video_list:
                 if file_item.endswith('.avi'):
                     uploading_list.append(os.path.join(video_root_dir, file_item))
+                    n_video += 1
                     flag = True
             if flag:
                 for file_item in os.listdir(logs_root_dir):
                     if file_item.endswith('.csv'):
                         uploading_list.append(os.path.join(logs_root_dir, file_item))
+
 
         for item in uploading_list:
             upload_success = False
@@ -540,27 +542,38 @@ def googleDriveManager(interval=20, cage_id=85136, mice_n=4):
             basename = item.replace('../../', '')
             target_dir = os.path.join(gdrive_rootDir, basename)
             while not upload_success:
+                recording_flag = False
 
-                try:
-                    copyLargeFile(origin_dir, target_dir)
-                    sleep(2)
-                except IOError as e:
-                    print("Failed, retry times: %d" % retry_count)
+                size1 = os.path.getsize(origin_dir)
+                sleep(2)
+                size2 = os.path.getsize(origin_dir)
+                if size1 != size2:
+                    print("Recording finished! Uploading starts!")
+                    recording_flag = True
+                if not recording_flag:
+                    try:
+                        copyLargeFile(origin_dir, target_dir)
+                        sleep(2)
+                    except IOError as e:
+                        print("Failed, retry times: %d" % retry_count)
+                        if os.path.exists(target_dir):
+                            os.remove(target_dir)
+                        sleep(2)
+                        retry_count += 1
+
                     if os.path.exists(target_dir):
-                        os.remove(target_dir)
-                    sleep(2)
-                    retry_count += 1
-
-                if os.path.exists(target_dir):
-                    size_origin = os.path.getsize(origin_dir)
-                    size_target = os.path.getsize(target_dir)
-                    print(size_origin, size_target)
-                    if size_origin == size_target:
-                        upload_success = True
-                        print("File uploaded as: %s successfully!" % target_dir)
-                        if origin_dir.endswith('.avi'):
-                            os.remove(origin_dir)
-                            print("Original file:%s deleted." % origin_dir)
+                        size_origin = os.path.getsize(origin_dir)
+                        size_target = os.path.getsize(target_dir)
+                        print("original file size:%d, target file size:%d"%(size_origin, size_target))
+                        if size_origin == size_target:
+                            upload_success = True
+                            print("File uploaded as: %s successfully!" % target_dir)
+                            if origin_dir.endswith('.avi'):
+                                os.remove(origin_dir)
+                                print("Original file:%s deleted." % origin_dir)
+                else:
+                    print("Current video is under recording, wait for 10 secs.")
+                    sleep(10)
         sleep(interval)
 
 
@@ -570,7 +583,8 @@ def googleDriveManager(interval=20, cage_id=85136, mice_n=4):
 
 # Python convention for launching main() function.
 if __name__ == "__main__":
-    p1 = multiprocessing.Process(target=googleDriveManager, args=(20, 85136, 4,))
+    manager = multiprocessing.Manager()
+    p1 = multiprocessing.Process(target=googleDriveManager, args=(5, 85136, 4))
     p2 = multiprocessing.Process(target=main)
     p1.start()
     p2.start()

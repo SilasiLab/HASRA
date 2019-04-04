@@ -3,6 +3,6 @@ MOUSE4
 4
 85136
 3
-BOTH
-109
+RIGHT
+189
 /mnt/1T/HomeCageSinglePellet_server/AnimalProfiles/MOUSE4/

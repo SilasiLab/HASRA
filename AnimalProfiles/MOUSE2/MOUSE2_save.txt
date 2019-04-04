@@ -3,6 +3,6 @@ MOUSE2
 2
 85136
 0
-BOTH
-5
+RIGHT
+96
 /mnt/1T/HomeCageSinglePellet_server/AnimalProfiles/MOUSE2/
