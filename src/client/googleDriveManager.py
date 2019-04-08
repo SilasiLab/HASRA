@@ -97,7 +97,7 @@ def googleDriveManager(interval=20, min_interval=10, cage_id=85136, mice_n=4):
                                     os.remove(origin_dir)
                                     print("Original file:%s deleted." % origin_dir)
 
-            sleep(interval)
+        sleep(interval)
 
 if __name__ == '__main__':
     googleDriveManager(300, 10, 85136, 4)
