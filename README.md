@@ -18,6 +18,7 @@ The design allows a single mouse at a time to enter the reaching tube. Upon entr
 	* matplotlib
 	* Pillow
 	* tqdm
+	* psutil
 * Flir Spinnaker SDK v1.10.31
 	* libavcodec-ffmpeg56
 	* libavformat-ffmpeg56
@@ -64,6 +65,7 @@ The design allows a single mouse at a time to enter the reaching tube. Upon entr
 	- `conda install -c conda-forge matplotlib`
 	- `conda install tqdm`
 	- `conda install Pillow`
+	-  pip install psutil
 
 6. Download the HCSP source code from https://github.com/SilasiLab/HomeCageSinglePellet and unpack it.
 7. Optional (Only if you want to use the analysis features): Install Deeplabcut using the Anaconda based pip installation method. (https://github.com/AlexEMG/DeepLabCut/blob/master/docs/installation.md)
@@ -261,16 +263,18 @@ enough, the analysis pipeline will work. **INSERT PICTURE OF FRAME CAPTURED BY P
 ### **Running the Device**
 1. Enter the virtual environment that the system was installed in by typing `source activate <my_env>` into a terminal.
 
-2. Use `cd` to navigate to HomeCageSinglePellet/src/client/ and then run `python -B genProfiles.py`. The text prompts will walk you through entering your new animals into the system.
+2. Use `cd` to navigate to HomeCageSinglePellet_server/src/client/ and then run `python -B genProfiles.py`. The text prompts will walk you through entering your new animals into the system.
 
-3. Open HomeCageSinglePellet/config/config.txt and set the system configuration you want.
+3. Open HomeCageSinglePellet_server/config/config.txt and set the system configuration you want.
 
-4. Enter HomeCageSinglePellet/src/client/ and run `python -B main.py`
+4. Enter HomeCageSinglePellet_server/src/client/ and run `python -B main.py`
 
-5. To test that everything is running correctly, block the IR beam breaker with something
+5. In the same folder, open another terminal and activate the virtual environment again, modify the cage ID in the script googleDriveManager.py, then run `python googleDriveManager.py`
+
+6. To test that everything is running correctly, block the IR beam breaker with something
 	and scan one of the system’s test tags. If a session starts properly, it’s working.
 
-6. To shut the system down cleanly; 
+7. To shut the system down cleanly; 
 
 	- Ensure no sessions are currently running. 
 	- Press the quit button on the GUI.
