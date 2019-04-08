@@ -583,10 +583,11 @@ def googleDriveManager(interval=20, cage_id=85136, mice_n=4):
 
 # Python convention for launching main() function.
 if __name__ == "__main__":
-    manager = multiprocessing.Manager()
-    p1 = multiprocessing.Process(target=googleDriveManager, args=(5, 85136, 4))
-    p2 = multiprocessing.Process(target=main)
-    p1.start()
-    p2.start()
-    p1.join()
-    p2.join()
+    main()
+    # manager = multiprocessing.Manager()
+    # p1 = multiprocessing.Process(target=googleDriveManager, args=(5, 85136, 4))
+    # p2 = multiprocessing.Process(target=main)
+    # p1.start()
+    # p2.start()
+    # p1.join()
+    # p2.join()
