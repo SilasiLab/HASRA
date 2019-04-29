@@ -21,7 +21,7 @@ import random
 import datetime
 import shutil
 from copy import copy
-
+from driver_for_a_better_camera import *
 
 systemCheck.check_directory_structure()
 # Load all configuration information for running the system.
@@ -298,15 +298,23 @@ class SessionController(object):
         profile.session_count += 1
         self.print_session_start_information(profile, startTime)
 
-        vidPath = profile.genVideoPath(startTime)
+        vidPath = profile.genVideoPath(startTime) + '.avi'
+        print("saved as :"+vidPath)
         if "TEST" in profile.name:
-            p = Popen(
-                ['../../bin/SessionVideo', vidPath, WIDTH, HEIGHT, OFFSET_X, OFFSET_Y, "50", EXPOSURE, BITRATE, "1"],
-                stdin=PIPE)
-        else:
-            p = Popen(['../../bin/SessionVideo', vidPath, WIDTH, HEIGHT, OFFSET_X, OFFSET_Y, FPS, EXPOSURE, BITRATE,
-                       DISPLAY_PREVIEW], stdin=PIPE)
+            # p = Popen(
+            #     ['../../bin/SessionVideo', vidPath, WIDTH, HEIGHT, OFFSET_X, OFFSET_Y, "120", EXPOSURE, BITRATE, "1"],
+            #     stdin=PIPE)
+            print("Its testing")
 
+            vs = WebcamVideoStream(src=0).start()
+
+            r = Recoder(savePath=vidPath, vs=vs, show=True).start()
+        else:
+            # p = Popen(['../../bin/SessionVideo', vidPath, WIDTH, HEIGHT, OFFSET_X, OFFSET_Y, FPS, EXPOSURE, BITRATE,
+            #            DISPLAY_PREVIEW], stdin=PIPE)
+            vs = WebcamVideoStream(src=0).start()
+
+            r = Recoder(savePath=vidPath, vs=vs, show=False).start()
         # Tell server to move stepper to appropriate position for current profile
         self.arduino_client.serialInterface.write(b'3')
         stepperMsg = str(profile.difficulty_dist_mm)
@@ -326,9 +334,6 @@ class SessionController(object):
         sleep(6)
         now = time.time()
 
-
-
-
         while True:
 
             if (time.time() - now > 7):
@@ -343,15 +348,25 @@ class SessionController(object):
                 trial_count += 1
 
             # Check if message has arrived from server, if it has, check if it is a TERM message.
+            Flag = False
             if self.arduino_client.serialInterface.in_waiting > 0:
                 serial_msg = self.arduino_client.serialInterface.readline().rstrip().decode()
+                print("===========================================")
+                print("Message from arduino")
+                print(serial_msg)
+                print("===========================================")
                 if serial_msg == "TERM":
-                    break
+                    Flag = True
+                    sleep(3)
+                    self.arduino_client.serialInterface.flushInput()
+            if Flag or (now - startTime) > 120:
+              break
 
-        open('KILL', 'a').close()
-        p.wait()
-        os.remove("KILL")
-
+        # open('KILL', 'a').close()
+        # p.wait()
+        # os.remove("KILL")
+        r.stop()
+        vs.stop()
         # Log session information.
         endTime = time.time()
         profile.insertSessionEntry(startTime, endTime, trial_count)
@@ -419,7 +434,7 @@ def main():
         RFID_code = listen_for_rfid(ser)[:12]
         # Check RFID authorization
         profile = session_controller.searchForProfile(RFID_code)
-
+        time.sleep(1)
         # RFID authorized
         if profile != -1:
 

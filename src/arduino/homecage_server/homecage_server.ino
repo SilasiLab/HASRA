@@ -38,11 +38,11 @@ bool servo1_up_flag = false;
 bool servo2_up_flag = false;
 const int SERVO_SETTLE_DELAY = 300;
 // Higher numbers make the arm go higher
-int SERVO1_UP_POS = 75;
+int SERVO1_UP_POS = 80;
 // Low numbers makehe arm go lower
-int SERVO1_DOWN_POS = 140;
+int SERVO1_DOWN_POS = 135;
 // Lower numbers make the arm go higher
-int SERVO2_UP_POS = 105;
+int SERVO2_UP_POS = 100;
 // High numbers make the arm go lower
 int SERVO2_DOWN_POS = 45;
 int SERVO_PULSE_DELAY = 16;
@@ -394,8 +394,6 @@ int startSession() {
     }
     
   }
-
-
   char termCmd;
   // Send session end message.
   Serial.write("TERM\n");
@@ -421,14 +419,15 @@ int startSession() {
 
 
 void loop() { 
-
-  while(1){
-    if(listenForStartCommand()){
+if(listenForStartCommand()){
       startSession();
     }
-    //displayPellet(right);
-    //delay(200);
-    //displayPellet(left);
-    //delay(200);
+  //while(1){
+   // if(listenForStartCommand()){
+   //   startSession();
+  //  }
+//    displayPellet(right);
+//    delay(200);
+//    displayPellet(left);
+//    delay(200);
   }      
-}
