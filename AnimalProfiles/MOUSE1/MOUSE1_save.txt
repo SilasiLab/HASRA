@@ -2,7 +2,7 @@
 MOUSE1
 1
 85136
-2
-BOTH
-124
-/mnt/1T/HomeCageSinglePellet_server/AnimalProfiles/MOUSE1/
+4
+RIGHT
+2760
+C:\Users\Silasi Lab\HomeCageSinglePellet_server\AnimalProfiles\MOUSE1\

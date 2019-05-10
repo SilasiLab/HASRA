@@ -4,7 +4,7 @@
     Organization: University of Ottawa (Silasi Lab)
 """
 
-
+from pathlib import WindowsPath, Path
 import gui
 import arduinoClient
 import systemCheck
@@ -72,6 +72,7 @@ def loadAnimalProfileTrialLimits():
     global mouse1TrialLimit, mouse2TrialLimit, mouse3TrialLimit, mouse4TrialLimit, mouse5TrialLimit
 
     with open("../../config/trialLimitConfig.txt") as f:
+        # print(f.readline().rstrip())
         mouse1TrialLimit = int(f.readline().rstrip())
         mouse2TrialLimit = int(f.readline().rstrip())
         mouse3TrialLimit = int(f.readline().rstrip())
@@ -101,10 +102,9 @@ def loadAnimalProfiles(profile_save_directory):
     for profile in profile_names:
 
         # Build save file path
-        load_file = profile_save_directory + profile + "/" + profile + "_save.txt"
-
+        # load_file = profile_save_directory + profile + "/" + profile + "_save.txt"
+        load_file = os.path.join(profile_save_directory , profile, profile + "_save.txt")
         profile_state = []
-
         # Open the save file
         try:
             load = open(load_file, 'r')
@@ -202,9 +202,10 @@ class AnimalProfile(object):
     # Generates the path where the video for the next session will be stored
     def genVideoPath(self, videoStartTimestamp):
 
-        videoStartTimestamp = time.strftime("%Y-%m-%d_%H:%M:%S", time.localtime(videoStartTimestamp))
-        return PROFILE_SAVE_DIRECTORY + str(self.name) + str("/Videos/") + videoStartTimestamp + "_" + str(
-            self.ID) + "_" + str(self.cageNumber) + "_" + str(self.session_count)
+        videoStartTimestamp = time.strftime("%Y-%m-%d_(%H-%M-%S)", time.localtime(videoStartTimestamp))
+        temp_dir = os.path.join(PROFILE_SAVE_DIRECTORY, str(self.name), "Videos", videoStartTimestamp + "_" + str(
+            self.ID) + "_" + str(self.cageNumber) + "_" + str(self.session_count))
+        return temp_dir
 
     # This function takes all the information required for an animal's session log entry, and then formats it.
     # Once formatted, it appends the log entry to the animal's session_history.csv file.
@@ -301,25 +302,17 @@ class SessionController(object):
         vidPath = profile.genVideoPath(startTime) + '.avi'
         print("saved as :"+vidPath)
         if "TEST" in profile.name:
-            # p = Popen(
-            #     ['../../bin/SessionVideo', vidPath, WIDTH, HEIGHT, OFFSET_X, OFFSET_Y, "120", EXPOSURE, BITRATE, "1"],
-            #     stdin=PIPE)
             print("Its testing")
-
             vs = WebcamVideoStream(src=0).start()
-
-            r = Recoder(savePath=vidPath, vs=vs, show=True).start()
+            r = Recoder(savePath=vidPath, vs=vs, show=False).start()
         else:
-            # p = Popen(['../../bin/SessionVideo', vidPath, WIDTH, HEIGHT, OFFSET_X, OFFSET_Y, FPS, EXPOSURE, BITRATE,
-            #            DISPLAY_PREVIEW], stdin=PIPE)
             vs = WebcamVideoStream(src=0).start()
-
             r = Recoder(savePath=vidPath, vs=vs, show=False).start()
         # Tell server to move stepper to appropriate position for current profile
         self.arduino_client.serialInterface.write(b'3')
         stepperMsg = str(profile.difficulty_dist_mm)
         self.arduino_client.serialInterface.write(stepperMsg.encode())
-        sleep(1)
+
 
         # Main session loop. Runs until it receives TERM sig from server. Polls
         # the camera queue for GETPEL messages and forwards to server if it receives one.
@@ -331,7 +324,6 @@ class SessionController(object):
             self.arduino_client.serialInterface.write(b'4')
 
         trial_count = 1
-        sleep(6)
         now = time.time()
 
         while True:
@@ -348,23 +340,17 @@ class SessionController(object):
                 trial_count += 1
 
             # Check if message has arrived from server, if it has, check if it is a TERM message.
-            Flag = False
             if self.arduino_client.serialInterface.in_waiting > 0:
                 serial_msg = self.arduino_client.serialInterface.readline().rstrip().decode()
-                print("===========================================")
-                print("Message from arduino")
-                print(serial_msg)
-                print("===========================================")
+                print("=========================================================")
+                print("receive message from arduino: %s" % serial_msg)
+                print("=========================================================")
                 if serial_msg == "TERM":
-                    Flag = True
-                    sleep(3)
+                    self.arduino_client.serialInterface.write(b'5')
+                    self.arduino_client.serialInterface.flush()
                     self.arduino_client.serialInterface.flushInput()
-            if Flag or (now - startTime) > 120:
-              break
+                    break
 
-        # open('KILL', 'a').close()
-        # p.wait()
-        # os.remove("KILL")
         r.stop()
         vs.stop()
         # Log session information.
@@ -385,9 +371,8 @@ def launch_gui():
 # This function initializes all the high level system components, returning a handle to each one. 
 def sys_init():
     profile_list = loadAnimalProfiles(PROFILE_SAVE_DIRECTORY)
-    arduino_client = arduinoClient.client("/dev/ttyUSB0", 9600)
-    print("first step")
-    ser = serial.Serial('/dev/ttyUSB1', 9600)
+    arduino_client = arduinoClient.client("COM7", 9600)
+    ser = serial.Serial('COM5', 9600)
     
     guiProcess = launch_gui()
     session_controller = SessionController(profile_list, arduino_client)
@@ -434,7 +419,7 @@ def main():
         RFID_code = listen_for_rfid(ser)[:12]
         # Check RFID authorization
         profile = session_controller.searchForProfile(RFID_code)
-        time.sleep(1)
+
         # RFID authorized
         if profile != -1:
 
@@ -481,7 +466,9 @@ def main():
 
 
             # Start a session on Arduino server side. <A> is the magic byte that tells the Arduino to start a session.
+            arduino_client.serialInterface.flushInput()
             arduino_client.serialInterface.write(b'A')
+
             # Start a session on Python client side.
             session_controller.startSession(profile)
             # After the session returns, flush the Arduino serial communication buffer.

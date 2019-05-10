@@ -5,4 +5,4 @@ MOUSE5
 4
 BOTH
 4872
-/mnt/1T/HomeCageSinglePellet_server/AnimalProfiles/MOUSE5/
+C:\Users\Silasi Lab\HomeCageSinglePellet_server\AnimalProfiles\MOUSE5\

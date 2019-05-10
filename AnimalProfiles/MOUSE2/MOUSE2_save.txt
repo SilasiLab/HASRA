@@ -2,7 +2,7 @@
 MOUSE2
 2
 85136
-3
+4
 RIGHT
-212
-/mnt/1T/HomeCageSinglePellet_server/AnimalProfiles/MOUSE2/
+1747
+C:\Users\Silasi Lab\HomeCageSinglePellet_server\AnimalProfiles\MOUSE2\

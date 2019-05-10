@@ -2,7 +2,7 @@
 MOUSE3
 3
 85136
-0
-BOTH
-63
-/mnt/1T/HomeCageSinglePellet_server/AnimalProfiles/MOUSE3/
+5
+LEFT
+1940
+C:\Users\Silasi Lab\HomeCageSinglePellet_server\AnimalProfiles\MOUSE3\

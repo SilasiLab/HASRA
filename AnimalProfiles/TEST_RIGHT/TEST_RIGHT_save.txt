@@ -4,5 +4,5 @@ TEST_RIGHT
 45567
 0
 BOTH
-68
-/mnt/1T/HomeCageSinglePellet_server/AnimalProfiles/TEST_RIGHT/
+273
+C:\Users\Silasi Lab\HomeCageSinglePellet_server\AnimalProfiles\TEST_RIGHT\

@@ -2,7 +2,7 @@
 MOUSE4
 4
 85136
-3
+4
 RIGHT
-270
-/mnt/1T/HomeCageSinglePellet_server/AnimalProfiles/MOUSE4/
+4336
+C:\Users\Silasi Lab\HomeCageSinglePellet_server\AnimalProfiles\MOUSE4\

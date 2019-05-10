@@ -299,9 +299,9 @@ class GUI:
 		for profile in self.profileNames:
 
 			# Build save file path and save in list
-			loadFile = self.animalProfilePath + profile + "/" + profile + "_save.txt"
+			# loadFile = self.animalProfilePath + profile + "/" + profile + "_save.txt"
+			loadFile = os.path.join(self.animalProfilePath, profile, profile + "_save.txt")
 			self.profileSaveFilePaths.append(loadFile)
-
 			# Open the save file
 			try:
 				load = open(loadFile, 'r')

@@ -3,7 +3,11 @@ from threading import Thread
 import cv2
 import time
 import subprocess
-
+import os
+import inspect
+import ctypes
+import threading
+from pathlib import Path, PureWindowsPath
 class FPS_camera:
     def __init__(self):
         self._start = None
@@ -35,10 +39,10 @@ class FPS_camera:
 
 
 class WebcamVideoStream:
-    def __init__(self, src=0, width=1280, height=720):
-        # initialize the video camera stream and read the first frame
-        # from the stream
+    def __init__(self, src=0, width=1279, height=719):
         self.stream = cv2.VideoCapture(src)
+        print(self.stream.isOpened())
+
         self.width = width
         self.height = height
         ret1 = self.stream.set(3, self.width)
@@ -48,12 +52,15 @@ class WebcamVideoStream:
         # initialize the variable used to indicate if the thread should
         # be stopped
         self.stopped = False
-        # print(self.stream.get(cv2.CAP_PROP_AUTO_EXPOSURE))
-        # print(self.stream.get(cv2.CAP_PROP_EXPOSURE))
+        self.flag = False
+        self.FPS = FPS_camera()
+
     def start(self):
         # start the thread to read frames from the video stream
+
         self.thread = Thread(target=self.update, args=())
         self.thread.start()
+        self.FPS = self.FPS.start()
         return self
 
     def update(self):
@@ -61,8 +68,18 @@ class WebcamVideoStream:
         while True:
             # if the thread indicator variable is set, stop the thread
             if self.stopped:
-                return
-            (self.grabbed, self.frame) = self.stream.read()
+                break
+
+            self.grabbed, self.frame = self.stream.read()
+            if self.grabbed:
+                # got a frame
+                self.FPS.update()
+            else:
+                # no frame
+                pass
+
+        self.stream.release()
+        self.flag = True
 
     def read(self):
         # return the frame most recently read
@@ -71,50 +88,95 @@ class WebcamVideoStream:
     def stop(self):
         # indicate that the thread should be stopped
         self.stopped = True
+        self.FPS.stop()
+        # print("[INFO] elasped time: {:.2f}".format(self.FPS.elapsed()))
+        # print("[INFO] approx. FPS: {:.2f}".format(self.FPS.fps()))
+        while not self.flag:
+            continue
+        if self.thread.is_alive():
+            _async_raise(self.thread.ident, SystemExit)
+
 
 class Recoder():
 
     def __init__(self, savePath='test.avi', show=False, vs=None):
         self.fourcc = cv2.VideoWriter_fourcc(*'MJPG')
-        self.writer = cv2.VideoWriter(savePath, self.fourcc, 120.0, (1280, 720), False)
+        self.writer = cv2.VideoWriter(savePath, self.fourcc, 100.0, (1280, 720), False)
         self.stopped = False
         self.FPS = FPS_camera()
         self.vs = vs
         self.thread = None
         self.show = show
+        self.flag = False
+        self.process = None
 
     def recording(self):
         self.FPS = self.FPS.start()
+        time_str = str(time.time())
         while True:
+            time_iter_start = datetime.datetime.now()
             if self.stopped:
                 break
             frame = self.vs.read()
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             self.writer.write(gray)
-            if self.show:
-                cv2.imshow('video', gray)
-                if cv2.waitKey(1) & 0xFF == ord('q'):
-                    break
             self.FPS.update()
+
+            if self.show:
+                cv2.imshow(time_str, gray)
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    cv2.destroyAllWindows()
+                    break
+            time_iter_end = datetime.datetime.now()
+            iteration = float((time_iter_end - time_iter_start).microseconds) * 1e-6
+            time.sleep(max((0.0080 - iteration), 0))
+
         self.writer.release()
+        cv2.waitKey(1)
+        cv2.destroyAllWindows()
+        cv2.waitKey(1)
+
+        self.flag = True
 
     def start(self):
-        # start the thread to read frames from the video stream
         self.thread = Thread(target=self.recording, args=())
         self.thread.start()
         return self
 
     def stop(self):
-        # indicate that the thread should be stopped
+
         self.FPS.stop()
-        print("[INFO] elasped time: {:.2f}".format(self.FPS.elapsed()))
+        # print("[INFO] elasped time: {:.2f}".format(self.FPS.elapsed()))
         print("[INFO] approx. FPS: {:.2f}".format(self.FPS.fps()))
         self.stopped = True
 
+        while not self.flag:
+            continue
+        if self.thread.is_alive():
+            _async_raise(self.thread.ident, SystemExit)
+
+
+def _async_raise(tid, exctype):
+    '''Raises an exception in the threads with id tid'''
+    if not inspect.isclass(exctype):
+        raise TypeError("Only types can be raised (not instances)")
+    res = ctypes.pythonapi.PyThreadState_SetAsyncExc(ctypes.c_long(tid),
+                                                     ctypes.py_object(exctype))
+    if res == 0:
+        raise ValueError("invalid thread id")
+    elif res != 1:
+        # "if it returns a number greater than one, you're in trouble,
+        # and you should call it again with exc=NULL to revert the effect"
+        ctypes.pythonapi.PyThreadState_SetAsyncExc(ctypes.c_long(tid), None)
+        raise SystemError("PyThreadState_SetAsyncExc failed")
+
+
 if __name__ == '__main__':
     print("[INFO] sampling THREADED frames from webcam...")
-    vs = WebcamVideoStream(src=0).start()
-    r = Recoder(savePath='test.avi', vs=vs, show=True).start()
-    time.sleep(5)
-    r.stop()
-    vs.stop()
+    for i in range(30):
+        vs = WebcamVideoStream(src=0).start()
+        r = Recoder(savePath=r"1.avi", vs=vs, show=False).start()
+        time.sleep(5)
+        r.stop()
+        vs.stop()
+

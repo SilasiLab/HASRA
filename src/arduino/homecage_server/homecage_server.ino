@@ -36,15 +36,15 @@ Servo servo1;
 Servo servo2;
 bool servo1_up_flag = false;
 bool servo2_up_flag = false;
-const int SERVO_SETTLE_DELAY = 300;
+const int SERVO_SETTLE_DELAY = 800;
 // Higher numbers make the arm go higher
-int SERVO1_UP_POS = 80;
+int SERVO1_UP_POS = 20;
 // Low numbers makehe arm go lower
-int SERVO1_DOWN_POS = 135;
+int SERVO1_DOWN_POS = 80;
 // Lower numbers make the arm go higher
 int SERVO2_UP_POS = 100;
 // High numbers make the arm go lower
-int SERVO2_DOWN_POS = 45;
+int SERVO2_DOWN_POS = 120;
 int SERVO_PULSE_DELAY = 16;
 int servo1Pos = SERVO1_DOWN_POS;
 int servo2Pos = SERVO2_DOWN_POS;
@@ -318,7 +318,6 @@ bool listenForStartCommand() {
     }
     
     if(authByte == 'A') {
-
       return true;
     }
     else if (authByte == 'Y' ) {
@@ -332,9 +331,9 @@ bool listenForStartCommand() {
 
 
 int startSession() {
-
+  bool startedflag = false;
   while(!digitalRead(IRBreakerPin)) {
-
+    startedflag = true;
     char cmd;
     char stepperDist;
     
@@ -355,7 +354,7 @@ int startSession() {
         case ('3'):
 
           // Give client a second to respond
-          delay(1000);
+          delay(200);
           stepperDist = Serial.read();
           
           switch(stepperDist){
@@ -395,8 +394,20 @@ int startSession() {
     
   }
   char termCmd;
-  // Send session end message.
-  Serial.write("TERM\n");
+  char message;
+  if (startedflag){
+    while(true)
+    {
+      Serial.write("TERM\n");
+      delay(30);
+      message = Serial.read();
+      if(message=='5'){
+        break;
+        }
+      }
+    startedflag = false;
+    }
+  
 
   if(servo1_up_flag)
   {
@@ -419,15 +430,7 @@ int startSession() {
 
 
 void loop() { 
-if(listenForStartCommand()){
-      startSession();
-    }
-  //while(1){
-   // if(listenForStartCommand()){
-   //   startSession();
-  //  }
-//    displayPellet(right);
-//    delay(200);
-//    displayPellet(left);
-//    delay(200);
-  }      
+  if(listenForStartCommand()){
+    startSession();
+  }
+}

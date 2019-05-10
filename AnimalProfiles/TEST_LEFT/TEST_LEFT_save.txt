@@ -5,4 +5,4 @@ TEST_LEFT
 0
 BOTH
 42
-/mnt/1T/HomeCageSinglePellet_server/AnimalProfiles/TEST_LEFT/
+C:\Users\Silasi Lab\HomeCageSinglePellet_server\AnimalProfiles\TEST_LEFT\
