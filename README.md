@@ -66,15 +66,15 @@ The design allows a single mouse at a time to enter the reaching tube. Upon entr
 	- `conda install Pillow`
 	- `pip install psutil`
 	
-5.1 For opencv, we need to download whl file first. https://www.lfd.uci.edu/~gohlke/pythonlibs/#opencv and download `opencv_python‑3.4.6+contrib‑cp35‑cp35m‑win_amd64.whl`
+6. For opencv, we need to download whl file first. https://www.lfd.uci.edu/~gohlke/pythonlibs/#opencv and download `opencv_python‑3.4.6+contrib‑cp35‑cp35m‑win_amd64.whl`
 	Open a terminal, go in to the directory containing this file.
 	- `pip install ./opencv_python‑3.4.6+contrib‑cp35‑cp35m‑win_amd64.whl`
 
-6. Download the HCSP source code from https://github.com/SilasiLab/HomeCageSinglePellet and unpack it.
-7. Optional (Only if you want to use the analysis features): Install Deeplabcut using the Anaconda based pip installation method. (https://github.com/AlexEMG/DeepLabCut/blob/master/docs/installation.md)
-8. Optional (Only if you want to use the anaylsis features): Move the file `HomeCageSinglePellet/src/analysis/HCSP_analyze.py` into `~/.conda/envs/DLC2/lib/python3.6/site-packages/deeplabcut` (Where DLC2 is the name of the anaconda virtual environment where you installed Deeplabcut).
-9. Optional (Only if you want to use the anaylsis features): Download our pretrained DLC2 network for automatically extracting reach attempts from your videos. **INSERT GOOGLE DRIVE LINK TO NETWORK HERE**
-8. Done!
+7. Download the HCSP source code from https://github.com/SilasiLab/HomeCageSinglePellet and unpack it.
+8. Optional (Only if you want to use the analysis features): Install Deeplabcut using the Anaconda based pip installation method. (https://github.com/AlexEMG/DeepLabCut/blob/master/docs/installation.md)
+9. Optional (Only if you want to use the anaylsis features): Move the file `HomeCageSinglePellet/src/analysis/HCSP_analyze.py` into `~/.conda/envs/DLC2/lib/python3.6/site-packages/deeplabcut` (Where DLC2 is the name of the anaconda virtual environment where you installed Deeplabcut).
+10. Optional (Only if you want to use the anaylsis features): Download our pretrained DLC2 network for automatically extracting reach attempts from your videos. **INSERT GOOGLE DRIVE LINK TO NETWORK HERE**
+11. Done!
 	
 	
 # **Assembly:**
