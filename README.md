@@ -58,14 +58,17 @@ The design allows a single mouse at a time to enter the reaching tube. Upon entr
 5. Create and configure a virtual environment for installing the HomeCageSinglePellet code.
 	- `conda create -n <yourenvname> python=3.5.2 anaconda`
 	- `conda activate <yourenvname>`
-	- `conda install -c conda-forge opencv=3.4.4`
 	- `conda install -c anaconda numpy`
 	- `conda install -c anaconda pyserial`
 	- `conda install -c anaconda tk`
 	- `conda install -c conda-forge matplotlib`
 	- `conda install tqdm`
 	- `conda install Pillow`
-	-  pip install psutil
+	- `pip install psutil`
+	For opencv, we need to download whl file first. 
+	https://www.lfd.uci.edu/~gohlke/pythonlibs/#opencv and download `opencv_python‑3.4.6+contrib‑cp35‑cp35m‑win_amd64.whl`
+	Open a terminal, go in to the directory containing this file.
+	- `pip install ./opencv_python‑3.4.6+contrib‑cp35‑cp35m‑win_amd64.whl`
 
 6. Download the HCSP source code from https://github.com/SilasiLab/HomeCageSinglePellet and unpack it.
 7. Optional (Only if you want to use the analysis features): Install Deeplabcut using the Anaconda based pip installation method. (https://github.com/AlexEMG/DeepLabCut/blob/master/docs/installation.md)
