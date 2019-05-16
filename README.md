@@ -65,8 +65,8 @@ The design allows a single mouse at a time to enter the reaching tube. Upon entr
 	- `conda install tqdm`
 	- `conda install Pillow`
 	- `pip install psutil`
-	For opencv, we need to download whl file first. 
-	https://www.lfd.uci.edu/~gohlke/pythonlibs/#opencv and download `opencv_python‑3.4.6+contrib‑cp35‑cp35m‑win_amd64.whl`
+	
+5.1 For opencv, we need to download whl file first. https://www.lfd.uci.edu/~gohlke/pythonlibs/#opencv and download `opencv_python‑3.4.6+contrib‑cp35‑cp35m‑win_amd64.whl`
 	Open a terminal, go in to the directory containing this file.
 	- `pip install ./opencv_python‑3.4.6+contrib‑cp35‑cp35m‑win_amd64.whl`
 
