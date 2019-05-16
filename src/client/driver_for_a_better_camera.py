@@ -2,12 +2,10 @@ import datetime
 from threading import Thread
 import cv2
 import time
-import subprocess
-import os
 import inspect
 import ctypes
-import threading
-from pathlib import Path, PureWindowsPath
+import argparse
+
 class FPS_camera:
     def __init__(self):
         self._start = None
@@ -39,14 +37,21 @@ class FPS_camera:
 
 
 class WebcamVideoStream:
-    def __init__(self, src=0, width=1279, height=719):
-        self.stream = cv2.VideoCapture(src)
+    def __init__(self, src=0, width=1280, height=720):
+        self.stream = cv2.VideoCapture(src, cv2.CAP_DSHOW)
         print(self.stream.isOpened())
-
         self.width = width
         self.height = height
-        ret1 = self.stream.set(3, self.width)
-        ret2 = self.stream.set(4, self.height)
+        ret1 = self.stream.set(cv2.CAP_PROP_FRAME_WIDTH, self.width)
+        ret2 = self.stream.set(cv2.CAP_PROP_FRAME_HEIGHT, self.height)
+        ret3 = self.stream.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)
+        ret4 = self.stream.set(cv2.CAP_PROP_EXPOSURE, -11)
+        ret5 = self.stream.set(cv2.CAP_PROP_AUTOFOCUS, 0)
+        ret6 = self.stream.set(cv2.CAP_PROP_BRIGHTNESS, 0.0)
+        ret7 = self.stream.set(cv2.CAP_PROP_FPS, 120)
+        ret8 = self.stream.set(cv2.CAP_PROP_CONTRAST, 0)
+        print(ret1, ret2, ret3, ret4, ret5, ret6, ret7, ret8)
+
         (self.grabbed, self.frame) = self.stream.read()
         self.thread = None
         # initialize the variable used to indicate if the thread should
@@ -69,7 +74,6 @@ class WebcamVideoStream:
             # if the thread indicator variable is set, stop the thread
             if self.stopped:
                 break
-
             self.grabbed, self.frame = self.stream.read()
             if self.grabbed:
                 # got a frame
@@ -89,8 +93,8 @@ class WebcamVideoStream:
         # indicate that the thread should be stopped
         self.stopped = True
         self.FPS.stop()
-        # print("[INFO] elasped time: {:.2f}".format(self.FPS.elapsed()))
-        # print("[INFO] approx. FPS: {:.2f}".format(self.FPS.fps()))
+        print("[INFO] elasped time: {:.2f}".format(self.FPS.elapsed()))
+        print("[INFO] approx. FPS: {:.2f}".format(self.FPS.fps()))
         while not self.flag:
             continue
         if self.thread.is_alive():
@@ -129,9 +133,10 @@ class Recoder():
                     break
             time_iter_end = datetime.datetime.now()
             iteration = float((time_iter_end - time_iter_start).microseconds) * 1e-6
-            time.sleep(max((0.0080 - iteration), 0))
+            time.sleep(max((0.0075 - iteration), 0))
 
         self.writer.release()
+        self.vs.stream.release()
         cv2.waitKey(1)
         cv2.destroyAllWindows()
         cv2.waitKey(1)
@@ -146,7 +151,7 @@ class Recoder():
     def stop(self):
 
         self.FPS.stop()
-        # print("[INFO] elasped time: {:.2f}".format(self.FPS.elapsed()))
+        print("[INFO] elasped time: {:.2f}".format(self.FPS.elapsed()))
         print("[INFO] approx. FPS: {:.2f}".format(self.FPS.fps()))
         self.stopped = True
 
@@ -170,13 +175,28 @@ def _async_raise(tid, exctype):
         ctypes.pythonapi.PyThreadState_SetAsyncExc(ctypes.c_long(tid), None)
         raise SystemError("PyThreadState_SetAsyncExc failed")
 
+def record_main(camera_src, video_path):
+    print("[INFO] sampling THREADED frames from webcam...")
+    vs = WebcamVideoStream(src=camera_src).start()
+    r = Recoder(savePath=video_path, vs=vs, show=False).start()
+    signal=input()
+    vs.stop()
+    r.stop()
 
 if __name__ == '__main__':
-    print("[INFO] sampling THREADED frames from webcam...")
-    for i in range(30):
-        vs = WebcamVideoStream(src=0).start()
-        r = Recoder(savePath=r"1.avi", vs=vs, show=False).start()
-        time.sleep(5)
-        r.stop()
-        vs.stop()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--c',
+                        help='an integer for the camer index', dest='camera_index')
+    parser.add_argument('--p',
+                        help='a string', dest='video_path')
+
+    args = parser.parse_args()
+    camera_index = args.camera_index
+    video_path = args.video_path
+
+    record_main(int(camera_index), video_path)
+
+
+
+
 

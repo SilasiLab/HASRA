@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e510e57-314a-4c0d-8e13-b052c2467250" name="Default Changelist" comment="" />
+    <list default="true" id="5e510e57-314a-4c0d-8e13-b052c2467250" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/muti_process_camera_driver.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/MOUSE1/Logs/MOUSE1_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/MOUSE1/Logs/MOUSE1_session_history.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/MOUSE1/MOUSE1_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/MOUSE1/MOUSE1_save.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/MOUSE2/Logs/MOUSE2_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/MOUSE2/Logs/MOUSE2_session_history.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/MOUSE2/MOUSE2_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/MOUSE2/MOUSE2_save.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/MOUSE3/Logs/MOUSE3_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/MOUSE3/Logs/MOUSE3_session_history.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/MOUSE3/MOUSE3_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/MOUSE3/MOUSE3_save.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/MOUSE4/Logs/MOUSE4_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/MOUSE4/Logs/MOUSE4_session_history.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/MOUSE4/MOUSE4_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/MOUSE4/MOUSE4_save.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/MOUSE5/MOUSE5_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/MOUSE5/MOUSE5_save.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/TEST_LEFT/TEST_LEFT_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/TEST_LEFT/TEST_LEFT_save.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/TEST_RIGHT/Logs/TEST_RIGHT_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/TEST_RIGHT/Logs/TEST_RIGHT_session_history.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/TEST_RIGHT/TEST_RIGHT_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/TEST_RIGHT/TEST_RIGHT_save.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../config/config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../config/config.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/arduino/homecage_server/homecage_server.ino" beforeDir="false" afterPath="$PROJECT_DIR$/arduino/homecage_server/homecage_server.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/client/.idea/client.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/1.avi" beforeDir="false" afterPath="$PROJECT_DIR$/client/1.avi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/driver_for_a_better_camera.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/driver_for_a_better_camera.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/gui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/systemCheck.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/systemCheck.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,8 +40,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/driver_for_a_better_camera.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="170" column="61" lean-forward="true" selection-start-line="170" selection-start-column="61" selection-end-line="170" selection-end-column="61" />
+            <state relative-caret-position="32">
+              <caret line="185" column="26" selection-start-line="185" selection-start-column="26" selection-end-line="185" selection-end-column="26" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -22,7 +49,51 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/muti_process_camera_driver.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="303">
+              <caret line="223" column="23" selection-start-line="220" selection-start-column="8" selection-end-line="223" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#22#0" expanded="true" />
+                <element signature="e#56#805#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="368" column="17" selection-start-line="368" selection-start-column="17" selection-end-line="368" selection-end-column="17" />
+              <folding>
+                <element signature="e#121#158#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/gui.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1708">
+              <caret line="134" column="25" selection-start-line="134" selection-start-column="25" selection-end-line="134" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -37,24 +108,34 @@
       <find>print(load)</find>
       <find>vidp</find>
       <find>does not exist</find>
+      <find>start</find>
+      <find>COM</find>
+      <find>flag</find>
+      <find>p</find>
+      <find>time_str</find>
     </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/client/genProfiles.py" />
-        <option value="$PROJECT_DIR$/client/gui.py" />
+        <option value="$PROJECT_DIR$/client/muti_process_camera_driver.py" />
         <option value="$PROJECT_DIR$/client/main.py" />
+        <option value="$PROJECT_DIR$/client/gui.py" />
         <option value="$PROJECT_DIR$/client/driver_for_a_better_camera.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="499" />
-    <option name="y" value="151" />
-    <option name="width" value="1400" />
-    <option name="height" value="938" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="179" />
+    <option name="y" value="187" />
+    <option name="width" value="1036" />
+    <option name="height" value="839" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -80,7 +161,8 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/HomeCageSinglePellet_server_2/src" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -138,10 +220,32 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="muti_process_camera_driver" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="src" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/client" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/client/muti_process_camera_driver.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.driver_for_a_better_camera" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.muti_process_camera_driver" />
       </list>
     </recent_temporary>
   </component>
@@ -159,16 +263,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="499" y="151" width="1400" height="938" extended-state="0" />
+    <frame x="179" y="187" width="1036" height="839" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2496329" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21543086" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3552795" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39907727" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.45892352" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39875776" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -180,6 +284,17 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/client/main.py</url>
+          <line>380</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/client/arduinoClient.py">
@@ -224,20 +339,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/envs/HCSP/Lib/ntpath.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="74" selection-start-line="74" selection-end-line="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/temp.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/muti_process_camera_driver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="223" column="23" selection-start-line="220" selection-start-column="8" selection-end-line="223" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+            <element signature="e#56#805#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-346">
-          <caret line="215" column="79" selection-start-line="215" selection-start-column="79" selection-end-line="215" selection-end-column="79" />
+        <state relative-caret-position="119">
+          <caret line="368" column="17" selection-start-line="368" selection-start-column="17" selection-end-line="368" selection-end-column="17" />
           <folding>
-            <element signature="e#121#125#0" expanded="true" />
+            <element signature="e#121#158#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/gui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3601">
-          <caret line="341" column="52" selection-start-line="341" selection-start-column="39" selection-end-line="341" selection-end-column="52" />
+        <state relative-caret-position="1708">
+          <caret line="134" column="25" selection-start-line="134" selection-start-column="25" selection-end-line="134" selection-end-column="25" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
@@ -246,8 +382,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/driver_for_a_better_camera.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="170" column="61" lean-forward="true" selection-start-line="170" selection-start-column="61" selection-end-line="170" selection-end-column="61" />
+        <state relative-caret-position="32">
+          <caret line="185" column="26" selection-start-line="185" selection-start-column="26" selection-end-line="185" selection-end-column="26" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>

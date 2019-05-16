@@ -131,7 +131,7 @@ class GUI:
 		frame42.pack()
 
 		frame3 = Frame(master)
-		self.scale = Scale(frame3, from_=0, to=5, orient=HORIZONTAL)
+		self.scale = Scale(frame3, from_=0, to=9, orient=HORIZONTAL)
 		self.scale.pack()
 		frame3.pack()
 
@@ -432,6 +432,7 @@ class GUI:
 def start_gui_loop(animalProfilePath):
 
 	root = Tk()
+	root.title("Cage1")
 	gui = GUI(root, animalProfilePath)
 	gui.load_animal_profiles()
 	root.mainloop()

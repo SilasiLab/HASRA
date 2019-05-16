@@ -10,7 +10,7 @@ import os
 
 def check_directory_structure():
 
-    assert(os.path.isdir('../../../HomeCageSinglePellet_server')),"Error: HomeCageSinglePellet_server directory does not exist"
+    assert(os.path.isdir('../../../HomeCageSinglePellet_server_1')),"Error: HomeCageSinglePellet_server directory does not exist"
     assert(os.path.isdir('../../src')),"Error: HomeCageSinglePellet_server/src directory does not exist"
     assert(os.path.isdir('../../bin')),"Error: HomeCageSinglePellet_server/bin directory does not exist"
     assert(os.path.isdir('../../config')),"Error: HomeCageSinglePellet_server/config directory does not exist"

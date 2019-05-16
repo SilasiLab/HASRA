@@ -303,11 +303,13 @@ class SessionController(object):
         print("saved as :"+vidPath)
         if "TEST" in profile.name:
             print("Its testing")
-            vs = WebcamVideoStream(src=0).start()
-            r = Recoder(savePath=vidPath, vs=vs, show=False).start()
+            #vs = WebcamVideoStream(src=1).start()
+            #r = Recoder(savePath=vidPath, vs=vs, show=False).start()
+            p = Popen(["python", "driver_for_a_better_camera.py", "--c", str(1), "--p", vidPath], stdin=PIPE, stdout=PIPE)
         else:
-            vs = WebcamVideoStream(src=0).start()
-            r = Recoder(savePath=vidPath, vs=vs, show=False).start()
+            #vs = WebcamVideoStream(src=1).start()
+            #r = Recoder(savePath=vidPath, vs=vs, show=False).start()
+            p = Popen(["python", "driver_for_a_better_camera.py", "--c", str(1), "--p", vidPath], stdin=PIPE, stdout=PIPE)
         # Tell server to move stepper to appropriate position for current profile
         self.arduino_client.serialInterface.write(b'3')
         stepperMsg = str(profile.difficulty_dist_mm)
@@ -351,8 +353,10 @@ class SessionController(object):
                     self.arduino_client.serialInterface.flushInput()
                     break
 
-        r.stop()
-        vs.stop()
+        p.stdin.write(b"stop\n")
+        p.stdin.flush()
+        for line in p.stdout.readlines():
+            print(line)
         # Log session information.
         endTime = time.time()
         profile.insertSessionEntry(startTime, endTime, trial_count)
@@ -371,8 +375,8 @@ def launch_gui():
 # This function initializes all the high level system components, returning a handle to each one. 
 def sys_init():
     profile_list = loadAnimalProfiles(PROFILE_SAVE_DIRECTORY)
-    arduino_client = arduinoClient.client("COM7", 9600)
-    ser = serial.Serial('COM5', 9600)
+    arduino_client = arduinoClient.client("COM13", 9600)
+    ser = serial.Serial('COM11', 9600)
     
     guiProcess = launch_gui()
     session_controller = SessionController(profile_list, arduino_client)
@@ -386,7 +390,6 @@ def listen_for_rfid(ser):
     rfid = ''
 
     while (ser.is_open):
-
         byte = ser.read(1)
 
         if (byte == b'\x02'):
@@ -418,6 +421,7 @@ def main():
         print("Waiting for RFID...")
         RFID_code = listen_for_rfid(ser)[:12]
         # Check RFID authorization
+
         profile = session_controller.searchForProfile(RFID_code)
 
         # RFID authorized
