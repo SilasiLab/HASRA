@@ -34,11 +34,11 @@ bool servo1_up_flag = false;
 bool servo2_up_flag = false;
 const int SERVO_SETTLE_DELAY = 300;
 // Higher numbers make the arm go higher
-int SERVO1_UP_POS = 80;
+int SERVO1_UP_POS = 90;
 // Low numbers makehe arm go lower
 int SERVO1_DOWN_POS = 135;
 // Lower numbers make the arm go higher
-int SERVO2_UP_POS = 100;
+int SERVO2_UP_POS = 85;
 // High numbers make the arm go lower
 int SERVO2_DOWN_POS = 45;
 int SERVO_PULSE_DELAY = 16;
@@ -144,7 +144,9 @@ int displayPellet(whichServo side) {
       servo1.write(i);
       delay(SERVO_PULSE_DELAY);
     }   
-    
+    digitalWrite(ptgreyGPIOSignalPin, HIGH);
+    delay(200);
+    digitalWrite(ptgreyGPIOSignalPin, LOW);
     // Raise arm to display pellet
     for (int i = SERVO1_DOWN_POS; i >= SERVO1_UP_POS; i -= 1) {
       servo1.write(i);
@@ -164,6 +166,9 @@ int displayPellet(whichServo side) {
       delay(SERVO_PULSE_DELAY);
     }   
     // Raise arm to display pellet
+    digitalWrite(ptgreyGPIOSignalPin, HIGH);
+    delay(200);
+    digitalWrite(ptgreyGPIOSignalPin, LOW);
     for (int i = SERVO2_DOWN_POS; i <= SERVO2_UP_POS; i += 1) {
       servo2.write(i);
       delay(SERVO_PULSE_DELAY);
@@ -276,7 +281,9 @@ void setup() {
   while (!Serial) {
     delay(100);
   }
-
+  pinMode(ptgreyGPIOSignalPin, OUTPUT);
+  digitalWrite(ptgreyGPIOSignalPin, HIGH);
+    
   zeroServos();
 
 
@@ -295,8 +302,8 @@ void setup() {
   // Set LED control pin
   pinMode(ledPin, OUTPUT);
   digitalWrite(ledPin, HIGH);
-  pinMode(ptgreyGPIOSignalPin, OUTPUT);
-  digitalWrite(ptgreyGPIOSignalPin, HIGH);
+  
+  digitalWrite(ptgreyGPIOSignalPin, LOW);
   // Let client know we're ready
   Serial.write("READY\n");
 }
@@ -437,7 +444,7 @@ int startSession() {
 
 
 void loop() { 
-  if(listenForStartCommand()){
+  /*if(listenForStartCommand()){
     startSession();
     char message;
     while(true)
@@ -452,5 +459,9 @@ void loop() {
      while(Serial.read() >= 0) {
       continue;
      }  
-  }
+  }*/
+  displayPellet(left);
+  delay(200);
+  displayPellet(right);
+  delay(200);
 }
