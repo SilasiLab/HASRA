@@ -17,8 +17,8 @@
     it's default listening mode.
 
 
-    Author: Julian Pitney
-    Email: JulianPitney@gmail.com
+    Author: Julian Pitney, Junzheng Wu
+    Email: JulianPitney@gmail.com, jwu220@uottawa.ca
     Organization: University of Ottawa (Silasi Lab)
 
 */
@@ -26,76 +26,69 @@
 #include <Servo.h>
 
 // Config
-const int servo1Pin = 10;
-const int servo2Pin = 9;
+const int servo1Pin = 8;
 Servo servo1;
-Servo servo2;
+
 bool servo1_up_flag = false;
-bool servo2_up_flag = false;
 const int SERVO_SETTLE_DELAY = 300;
 // Higher numbers make the arm go higher
-int SERVO1_UP_POS = 90;
+int SERVO1_UP_POS = 60;
 // Low numbers makehe arm go lower
-int SERVO1_DOWN_POS = 135;
-// Lower numbers make the arm go higher
-int SERVO2_UP_POS = 85;
-// High numbers make the arm go lower
-int SERVO2_DOWN_POS = 45;
+int SERVO1_DOWN_POS = 120;
+
 int SERVO_PULSE_DELAY = 16;
 int servo1Pos = SERVO1_DOWN_POS;
-int servo2Pos = SERVO2_DOWN_POS;
-typedef enum {left,right} whichServo;
 
+
+typedef enum {x, y} whichStepper;
 const int ledPin = 13;
-const int switchPin = 2;
-const int IRBreakerPin = 3;
-const int ptgreyGPIOSignalPin = A1;
+const int switchPin1 = 9;
+const int switchPin2 = 10;
+const int IRBreakerPin = A2;
+const int vibrationPin = A1;
 
-volatile byte switchState = digitalRead(switchPin);
-volatile byte IRState;
+
+const int step1_left = 4;
+const int step1_right = 3;
+const int step1_sleep = 2;
+
+const int step2_left = 7;
+const int step2_right = 6;
+const int step2_sleep = 5;
+
+
+
+volatile byte switchState1 = digitalRead(switchPin1);
+volatile byte switchState2 = digitalRead(switchPin2);
+volatile byte IRState = digitalRead(IRBreakerPin);
 
 int stepperDistFromOrigin = -1;
 double stepsToMmRatio = 420;
 
-
-// Hardware interrupt handler for switch pin
-void handleSwitchChange() {
-
-  switchState = digitalRead(switchPin);
+void handleSwitchChange1() {
+  switchState1 = digitalRead(switchPin1);
+}
+void handleSwitchChange2() {
+  switchState2 = digitalRead(switchPin2);
 }
 
-// Hardware interrupt handler for IR breaker pin 
 void handleIRChange() {
-
   IRState = digitalRead(IRBreakerPin);  
   digitalWrite(ledPin, IRState);
-
 }
-
 
 int zeroServos() {
 
   servo1.attach(servo1Pin);
-  servo2.attach(servo2Pin);
-
 
   for (int i = servo1Pos; i <= SERVO1_DOWN_POS; i += 1) {
       servo1.write(i);
       delay(SERVO_PULSE_DELAY);
     }   
   delay(SERVO_SETTLE_DELAY);
-  servo1Pos = SERVO1_DOWN_POS;;
-
-  for (int i = servo2Pos; i >= SERVO2_DOWN_POS; i -= 1) {
-      servo2.write(i);
-      delay(SERVO_PULSE_DELAY);
-    }   
-
-  delay(SERVO_SETTLE_DELAY);
-  servo2Pos = SERVO2_DOWN_POS;
-
+  servo1Pos = SERVO1_DOWN_POS;
+  
   servo1.detach();
-  servo2.detach();
   return 0;
 
 }
@@ -115,161 +108,100 @@ int lowerServo1(){
   return 0;
 }
 
-int lowerServo2(){
-
-  servo2.attach(servo2Pin);  
-
-  for (int i = servo2Pos; i >= SERVO2_DOWN_POS; i -= 1) {
-      servo2.write(i);
-      delay(SERVO_PULSE_DELAY);
-    }   
-
-  delay(SERVO_SETTLE_DELAY);
-  servo2Pos = SERVO2_DOWN_POS;
-
-  servo2.detach();
-  return 0;
-}
-
-
-
-int displayPellet(whichServo side) {
-  
-  if(side == left){
+int displayPellet() {
     
-    servo1.attach(servo1Pin);
+  servo1.attach(servo1Pin);
 
-    // Lower arm to grab pellet.
-    for (int i = servo1Pos; i <= SERVO1_DOWN_POS; i += 1) {
-      servo1.write(i);
-      delay(SERVO_PULSE_DELAY);
-    }   
-    digitalWrite(ptgreyGPIOSignalPin, HIGH);
-    delay(200);
-    digitalWrite(ptgreyGPIOSignalPin, LOW);
-    // Raise arm to display pellet
-    for (int i = SERVO1_DOWN_POS; i >= SERVO1_UP_POS; i -= 1) {
-      servo1.write(i);
-      delay(SERVO_PULSE_DELAY);
-    }
-    delay(SERVO_SETTLE_DELAY);
-    servo1Pos = SERVO1_UP_POS;
-    servo1_up_flag = true;
-    servo1.detach();
+  // Lower arm to grab pellet.
+  for (int i = servo1Pos; i <= SERVO1_DOWN_POS; i += 1) {
+    servo1.write(i);
+    delay(SERVO_PULSE_DELAY);
+  }   
+  digitalWrite(vibrationPin, HIGH);
+  delay(200);
+  digitalWrite(vibrationPin, LOW);
+  // Raise arm to display pellet
+  for (int i = SERVO1_DOWN_POS; i >= SERVO1_UP_POS; i -= 1) {
+    servo1.write(i);
+    delay(SERVO_PULSE_DELAY);
   }
-  else if(side == right){
-     
-    servo2.attach(servo2Pin);
-    // Lower arm to grab pellet.
-    for (int i = servo2Pos; i >= SERVO2_DOWN_POS; i -= 1) {
-      servo2.write(i);
-      delay(SERVO_PULSE_DELAY);
-    }   
-    // Raise arm to display pellet
-    digitalWrite(ptgreyGPIOSignalPin, HIGH);
-    delay(200);
-    digitalWrite(ptgreyGPIOSignalPin, LOW);
-    for (int i = SERVO2_DOWN_POS; i <= SERVO2_UP_POS; i += 1) {
-      servo2.write(i);
-      delay(SERVO_PULSE_DELAY);
-    }
-    delay(SERVO_SETTLE_DELAY);
-    servo2Pos = SERVO2_UP_POS;
-    servo2_up_flag = true;
-    servo2.detach();
-  }
+  delay(SERVO_SETTLE_DELAY);
+  servo1Pos = SERVO1_UP_POS;
+  servo1_up_flag = true;
+  servo1.detach();
+  return 0;
+}
 
+int moveStepper_both(int targetPos1, int targetPos2) {
+  digitalWrite(step1_sleep, HIGH);
+  digitalWrite(step2_sleep, HIGH);
+  delay(100);
+  int step1 = 0;
+  int step2 = 0;
+  
+  if(targetPos1 > 0){step1 = -1; digitalWrite(step1_left, LOW);}
+  else{step1 = 1; digitalWrite(step1_left, HIGH);}
+  if(targetPos2 > 0){step2 = -1; digitalWrite(step2_left, LOW);}
+  else{step2 = 1; digitalWrite(step2_left, HIGH);}
+  
+  int count1 = targetPos1 * stepsToMmRatio;
+  int count2 = targetPos2 * stepsToMmRatio;
+  
+  while((count1 != 0) || (count2 != 0))
+  {
+    if(count1 != 0)
+    {
+      count1 += step1;
+      digitalWrite(step1_right, HIGH);
+    }
+    if(count2 != 0)
+    {
+      count2 += step2;
+      digitalWrite(step2_right, HIGH);
+    }
+    delayMicroseconds(500);
+    if(count1 != 0)
+    {
+      digitalWrite(step1_right, LOW);
+    }
+    if(count2 != 0)
+    {
+      digitalWrite(step2_right, LOW);
+    }
+    delayMicroseconds(500);
+      
+  }
+  digitalWrite(step1_sleep, LOW);
+  digitalWrite(step2_sleep, LOW);
   return 0;
 }
 
 
 
-int zeroStepper() {
+int zeroStepper_both(){
 
-  digitalWrite(A3, LOW);
-  for(int i = 0; i < 1000; i++)
-  {
-    digitalWrite(A4, HIGH);
-    delay(1);
-    digitalWrite(A4, LOW);
-    delay(1);
-  }
-
-
-  digitalWrite(A3, HIGH);
+  int left = 0;
+  int right = 0;
+  
+  digitalWrite(step1_sleep, HIGH);
+  digitalWrite(step2_sleep, HIGH);
+  delay(100);
+  digitalWrite(step1_left, HIGH);
+  digitalWrite(step2_left, HIGH);
   delay(100);
   
-  while(!switchState){
-
-    digitalWrite(A4, HIGH);
-    delay(1);
-    digitalWrite(A4, LOW);
-    delay(1);
+  while((!digitalRead(switchPin1)) || (!digitalRead(switchPin2))){
+    if (!digitalRead(switchPin1)){digitalWrite(step1_right, LOW);}
+    if (!digitalRead(switchPin2)){digitalWrite(step2_right, LOW);}
+    delayMicroseconds(500);
+    if (!digitalRead(switchPin1)){digitalWrite(step1_right, HIGH);}
+    if (!digitalRead(switchPin2)){digitalWrite(step2_right, HIGH);}
+    delayMicroseconds(500);
   }
-
-  for(int i = 0; i < 50; i++)
-  {
-    digitalWrite(A4, HIGH);
-    delay(1);
-    digitalWrite(A4, LOW);
-    delay(1);
-  }
-
-  stepperDistFromOrigin = 0;
+  digitalWrite(step1_sleep, LOW);
+  digitalWrite(step2_sleep, LOW);
   return 0;
 }
-
-int moveStepper(int targetPos) {
-
-  int travelDist = targetPos - stepperDistFromOrigin;
-  
-  if(travelDist < 0){
-
-    // If we try to move backwards but switch is pressed, set current position to origin and block movement.
-    if(switchState){
-      stepperDistFromOrigin = 0;
-      return 2;
-    }
-    digitalWrite(A3, HIGH);
-  }
-  else{
-
-    digitalWrite(A3, LOW);
-  }
-  
-  int stepsToTake = abs(travelDist);
-  int stepsTaken = 0;
-  
-  for(int i = 0; i < stepsToTake; i += 1){
-
-    digitalWrite(A4, HIGH);
-    delay(1);
-    digitalWrite(A4, LOW);
-    delay(1);
-
-    if(travelDist < 0){
-      
-      stepperDistFromOrigin -= 1;    
-    }
-    else if(travelDist > 0){
-      
-      stepperDistFromOrigin += 1;
-    }  
-    stepsTaken += 1;
-
-    // If we hit the limit switch after a short movement, we're at the origin and should abort. 
-    if(stepsTaken > 1000 && switchState){
-
-      stepperDistFromOrigin = 0;
-      return 1;
-    }
-   
-  }
-  return 0;
-}
-
-
-
 
 
 void setup() {
@@ -281,123 +213,92 @@ void setup() {
   while (!Serial) {
     delay(100);
   }
-  pinMode(ptgreyGPIOSignalPin, OUTPUT);
-  digitalWrite(ptgreyGPIOSignalPin, HIGH);
-    
+  pinMode(vibrationPin, OUTPUT);
   zeroServos();
-
-
-
-  // Set switch read pin
-  pinMode(switchPin, INPUT_PULLUP);
-  switchState = digitalRead(switchPin);
-  attachInterrupt(digitalPinToInterrupt(switchPin), handleSwitchChange, CHANGE);
-  zeroStepper();
-
   
-  // Set IR breaker read pin
+  pinMode(step1_sleep, OUTPUT);
+  pinMode(step2_sleep, OUTPUT);
+  
+  pinMode(switchPin1, INPUT_PULLUP);
+  switchState1 = digitalRead(switchPin1);
+  attachInterrupt(digitalPinToInterrupt(switchPin1), handleSwitchChange1, CHANGE);
+
+  pinMode(switchPin2, INPUT_PULLUP);
+  switchState2 = digitalRead(switchPin2);
+  attachInterrupt(digitalPinToInterrupt(switchPin2), handleSwitchChange2, CHANGE);
+
   pinMode(IRBreakerPin, INPUT_PULLUP);
   IRState = digitalRead(IRBreakerPin);
   attachInterrupt(digitalPinToInterrupt(IRBreakerPin), handleIRChange, HIGH);
+    
+  //zeroStepper_both();
+  
   // Set LED control pin
   pinMode(ledPin, OUTPUT);
   digitalWrite(ledPin, HIGH);
-  
-  digitalWrite(ptgreyGPIOSignalPin, LOW);
-  // Let client know we're ready
   Serial.write("READY\n");
 }
 
-
 bool listenForStartCommand() {
-  
   char authByte;
-  
   while(true) {
-
     if(Serial.available() > 0) {
-      
       authByte = Serial.read();
     }
-    
+    else{return false;}
     if(authByte == 'A') {
       return true;
     }
     else if (authByte == 'Y' ) {
-      digitalWrite(ledPin,HIGH);
+      digitalWrite(ledPin, HIGH);
       return false;
     }
 
   }
 }
 
-
-
 int startSession() {
   bool startedflag = false;
   while(!digitalRead(IRBreakerPin)) {
     startedflag = true;
     char cmd;
-    char stepperDist;
-    
+    char stepperDist1;
+    char stepperDist2;
+    int stepperDistInt1;
+    int stepperDistInt2;
     if(Serial.available() > 0) {
-
       cmd = Serial.read();
       
       switch(cmd){
         
         case ('1'):
-          displayPellet(right);
+          displayPellet();
           break;
           
         case ('2'):
-          displayPellet(left);
+          displayPellet();
           break;
           
         case ('3'):
 
           // Give client a second to respond
           delay(200);
-          stepperDist = Serial.read();
+          zeroStepper_both();
+         
+          stepperDist1 = Serial.read();
+            
+          delay(200);
           
-          switch(stepperDist){
-            case('0'):
-              zeroStepper();
-              break;
-            case('1'):
-              moveStepper(stepsToMmRatio * 1);
-              break;
-            case('2'):
-              moveStepper(stepsToMmRatio * 2);
-              break;
-            case('3'):
-              moveStepper(stepsToMmRatio * 3);
-              break;
-            case('4'):
-              moveStepper(stepsToMmRatio * 4);
-              break;
-            case('5'):
-              moveStepper(stepsToMmRatio * 5);
-              break;
-            case('6'):
-              moveStepper(stepsToMmRatio * 6);
-              break;
-            case('7'):
-              moveStepper(stepsToMmRatio * 7);
-              break;
-            case('8'):
-              moveStepper(stepsToMmRatio * 8);
-              break;
-            case('9'):
-              moveStepper(stepsToMmRatio * 9);
-              break;
-            default:
-              break;  
-            }
+          stepperDist2 = Serial.read();
+
+          if (isDigit(stepperDist1)){stepperDistInt1 = stepperDist1 - '0';}
+          else{stepperDistInt1 = 10 + stepperDist1 - 'a';}
+          if (isDigit(stepperDist2)){stepperDistInt2 = stepperDist2 - '0';}
+          else{stepperDistInt2 = 10 + stepperDist2 - 'a';}
+          moveStepper_both(stepperDistInt1, stepperDistInt2);
           break;
         case ('4'):
-          displayPellet(left);
-          displayPellet(right);
+          displayPellet();
           break;
         default:
           break;
@@ -405,63 +306,34 @@ int startSession() {
     }
     
   }
-  /*
-  char termCmd;
-  char message;
-  if (startedflag){
-    while(true)
-    {
-      Serial.write("TERM\n");
-      delay(30);
-      message = Serial.read();
-      if(message=='5'){
-        break;
-        }
-      }
-    startedflag = false;
-    }
-  */
-
   if(servo1_up_flag)
   {
     lowerServo1();
     servo1_up_flag = false;
   }
-  if(servo2_up_flag)
-  {
-    lowerServo2();
-    servo2_up_flag = false;
-  }
-  // Flush serial buffer.
-  /*
-  while(Serial.read() >= 0) {
-    continue;
-  }
-*/
+  
   return 0;
+  
 }
 
 
-
-void loop() { 
-  /*if(listenForStartCommand()){
+void loop(){
+  boolean DEBUG = false;
+  if(DEBUG){
+    while(!digitalRead(IRBreakerPin)){
+    zeroStepper_both();
+    delay(200);
+    moveStepper_both(10, 10);
+    delay(3000);
+    }
+  }
+  else{
+    if(listenForStartCommand()){
+    digitalWrite(ledPin, LOW);
     startSession();
-    char message;
-    while(true)
-    {
-      Serial.write("TERM\n");
-      delay(30);
-      message = Serial.read();
-      if(message=='5'){
-        break;
-        }
-     }
-     while(Serial.read() >= 0) {
-      continue;
-     }  
-  }*/
-  displayPellet(left);
-  delay(200);
-  displayPellet(right);
-  delay(200);
+    Serial.write("TERM\n");
+    zeroStepper_both();
+    }
+  }
+  digitalWrite(ledPin, HIGH);  
 }

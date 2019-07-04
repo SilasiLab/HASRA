@@ -1,3 +1,13 @@
+"""
+    Author: Junzheng Wu
+    Email: jwu220@uottawa.ca
+    Organization: University of Ottawa (Silasi Lab)
+
+    To increase FPS, the whole stream is divided into two parallel threads.
+    And then those two threads are organized to run as a subprocess in the main.py script
+    1. Sample frames from camera.
+    2. Save frames into a video file.
+"""
 import datetime
 from threading import Thread
 import cv2
@@ -38,7 +48,10 @@ class FPS_camera:
 
 class WebcamVideoStream:
     def __init__(self, src=0, width=1280, height=720):
+        # If you are under windows system using Dshow as backend
         self.stream = cv2.VideoCapture(src, cv2.CAP_DSHOW)
+        # If not go next line
+        # self.stream = cv2.VideoCapture(src)
         print(self.stream.isOpened())
         self.width = width
         self.height = height
@@ -175,28 +188,25 @@ def _async_raise(tid, exctype):
         ctypes.pythonapi.PyThreadState_SetAsyncExc(ctypes.c_long(tid), None)
         raise SystemError("PyThreadState_SetAsyncExc failed")
 
-def record_main(camera_src, video_path):
+def record_main(camera_src, video_path, show=False):
     print("[INFO] sampling THREADED frames from webcam...")
     vs = WebcamVideoStream(src=camera_src).start()
-    r = Recoder(savePath=video_path, vs=vs, show=False).start()
+    r = Recoder(savePath=video_path, vs=vs, show=show).start()
     signal=input()
+    print(signal)
     vs.stop()
     r.stop()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--c',
-                        help='an integer for the camer index', dest='camera_index')
-    parser.add_argument('--p',
-                        help='a string', dest='video_path')
+    parser.add_argument('--c', help='an integer for the camer index', dest='camera_index')
+    parser.add_argument('--p', help='a string', dest='video_path')
 
     args = parser.parse_args()
     camera_index = args.camera_index
     video_path = args.video_path
 
     record_main(int(camera_index), video_path)
-
-
 
 
 

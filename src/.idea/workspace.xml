@@ -2,32 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e510e57-314a-4c0d-8e13-b052c2467250" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/muti_process_camera_driver.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/MOUSE1/Logs/MOUSE1_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/MOUSE1/Logs/MOUSE1_session_history.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/MOUSE1/MOUSE1_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/MOUSE1/MOUSE1_save.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/MOUSE2/Logs/MOUSE2_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/MOUSE2/Logs/MOUSE2_session_history.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/MOUSE2/MOUSE2_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/MOUSE2/MOUSE2_save.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/MOUSE3/Logs/MOUSE3_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/MOUSE3/Logs/MOUSE3_session_history.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/MOUSE3/MOUSE3_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/MOUSE3/MOUSE3_save.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/MOUSE4/Logs/MOUSE4_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/MOUSE4/Logs/MOUSE4_session_history.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/MOUSE4/MOUSE4_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/MOUSE4/MOUSE4_save.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/MOUSE5/MOUSE5_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/MOUSE5/MOUSE5_save.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/TEST_LEFT/TEST_LEFT_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/TEST_LEFT/TEST_LEFT_save.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/TEST_RIGHT/Logs/TEST_RIGHT_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/TEST_RIGHT/Logs/TEST_RIGHT_session_history.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AnimalProfiles/TEST_RIGHT/TEST_RIGHT_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../AnimalProfiles/TEST_RIGHT/TEST_RIGHT_save.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config/config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../config/config.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bin/SessionVideo" beforeDir="false" afterPath="$PROJECT_DIR$/../bin/SessionVideo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../config/config.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../config/trialLimitConfig.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../config/trialLimitConfig.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/arduino/homecage_server/homecage_server.ino" beforeDir="false" afterPath="$PROJECT_DIR$/arduino/homecage_server/homecage_server.ino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.idea/client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/client/.idea/client.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/1.avi" beforeDir="false" afterPath="$PROJECT_DIR$/client/1.avi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/arduinoClient.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/arduinoClient.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/driver_for_a_better_camera.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/driver_for_a_better_camera.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/genProfiles.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/genProfiles.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/googleDriveManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/googleDriveManager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/gui.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/systemCheck.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/systemCheck.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ptgrey/.obj/build/SessionVideo.o" beforeDir="false" afterPath="$PROJECT_DIR$/ptgrey/.obj/build/SessionVideo.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ptgrey/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/ptgrey/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ptgrey/SessionVideo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ptgrey/SessionVideo.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,52 +26,58 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/driver_for_a_better_camera.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="32">
-              <caret line="185" column="26" selection-start-line="185" selection-start-column="26" selection-end-line="185" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/muti_process_camera_driver.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="223" column="23" selection-start-line="220" selection-start-column="8" selection-end-line="223" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#22#0" expanded="true" />
-                <element signature="e#56#805#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="368" column="17" selection-start-line="368" selection-start-column="17" selection-end-line="368" selection-end-column="17" />
-              <folding>
-                <element signature="e#121#158#0" expanded="true" />
-              </folding>
-            </state>
+            <state relative-caret-position="-630" />
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/gui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1708">
-              <caret line="134" column="25" selection-start-line="134" selection-start-column="25" selection-end-line="134" selection-end-column="25" />
+            <state>
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="111" column="38" selection-start-line="111" selection-start-column="38" selection-end-line="111" selection-end-column="38" />
+              <folding>
+                <element signature="e#153#163#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/systemCheck.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="61">
+              <caret line="17" column="46" lean-forward="true" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/genProfiles.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="197">
+              <caret line="26" column="77" lean-forward="true" selection-start-line="26" selection-start-column="77" selection-end-line="26" selection-end-column="77" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/googleDriveManager.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-900" />
           </provider>
         </entry>
       </file>
@@ -97,22 +92,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>/</find>
-      <find>loadAnimalProfiles</find>
-      <find>PROFILE_SAVE_DIRECTORY</find>
-      <find>'/mnt/1T/HomeCageSinglePellet_server/AnimalProfiles/'</find>
-      <find>load</find>
-      <find>log_save_directory</find>
-      <find>saved as</find>
-      <find>print</find>
       <find>print(load)</find>
       <find>vidp</find>
       <find>does not exist</find>
       <find>start</find>
-      <find>COM</find>
       <find>flag</find>
       <find>p</find>
       <find>time_str</find>
+      <find>COM</find>
+      <find>WIDTH</find>
+      <find>HEIGHT</find>
+      <find>OFFSET_X</find>
+      <find>FPS</find>
+      <find>EXPOSURE</find>
+      <find>animal_profile_directory</find>
+      <find>profile_state</find>
+      <find>loadAnimalProfiles</find>
+      <find>find_profile_state_index</find>
+      <find>profileStates</find>
+      <find>save_animal_profile</find>
+      <find>profileSaveFilePaths</find>
+      <find>print</find>
+      <find>load_animal_profiles</find>
+      <find>dists1</find>
+      <find>fb</find>
+      <find>session_history</find>
+      <find>profile_save_directory</find>
+      <find>left_right_box_list</find>
+      <find>PROFILE_SAVE_DIRECTORY</find>
+      <find>log_save_directory</find>
+      <find>AnimalProfile</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -121,19 +130,22 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/client/genProfiles.py" />
         <option value="$PROJECT_DIR$/client/muti_process_camera_driver.py" />
-        <option value="$PROJECT_DIR$/client/main.py" />
-        <option value="$PROJECT_DIR$/client/gui.py" />
+        <option value="$USER_HOME$/retrain_deeplabcut/retrain_deeplabcut.py" />
+        <option value="$PROJECT_DIR$/client/googleDriveManager.py" />
         <option value="$PROJECT_DIR$/client/driver_for_a_better_camera.py" />
+        <option value="$PROJECT_DIR$/client/systemCheck.py" />
+        <option value="$PROJECT_DIR$/client/gui.py" />
+        <option value="$PROJECT_DIR$/client/main.py" />
+        <option value="$PROJECT_DIR$/client/genProfiles.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="179" />
-    <option name="y" value="187" />
-    <option name="width" value="1036" />
-    <option name="height" value="839" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="162" />
+    <option name="y" value="87" />
+    <option name="width" value="1300" />
+    <option name="height" value="819" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -141,6 +153,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -157,12 +170,11 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/HomeCageSinglePellet_server_2/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -177,7 +189,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.driver_for_a_better_camera">
+  <component name="RunManager" selected="Python.main">
     <configuration name="driver_for_a_better_camera" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="src" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -191,6 +203,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/client/driver_for_a_better_camera.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="gui" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="src" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/client" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/client/gui.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -243,8 +276,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.driver_for_a_better_camera" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.driver_for_a_better_camera" />
+        <item itemvalue="Python.gui" />
         <item itemvalue="Python.muti_process_camera_driver" />
       </list>
     </recent_temporary>
@@ -263,16 +297,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="179" y="187" width="1036" height="839" extended-state="0" />
+    <frame x="162" y="87" width="1300" height="819" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21543086" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3797964" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.45892352" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39875776" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.36880466" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3985729" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -289,103 +323,63 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/client/main.py</url>
-          <line>380</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/client/gui.py</url>
+          <line>53</line>
+          <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/arduinoClient.py">
+    <entry file="file://$USER_HOME$/Anaconda3/envs/HCSP/Lib/ntpath.py" />
+    <entry file="file://$PROJECT_DIR$/client/temp.png" />
+    <entry file="file://$PROJECT_DIR$/client/arduinoClient.py" />
+    <entry file="file://$PROJECT_DIR$/client/muti_process_camera_driver.py" />
+    <entry file="file://$PROJECT_DIR$/client/pelletClassifier.py" />
+    <entry file="file://$USER_HOME$/anaconda3/envs/tensorflow/lib/python3.6/tkinter/__init__.py" />
+    <entry file="file://$USER_HOME$/anaconda3/envs/tensorflow/lib/python3.6/pickle.py" />
+    <entry file="file://$USER_HOME$/anaconda3/envs/tensorflow/lib/python3.6/threading.py" />
+    <entry file="file://$USER_HOME$/retrain_deeplabcut/retrain_deeplabcut.py" />
+    <entry file="file://$PROJECT_DIR$/client/test_monitor.py" />
+    <entry file="file://$PROJECT_DIR$/client/driver_for_a_better_camera.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
-          <folding>
-            <element signature="e#122#135#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/genProfiles.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3">
-          <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/googleDriveManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/pelletClassifier.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/systemCheck.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/envs/HCSP/Lib/ntpath.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="74" selection-start-line="74" selection-end-line="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/temp.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/muti_process_camera_driver.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="223" column="23" selection-start-line="220" selection-start-column="8" selection-end-line="223" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-            <element signature="e#56#805#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="368" column="17" selection-start-line="368" selection-start-column="17" selection-end-line="368" selection-end-column="17" />
-          <folding>
-            <element signature="e#121#158#0" expanded="true" />
-          </folding>
-        </state>
+        <state relative-caret-position="-630" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/gui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1708">
-          <caret line="134" column="25" selection-start-line="134" selection-start-column="25" selection-end-line="134" selection-end-column="25" />
+        <state>
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/driver_for_a_better_camera.py">
+    <entry file="file://$PROJECT_DIR$/client/genProfiles.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="185" column="26" selection-start-line="185" selection-start-column="26" selection-end-line="185" selection-end-column="26" />
+        <state relative-caret-position="197">
+          <caret line="26" column="77" lean-forward="true" selection-start-line="26" selection-start-column="77" selection-end-line="26" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/googleDriveManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-900" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/systemCheck.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61">
+          <caret line="17" column="46" lean-forward="true" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="111" column="38" selection-start-line="111" selection-start-column="38" selection-end-line="111" selection-end-column="38" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#153#163#0" expanded="true" />
           </folding>
         </state>
       </provider>

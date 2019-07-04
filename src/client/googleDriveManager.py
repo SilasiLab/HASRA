@@ -1,7 +1,12 @@
+'''
+    Author: Junzheng Wu
+    Email: jwu220@uottawa.ca
+    Organization: University of Ottawa (Silasi Lab)
+
+    This script will update the recorded video onto google drive.
+'''
 from time import sleep
 import time
-import datetime
-import shutil
 from copy import copy
 import os
 import psutil
@@ -9,6 +14,13 @@ import subprocess
 from multiprocessing import Process
 
 def copyLargeFile(src, dest, buffer_size=16000):
+    '''
+    This function will robustly copy large files.
+    :param src:
+    :param dest:
+    :param buffer_size:
+    :return:
+    '''
     with open(src, 'rb') as fsrc:
         with open(dest, 'wb') as fdst:
             while 1:
@@ -21,6 +33,13 @@ def copyLargeFile(src, dest, buffer_size=16000):
                 fdst.write(buf)
 
 def work_in_free_time(window_length=5, interval=3, threshold=0.3):
+    '''
+    Keep monitoring the usage of cpu, and only update the files in spare time.
+    :param window_length:
+    :param interval:
+    :param threshold:
+    :return:
+    '''
     cpu_pct = 0
     for i in range(window_length):
         cpu_pct += psutil.cpu_percent()
@@ -136,16 +155,6 @@ def googleDriveManager(interval=20, min_interval=10, cage_id=85136, mice_n=4, gd
                     target_dir = os.path.join(gdrive_rootDir, basename)
 
                     while not upload_success:
-                        # sleep(min_interval)
-                        #
-                        # size1 = os.path.getsize(origin_dir)
-                        # sleep(2. * min_interval)
-                        # size2 = os.path.getsize(origin_dir)
-                        # if size1 != size2:
-                        #     print("Current video is under recording, wait for %d secs." % min_interval)
-                        #     sleep(min_interval)
-                        # else:
-                        #     print("Recording finished! Uploading starts!")
                         try:
                             copyLargeFile(origin_dir, target_dir)
                             sleep(min_interval)
@@ -172,14 +181,3 @@ def googleDriveManager(interval=20, min_interval=10, cage_id=85136, mice_n=4, gd
 
 if __name__ == '__main__':
     googleDriveManager(300, 5, 85136, 4)
-    '''gdrive_local = "/mnt/googleTeamDrive/"
-    gdrive_rclone = 'silasi_team_drive'
-    p = Process(target=self_recover, args=[gdrive_local, gdrive_rclone], name='manager')
-    p.start()
-    while True:
-        sleep(1)
-        p = self_recover_backend(gdrive_local, gdrive_rclone, p)
-        count = sum(1 for proc in psutil.process_iter() if proc.name =="manager")
-        print(count)
-
-    '''

@@ -1,44 +1,28 @@
 """
-    Author: Julian Pitney
-    Email: JulianPitney@gmail.com
+    Author: Julian Pitney, Junzheng Wu
+    Email: JulianPitney@gmail.com, jwu220@uottawa.ca
     Organization: University of Ottawa (Silasi Lab)
 """
 
-from pathlib import WindowsPath, Path
 import gui
 import arduinoClient
 import systemCheck
 import time
-import socket
-import sys
-from time import sleep
 import multiprocessing
 import serial
 from subprocess import PIPE, Popen
 import os
-import cv2
-import random
 import datetime
-import shutil
-from copy import copy
 from driver_for_a_better_camera import *
+import pysnooper
 
 systemCheck.check_directory_structure()
 # Load all configuration information for running the system.
 # Note: Configuration information for data analysis does not come from here.
-with open("../../config/config.txt") as config:
-    config.readline()
-    WIDTH = config.readline()[6:]
-    HEIGHT = config.readline()[7:]
-    OFFSET_X = config.readline()[9:]
-    OFFSET_Y = config.readline()[9:]
-    FPS = config.readline()[4:]
-    EXPOSURE = config.readline()[9:]
-    BITRATE = config.readline()[8:]
-    DISPLAY_PREVIEW = config.readline()[16:]
-    PROFILE_SAVE_DIRECTORY = config.readline()[23:]
-    PROFILE_SAVE_DIRECTORY = PROFILE_SAVE_DIRECTORY[:len(PROFILE_SAVE_DIRECTORY) - 1]
-config.close()
+
+dirpath = os.getcwd()
+base_dir = dirpath.split('src'+os.sep+'client')[0]
+PROFILE_SAVE_DIRECTORY = os.path.join(base_dir, 'AnimalProfiles')
 
 
 # This function generates a list of AnimalProfiles found inside <profile_save_directory>.
@@ -71,7 +55,7 @@ def loadAnimalProfileTrialLimits():
 
     global mouse1TrialLimit, mouse2TrialLimit, mouse3TrialLimit, mouse4TrialLimit, mouse5TrialLimit
 
-    with open("../../config/trialLimitConfig.txt") as f:
+    with open(".." + os.sep + ".." + os.sep + "config" + os.sep + "trialLimitConfig.txt") as f:
         # print(f.readline().rstrip())
         mouse1TrialLimit = int(f.readline().rstrip())
         mouse2TrialLimit = int(f.readline().rstrip())
@@ -93,7 +77,7 @@ def resetAnimalProfileTrialsToday():
         mouse5TrialsToday = 0
 
 
-
+@pysnooper.snoop("debug_log" + os.sep + "loadAnimalProfiles.logs")
 def loadAnimalProfiles(profile_save_directory):
     # Get list of profile folders
     profile_names = os.listdir(profile_save_directory)
@@ -121,11 +105,12 @@ def loadAnimalProfiles(profile_save_directory):
         name = profile_state[1]
         mouseNumber = profile_state[2]
         cageNumber = profile_state[3]
-        difficulty_dist_mm = profile_state[4]
-        dominant_hand = profile_state[5]
-        session_count = profile_state[6]
-        animal_profile_directory = profile_state[7]
-        temp = AnimalProfile(ID, name, mouseNumber, cageNumber, difficulty_dist_mm, dominant_hand, session_count,
+        difficulty_dist_mm1 = profile_state[4]
+        difficulty_dist_mm2 = profile_state[5]
+        dominant_hand = profile_state[6]
+        session_count = profile_state[7]
+        animal_profile_directory = load_file.replace(name + "_save.txt", "")
+        temp = AnimalProfile(ID, name, mouseNumber, cageNumber, difficulty_dist_mm1, difficulty_dist_mm2, dominant_hand, session_count,
                              animal_profile_directory, False)
         profiles.append(temp)
 
@@ -153,24 +138,25 @@ class AnimalProfile(object):
     #        video_save_directory: A path to where the videos for this animal are stored. This path will be inside [./<animal_profile_directory>/<animal_name>/]
     #        log_save_directory: A path to where the logs for this animal are stored. This pathh will be inside [./<animal_profile_directory/<animal_name/]
 
-    def __init__(self, ID, name, mouseNumber, cageNumber, difficulty_dist_mm, dominant_hand, session_count,
+    def __init__(self, ID, name, mouseNumber, cageNumber, difficulty_dist_mm1, difficulty_dist_mm2, dominant_hand, session_count,
                  profile_save_directory, is_new):
 
         self.ID = str(ID)
         self.name = str(name)
         self.mouseNumber = str(mouseNumber)
         self.cageNumber = str(cageNumber)
-        self.difficulty_dist_mm = int(difficulty_dist_mm)
+        self.difficulty_dist_mm1 = int(difficulty_dist_mm1)
+        self.difficulty_dist_mm2 = int(difficulty_dist_mm2)
         self.dominant_hand = str(dominant_hand)
         self.session_count = int(session_count)
 
         if is_new:
-            self.animal_profile_directory = profile_save_directory + name + "/"
+            self.animal_profile_directory = profile_save_directory + name + os.sep
         else:
             self.animal_profile_directory = profile_save_directory
 
-        self.video_save_directory = self.animal_profile_directory + "Videos/"
-        self.log_save_directory = self.animal_profile_directory + "Logs/"
+        self.video_save_directory = self.animal_profile_directory + "Videos" + os.sep
+        self.log_save_directory = self.animal_profile_directory + "Logs" + os.sep
 
         if is_new:
 
@@ -194,7 +180,8 @@ class AnimalProfile(object):
             save.write(str(self.name) + "\n")
             save.write(str(self.mouseNumber) + "\n")
             save.write(str(self.cageNumber) + "\n")
-            save.write(str(self.difficulty_dist_mm) + "\n")
+            save.write(str(self.difficulty_dist_mm1) + "\n")
+            save.write(str(self.difficulty_dist_mm2) + "\n")
             save.write(str(self.dominant_hand) + "\n")
             save.write(str(self.session_count) + "\n")
             save.write(str(self.animal_profile_directory) + "\n")
@@ -212,13 +199,14 @@ class AnimalProfile(object):
     def insertSessionEntry(self, start_timestamp, end_timestamp, trial_count):
 
         # TODO: Is there a better way to create + format strings?
-        session_history = self.log_save_directory + str(self.name) + "_session_history.csv"
+        # session_history = self.log_save_directory + str(self.name) + "_session_history.csv"
+        session_history = os.path.join(PROFILE_SAVE_DIRECTORY, str(self.name), 'Logs', str(self.name)+"_session_history.csv")
         start_date = time.strftime("%d-%b-%Y", time.localtime(start_timestamp))
         start_time = time.strftime("%H:%M:%S", time.localtime(start_timestamp))
         end_date = time.strftime("%d-%b-%Y", time.localtime(end_timestamp))
         end_time = time.strftime("%H:%M:%S", time.localtime(end_timestamp))
         csv_entry = str(self.session_count) + "," + str(self.name) + "," + str(self.ID) + "," + str(
-            trial_count) + "," + str(self.difficulty_dist_mm) + "," + str(
+            trial_count) + "," + str(self.difficulty_dist_mm1) + "," + str(self.difficulty_dist_mm2) + "," + str(
             self.dominant_hand) + "," + start_date + "," + start_time + "," + end_date + "," + end_time + "\n"
 
         with open(session_history, "a") as log:
@@ -303,18 +291,18 @@ class SessionController(object):
         print("saved as :"+vidPath)
         if "TEST" in profile.name:
             print("Its testing")
-            #vs = WebcamVideoStream(src=1).start()
-            #r = Recoder(savePath=vidPath, vs=vs, show=False).start()
-            p = Popen(["python", "driver_for_a_better_camera.py", "--c", str(1), "--p", vidPath], stdin=PIPE, stdout=PIPE)
+            p = Popen(["python", "driver_for_a_better_camera.py", "--c", str(0), "--p", vidPath], stdin=PIPE, stdout=PIPE)
         else:
-            #vs = WebcamVideoStream(src=1).start()
-            #r = Recoder(savePath=vidPath, vs=vs, show=False).start()
-            p = Popen(["python", "driver_for_a_better_camera.py", "--c", str(1), "--p", vidPath], stdin=PIPE, stdout=PIPE)
+            p = Popen(["python", "driver_for_a_better_camera.py", "--c", str(0), "--p", vidPath], stdin=PIPE, stdout=PIPE)
         # Tell server to move stepper to appropriate position for current profile
         self.arduino_client.serialInterface.write(b'3')
-        stepperMsg = str(profile.difficulty_dist_mm)
-        self.arduino_client.serialInterface.write(stepperMsg.encode())
 
+        stepperMsg1 = scale_stepper_dist(profile.difficulty_dist_mm1)
+        stepperMsg2 = scale_stepper_dist(profile.difficulty_dist_mm2)
+
+        self.arduino_client.serialInterface.write(stepperMsg1.encode())
+        self.arduino_client.serialInterface.write(stepperMsg2.encode())
+        print(stepperMsg1, stepperMsg2)
 
         # Main session loop. Runs until it receives TERM sig from server. Polls
         # the camera queue for GETPEL messages and forwards to server if it receives one.
@@ -348,7 +336,6 @@ class SessionController(object):
                 print("receive message from arduino: %s" % serial_msg)
                 print("=========================================================")
                 if serial_msg == "TERM":
-                    self.arduino_client.serialInterface.write(b'5')
                     self.arduino_client.serialInterface.flush()
                     self.arduino_client.serialInterface.flushInput()
                     break
@@ -363,6 +350,11 @@ class SessionController(object):
         profile.saveProfile()
         self.print_session_end_information(profile, endTime)
 
+def scale_stepper_dist(distance):
+    if distance < 10:
+        return str(distance)
+    else:
+        return str(hex(distance)).replace('0x', '')
 
 
 # Just a wrapper to launch the configuration GUI in its own process. 
@@ -375,8 +367,8 @@ def launch_gui():
 # This function initializes all the high level system components, returning a handle to each one. 
 def sys_init():
     profile_list = loadAnimalProfiles(PROFILE_SAVE_DIRECTORY)
-    arduino_client = arduinoClient.client("COM13", 9600)
-    ser = serial.Serial('COM11', 9600)
+    arduino_client = arduinoClient.client("COM16", 9600)
+    ser = serial.Serial('COM19', 9600)
     
     guiProcess = launch_gui()
     session_controller = SessionController(profile_list, arduino_client)
@@ -400,7 +392,7 @@ def listen_for_rfid(ser):
             rfid += byte.decode('utf-8')
 
 
-
+@pysnooper.snoop("debug_log" + os.sep + "main.logs")
 def main():
 
     global mouse1TrialLimit, mouse2TrialLimit, mouse3TrialLimit, mouse4TrialLimit, mouse5TrialLimit
