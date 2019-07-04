@@ -1,8 +1,9 @@
-00782B1884CF
+00660B3499C0
 TEST_RIGHT
-5
+6
 45567
-0
+15
+7
 BOTH
-273
-C:\Users\Silasi Lab\HomeCageSinglePellet_server\AnimalProfiles\TEST_RIGHT\
+381
+C:\Users\Silasi Lab\HomeCageSinglePellet_server_2\AnimalProfiles\TEST_RIGHT\

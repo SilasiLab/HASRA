@@ -1,8 +1,9 @@
-002FBE7326C4
+002FBE71F616
 MOUSE4
 4
-85136
-4
+86885
+15
+7
 RIGHT
 4336
-C:\Users\Silasi Lab\HomeCageSinglePellet_server\AnimalProfiles\MOUSE4\
+C:\Users\Silasi Lab\HomeCageSinglePellet_server_2\AnimalProfiles\MOUSE4\

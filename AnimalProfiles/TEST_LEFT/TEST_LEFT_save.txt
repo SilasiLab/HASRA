@@ -1,8 +1,0 @@
-00782B19C08A
-TEST_LEFT
-6
-45567
-0
-BOTH
-42
-C:\Users\Silasi Lab\HomeCageSinglePellet_server\AnimalProfiles\TEST_LEFT\

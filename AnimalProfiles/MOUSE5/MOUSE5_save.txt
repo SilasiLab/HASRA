@@ -1,8 +1,9 @@
 002FBE797F35
 MOUSE5
 5
-67465
-4
+86885
+15
+7
 BOTH
 4872
-C:\Users\Silasi Lab\HomeCageSinglePellet_server\AnimalProfiles\MOUSE5\
+C:\Users\Silasi Lab\HomeCageSinglePellet_server_2\AnimalProfiles\MOUSE5\

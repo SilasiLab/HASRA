@@ -1,8 +1,9 @@
-002FBE7305E7
+002FBE722AC9
 MOUSE1
 1
-85136
-4
+86885
+15
+7
 RIGHT
-2760
-C:\Users\Silasi Lab\HomeCageSinglePellet_server\AnimalProfiles\MOUSE1\
+2761
+C:\Users\Silasi Lab\HomeCageSinglePellet_server_2\AnimalProfiles\MOUSE1\
