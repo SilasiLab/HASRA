@@ -10,6 +10,7 @@ The design allows a single mouse at a time to enter the reaching tube. Upon entr
 
 # **Dependencies:**
 * Ubuntu v16.04 LTS: Kernel version 4.4.19-35 or later
+* Or Windows 10 is recommended, since the backend camera driver performs better that the one on linux in our experiment.
 * Python v3.5.2
 	* pySerial	
 	* numpy
@@ -19,6 +20,9 @@ The design allows a single mouse at a time to enter the reaching tube. Upon entr
 	* Pillow
 	* tqdm
 	* psutil
+	* multiprocessing
+	* subprocess
+	* pysnooper
 * Flir Spinnaker SDK v1.10.31
 	* libavcodec-ffmpeg56
 	* libavformat-ffmpeg56
@@ -65,6 +69,7 @@ The design allows a single mouse at a time to enter the reaching tube. Upon entr
 	- `conda install tqdm`
 	- `conda install Pillow`
 	- `pip install psutil`
+	- `pip install pysnooper`
 	
 6. For opencv, we need to download whl file first. https://www.lfd.uci.edu/~gohlke/pythonlibs/#opencv and download `opencv_python‑3.4.6+contrib‑cp35‑cp35m‑win_amd64.whl`
 	Open a terminal, go in to the directory containing this file.
