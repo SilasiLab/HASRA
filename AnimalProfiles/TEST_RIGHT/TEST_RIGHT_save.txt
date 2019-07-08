@@ -1,9 +1,9 @@
-00660B3499C0
+00782B1884CF
 TEST_RIGHT
 6
 45567
 15
 7
 BOTH
-381
-C:\Users\Silasi Lab\HomeCageSinglePellet_server_2\AnimalProfiles\TEST_RIGHT\
+387
+/home/silasi/HomeCageSinglePellet_server/AnimalProfiles/TEST_RIGHT/

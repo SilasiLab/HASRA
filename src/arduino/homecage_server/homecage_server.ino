@@ -32,9 +32,9 @@ Servo servo1;
 bool servo1_up_flag = false;
 const int SERVO_SETTLE_DELAY = 300;
 // Higher numbers make the arm go higher
-int SERVO1_UP_POS = 60;
+int SERVO1_UP_POS = 30;
 // Low numbers makehe arm go lower
-int SERVO1_DOWN_POS = 120;
+int SERVO1_DOWN_POS = 90;
 
 int SERVO_PULSE_DELAY = 16;
 int servo1Pos = SERVO1_DOWN_POS;
@@ -316,16 +316,36 @@ int startSession() {
   
 }
 
+void test_switch(){
+  while(!digitalRead(switchPin2)){
+    digitalWrite(ledPin, HIGH);
+  }
+  digitalWrite(ledPin, LOW);
+  delay(500);
+}
+
+void test_beambreaker(){
+  while(!digitalRead(IRBreakerPin)){
+    digitalWrite(ledPin, HIGH);
+    }
+  digitalWrite(ledPin, LOW);
+  delay(500);
+}
+
+void test_servo(){
+  displayPellet();
+}
+
+void test_stepper(){
+  zeroStepper_both();
+  moveStepper_both(10, 10);
+}
 
 void loop(){
   boolean DEBUG = false;
   if(DEBUG){
-    while(!digitalRead(IRBreakerPin)){
-    zeroStepper_both();
-    delay(200);
-    moveStepper_both(10, 10);
-    delay(3000);
-    }
+    test_stepper();
+    test_servo();
   }
   else{
     if(listenForStartCommand()){

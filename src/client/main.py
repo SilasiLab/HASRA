@@ -367,8 +367,8 @@ def launch_gui():
 # This function initializes all the high level system components, returning a handle to each one. 
 def sys_init():
     profile_list = loadAnimalProfiles(PROFILE_SAVE_DIRECTORY)
-    arduino_client = arduinoClient.client("COM16", 9600)
-    ser = serial.Serial('COM19', 9600)
+    arduino_client = arduinoClient.client("/dev/ttyUSB0", 9600)
+    ser = serial.Serial('/dev/ttyUSB1', 9600)
     
     guiProcess = launch_gui()
     session_controller = SessionController(profile_list, arduino_client)

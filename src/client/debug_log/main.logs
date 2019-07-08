@@ -346,3 +346,300 @@ Modified var:.. profile = <__main__.AnimalProfile object at 0x000002557F400BE0>
 14:09:06.871154 line       491         ser.reset_output_buffer()
 14:09:06.871154 line       413         print("Waiting for RFID...")
 14:09:06.872151 line       414         RFID_code = listen_for_rfid(ser)[:12]
+14:33:45.731050 call       396 def main():
+14:33:45.731355 line       401     loadAnimalProfileTrialLimits()
+14:33:45.731555 line       404     profile_list, arduino_client, session_controller, ser, guiProcess = sys_init()
+14:33:45.742508 exception  404     profile_list, arduino_client, session_controller, ser, guiProcess = sys_init()
+serial.serialutil.SerialException: [Errno 2] could not open port COM16: [Errno 2] No such file or directory: 'COM16'
+Call ended by exception
+14:34:27.832738 call       396 def main():
+14:34:27.832963 line       401     loadAnimalProfileTrialLimits()
+14:34:27.833058 line       404     profile_list, arduino_client, session_controller, ser, guiProcess = sys_init()
+New var:....... profile_list = [<__main__.AnimalProfile object at 0x7f3e8a64097...__main__.AnimalProfile object at 0x7f3e8a640588>]
+New var:....... arduino_client = <arduinoClient.client object at 0x7f3e8a640940>
+New var:....... session_controller = <__main__.SessionController object at 0x7f3e8a640358>
+New var:....... ser = Serial<id=0x7f3e8a640be0, open=True>(port='/dev/...=None, xonxoff=False, rtscts=False, dsrdtr=False)
+New var:....... guiProcess = <Process(Process-1, started)>
+14:34:30.853546 line       410     while True:
+14:34:30.853903 line       413         print("Waiting for RFID...")
+14:34:30.854197 line       414         RFID_code = listen_for_rfid(ser)[:12]
+14:34:33.879879 exception  414         RFID_code = listen_for_rfid(ser)[:12]
+KeyboardInterrupt
+Call ended by exception
+14:34:59.453983 call       396 def main():
+14:34:59.454180 line       401     loadAnimalProfileTrialLimits()
+14:34:59.454276 line       404     profile_list, arduino_client, session_controller, ser, guiProcess = sys_init()
+New var:....... profile_list = [<__main__.AnimalProfile object at 0x7f16a7c5d9b...__main__.AnimalProfile object at 0x7f16a7c5d5c0>]
+New var:....... arduino_client = <arduinoClient.client object at 0x7f16a7c5d978>
+New var:....... session_controller = <__main__.SessionController object at 0x7f16a7c5d390>
+New var:....... ser = Serial<id=0x7f16a7c5dc18, open=True>(port='/dev/...=None, xonxoff=False, rtscts=False, dsrdtr=False)
+New var:....... guiProcess = <Process(Process-1, started)>
+14:35:02.473259 line       410     while True:
+14:35:02.473533 line       413         print("Waiting for RFID...")
+14:35:02.473731 line       414         RFID_code = listen_for_rfid(ser)[:12]
+New var:....... RFID_code = '00782B1884CF'
+14:35:15.612937 line       417         profile = session_controller.searchForProfile(RFID_code)
+New var:....... profile = -1
+14:35:15.613270 line       420         if profile != -1:
+14:35:15.613453 line       483             arduino_client.serialInterface.write(b'Y')
+14:35:15.613727 line       484             unrecognized_id_msg = RFID_code + " not recognized. Aborting session.\n\n"
+New var:....... unrecognized_id_msg = '00782B1884CF not recognized. Aborting session.\n\n'
+14:35:15.613983 line       485             print(unrecognized_id_msg)
+14:35:15.614173 line       490         ser.reset_input_buffer()
+14:35:15.614371 line       491         ser.reset_output_buffer()
+14:35:15.614558 line       413         print("Waiting for RFID...")
+14:35:15.614735 line       414         RFID_code = listen_for_rfid(ser)[:12]
+14:35:49.612545 exception  414         RFID_code = listen_for_rfid(ser)[:12]
+KeyboardInterrupt
+Call ended by exception
+14:35:52.163728 call       396 def main():
+14:35:52.163934 line       401     loadAnimalProfileTrialLimits()
+14:35:52.164034 line       404     profile_list, arduino_client, session_controller, ser, guiProcess = sys_init()
+New var:....... profile_list = [<__main__.AnimalProfile object at 0x7fd69984a90...__main__.AnimalProfile object at 0x7fd69984a6d8>]
+New var:....... arduino_client = <arduinoClient.client object at 0x7fd69984aba8>
+New var:....... session_controller = <__main__.SessionController object at 0x7fd69984a320>
+New var:....... ser = Serial<id=0x7fd69984acf8, open=True>(port='/dev/...=None, xonxoff=False, rtscts=False, dsrdtr=False)
+New var:....... guiProcess = <Process(Process-1, started)>
+14:35:55.182495 line       410     while True:
+14:35:55.182887 line       413         print("Waiting for RFID...")
+14:35:55.183186 line       414         RFID_code = listen_for_rfid(ser)[:12]
+New var:....... RFID_code = '00782B1884CF'
+14:35:58.760363 line       417         profile = session_controller.searchForProfile(RFID_code)
+New var:....... profile = <__main__.AnimalProfile object at 0x7fd69984a4a8>
+14:35:58.760695 line       420         if profile != -1:
+14:35:58.760886 line       424             resetAnimalProfileTrialsToday()
+14:35:58.761116 line       425             session_controller.set_profile_list(loadAnimalProfiles(PROFILE_SAVE_DIRECTORY))
+14:35:58.783799 line       426             profile = session_controller.searchForProfile(RFID_code)
+Modified var:.. profile = <__main__.AnimalProfile object at 0x7fd699862d68>
+14:35:58.783903 line       428             if(profile.mouseNumber == "1"):
+14:35:58.783972 line       435             elif(profile.mouseNumber == "2"):
+14:35:58.784040 line       442             elif(profile.mouseNumber == "3"):
+14:35:58.784109 line       449             elif(profile.mouseNumber == "4"):
+14:35:58.784179 line       456             elif(profile.mouseNumber == "5"):
+14:35:58.784245 line       465             arduino_client.serialInterface.flushInput()
+14:35:58.784328 line       466             arduino_client.serialInterface.write(b'A')
+14:35:58.784447 line       469             session_controller.startSession(profile)
+14:36:18.113622 line       471             arduino_client.serialInterface.flush()
+14:36:18.113748 line       475             session_controller.set_profile_list(loadAnimalProfiles(PROFILE_SAVE_DIRECTORY))
+14:36:18.122775 line       476             loadAnimalProfileTrialLimits()
+14:36:18.122876 line       490         ser.reset_input_buffer()
+14:36:18.122939 line       491         ser.reset_output_buffer()
+14:36:18.122997 line       413         print("Waiting for RFID...")
+14:36:18.123053 line       414         RFID_code = listen_for_rfid(ser)[:12]
+14:37:21.450666 exception  414         RFID_code = listen_for_rfid(ser)[:12]
+KeyboardInterrupt
+Call ended by exception
+14:37:22.986140 call       396 def main():
+14:37:22.986351 line       401     loadAnimalProfileTrialLimits()
+14:37:22.986456 line       404     profile_list, arduino_client, session_controller, ser, guiProcess = sys_init()
+New var:....... profile_list = [<__main__.AnimalProfile object at 0x7f60fcfe697...__main__.AnimalProfile object at 0x7f60fcfe6588>]
+New var:....... arduino_client = <arduinoClient.client object at 0x7f60fcfe6940>
+New var:....... session_controller = <__main__.SessionController object at 0x7f60fcfe6358>
+New var:....... ser = Serial<id=0x7f60fcfe6be0, open=True>(port='/dev/...=None, xonxoff=False, rtscts=False, dsrdtr=False)
+New var:....... guiProcess = <Process(Process-1, started)>
+14:37:26.004234 line       410     while True:
+14:37:26.004499 line       413         print("Waiting for RFID...")
+14:37:26.004702 line       414         RFID_code = listen_for_rfid(ser)[:12]
+New var:....... RFID_code = '00782B1884CF'
+14:37:31.504538 line       417         profile = session_controller.searchForProfile(RFID_code)
+New var:....... profile = <__main__.AnimalProfile object at 0x7f60fcfe6c18>
+14:37:31.504863 line       420         if profile != -1:
+14:37:31.505080 line       424             resetAnimalProfileTrialsToday()
+14:37:31.505280 line       425             session_controller.set_profile_list(loadAnimalProfiles(PROFILE_SAVE_DIRECTORY))
+14:37:32.871908 line       426             profile = session_controller.searchForProfile(RFID_code)
+Modified var:.. profile = <__main__.AnimalProfile object at 0x7f60fcffef28>
+14:37:32.872064 line       428             if(profile.mouseNumber == "1"):
+14:37:32.872170 line       435             elif(profile.mouseNumber == "2"):
+14:37:32.872270 line       442             elif(profile.mouseNumber == "3"):
+14:37:32.872368 line       449             elif(profile.mouseNumber == "4"):
+14:37:32.872471 line       456             elif(profile.mouseNumber == "5"):
+14:37:32.872569 line       465             arduino_client.serialInterface.flushInput()
+14:37:32.872695 line       466             arduino_client.serialInterface.write(b'A')
+14:37:32.872864 line       469             session_controller.startSession(profile)
+14:37:45.481431 line       471             arduino_client.serialInterface.flush()
+14:37:45.481557 line       475             session_controller.set_profile_list(loadAnimalProfiles(PROFILE_SAVE_DIRECTORY))
+14:37:45.490664 line       476             loadAnimalProfileTrialLimits()
+14:37:45.490765 line       490         ser.reset_input_buffer()
+14:37:45.490827 line       491         ser.reset_output_buffer()
+14:37:45.490886 line       413         print("Waiting for RFID...")
+14:37:45.490941 line       414         RFID_code = listen_for_rfid(ser)[:12]
+14:37:53.920186 line       417         profile = session_controller.searchForProfile(RFID_code)
+Modified var:.. profile = <__main__.AnimalProfile object at 0x7f60fcf86ac8>
+14:37:53.920585 line       420         if profile != -1:
+14:37:53.920772 line       424             resetAnimalProfileTrialsToday()
+14:37:53.920957 line       425             session_controller.set_profile_list(loadAnimalProfiles(PROFILE_SAVE_DIRECTORY))
+14:37:53.943478 line       426             profile = session_controller.searchForProfile(RFID_code)
+Modified var:.. profile = <__main__.AnimalProfile object at 0x7f60fcffee10>
+14:37:53.943630 line       428             if(profile.mouseNumber == "1"):
+14:37:53.943731 line       435             elif(profile.mouseNumber == "2"):
+14:37:53.943829 line       442             elif(profile.mouseNumber == "3"):
+14:37:53.943951 line       449             elif(profile.mouseNumber == "4"):
+14:37:53.944076 line       456             elif(profile.mouseNumber == "5"):
+14:37:53.944177 line       465             arduino_client.serialInterface.flushInput()
+14:37:53.944282 line       466             arduino_client.serialInterface.write(b'A')
+14:37:53.944381 line       469             session_controller.startSession(profile)
+14:38:51.817351 exception  469             session_controller.startSession(profile)
+KeyboardInterrupt
+Call ended by exception
+14:39:13.970598 call       396 def main():
+14:39:13.970849 line       401     loadAnimalProfileTrialLimits()
+14:39:13.970974 line       404     profile_list, arduino_client, session_controller, ser, guiProcess = sys_init()
+New var:....... profile_list = [<__main__.AnimalProfile object at 0x7f4c35e3e90...__main__.AnimalProfile object at 0x7f4c35e3e518>]
+New var:....... arduino_client = <arduinoClient.client object at 0x7f4c35e3e8d0>
+New var:....... session_controller = <__main__.SessionController object at 0x7f4c35e3e2e8>
+New var:....... ser = Serial<id=0x7f4c35e3eb70, open=True>(port='/dev/...=None, xonxoff=False, rtscts=False, dsrdtr=False)
+New var:....... guiProcess = <Process(Process-1, started)>
+14:39:16.991312 line       410     while True:
+14:39:16.991569 line       413         print("Waiting for RFID...")
+14:39:16.991803 line       414         RFID_code = listen_for_rfid(ser)[:12]
+New var:....... RFID_code = '00782B1884CF'
+14:39:22.067486 line       417         profile = session_controller.searchForProfile(RFID_code)
+New var:....... profile = <__main__.AnimalProfile object at 0x7f4c35e3eba8>
+14:39:22.067829 line       420         if profile != -1:
+14:39:22.068018 line       424             resetAnimalProfileTrialsToday()
+14:39:22.068219 line       425             session_controller.set_profile_list(loadAnimalProfiles(PROFILE_SAVE_DIRECTORY))
+14:39:22.091539 line       426             profile = session_controller.searchForProfile(RFID_code)
+Modified var:.. profile = <__main__.AnimalProfile object at 0x7f4c35e56f28>
+14:39:22.091646 line       428             if(profile.mouseNumber == "1"):
+14:39:22.091717 line       435             elif(profile.mouseNumber == "2"):
+14:39:22.091787 line       442             elif(profile.mouseNumber == "3"):
+14:39:22.091856 line       449             elif(profile.mouseNumber == "4"):
+14:39:22.091925 line       456             elif(profile.mouseNumber == "5"):
+14:39:22.091993 line       465             arduino_client.serialInterface.flushInput()
+14:39:22.092087 line       466             arduino_client.serialInterface.write(b'A')
+14:39:22.092209 line       469             session_controller.startSession(profile)
+14:39:54.729712 exception  469             session_controller.startSession(profile)
+KeyboardInterrupt
+Call ended by exception
+14:40:06.787407 call       396 def main():
+14:40:06.787603 line       401     loadAnimalProfileTrialLimits()
+14:40:06.787697 line       404     profile_list, arduino_client, session_controller, ser, guiProcess = sys_init()
+New var:....... profile_list = [<__main__.AnimalProfile object at 0x7fc18518b90...__main__.AnimalProfile object at 0x7fc18518b518>]
+New var:....... arduino_client = <arduinoClient.client object at 0x7fc18518b8d0>
+New var:....... session_controller = <__main__.SessionController object at 0x7fc18518b2e8>
+New var:....... ser = Serial<id=0x7fc18518bb70, open=True>(port='/dev/...=None, xonxoff=False, rtscts=False, dsrdtr=False)
+New var:....... guiProcess = <Process(Process-1, started)>
+14:40:09.807858 line       410     while True:
+14:40:09.808125 line       413         print("Waiting for RFID...")
+14:40:09.808331 line       414         RFID_code = listen_for_rfid(ser)[:12]
+New var:....... RFID_code = '00782B1884CF'
+14:40:16.449062 line       417         profile = session_controller.searchForProfile(RFID_code)
+New var:....... profile = <__main__.AnimalProfile object at 0x7fc18518bba8>
+14:40:16.449441 line       420         if profile != -1:
+14:40:16.449630 line       424             resetAnimalProfileTrialsToday()
+14:40:16.449828 line       425             session_controller.set_profile_list(loadAnimalProfiles(PROFILE_SAVE_DIRECTORY))
+14:40:16.472341 line       426             profile = session_controller.searchForProfile(RFID_code)
+Modified var:.. profile = <__main__.AnimalProfile object at 0x7fc1851a3f28>
+14:40:16.472558 line       428             if(profile.mouseNumber == "1"):
+14:40:16.472714 line       435             elif(profile.mouseNumber == "2"):
+14:40:16.472842 line       442             elif(profile.mouseNumber == "3"):
+14:40:16.472937 line       449             elif(profile.mouseNumber == "4"):
+14:40:16.473034 line       456             elif(profile.mouseNumber == "5"):
+14:40:16.473137 line       465             arduino_client.serialInterface.flushInput()
+14:40:16.473282 line       466             arduino_client.serialInterface.write(b'A')
+14:40:16.473461 line       469             session_controller.startSession(profile)
+14:40:58.368828 line       471             arduino_client.serialInterface.flush()
+14:40:58.369178 line       475             session_controller.set_profile_list(loadAnimalProfiles(PROFILE_SAVE_DIRECTORY))
+14:40:58.391719 line       476             loadAnimalProfileTrialLimits()
+14:40:58.391894 line       490         ser.reset_input_buffer()
+14:40:58.392002 line       491         ser.reset_output_buffer()
+14:40:58.392104 line       413         print("Waiting for RFID...")
+14:40:58.392202 line       414         RFID_code = listen_for_rfid(ser)[:12]
+14:42:29.910562 exception  414         RFID_code = listen_for_rfid(ser)[:12]
+KeyboardInterrupt
+Call ended by exception
+14:42:33.308417 call       396 def main():
+14:42:33.308619 line       401     loadAnimalProfileTrialLimits()
+14:42:33.308716 line       404     profile_list, arduino_client, session_controller, ser, guiProcess = sys_init()
+New var:....... profile_list = [<__main__.AnimalProfile object at 0x7fb42c95297...__main__.AnimalProfile object at 0x7fb42c952588>]
+New var:....... arduino_client = <arduinoClient.client object at 0x7fb42c952940>
+New var:....... session_controller = <__main__.SessionController object at 0x7fb42c952358>
+New var:....... ser = Serial<id=0x7fb42c952be0, open=True>(port='/dev/...=None, xonxoff=False, rtscts=False, dsrdtr=False)
+New var:....... guiProcess = <Process(Process-1, started)>
+14:42:37.672322 line       410     while True:
+14:42:37.672582 line       413         print("Waiting for RFID...")
+14:42:37.672785 line       414         RFID_code = listen_for_rfid(ser)[:12]
+14:42:53.509802 exception  414         RFID_code = listen_for_rfid(ser)[:12]
+KeyboardInterrupt
+Call ended by exception
+14:45:14.827380 call       396 def main():
+14:45:14.827587 line       401     loadAnimalProfileTrialLimits()
+14:45:14.827683 line       404     profile_list, arduino_client, session_controller, ser, guiProcess = sys_init()
+New var:....... profile_list = [<__main__.AnimalProfile object at 0x7f07500f897...__main__.AnimalProfile object at 0x7f07500f8588>]
+New var:....... arduino_client = <arduinoClient.client object at 0x7f07500f8940>
+New var:....... session_controller = <__main__.SessionController object at 0x7f07500f8358>
+New var:....... ser = Serial<id=0x7f07500f8be0, open=True>(port='/dev/...=None, xonxoff=False, rtscts=False, dsrdtr=False)
+New var:....... guiProcess = <Process(Process-1, started)>
+14:45:17.848114 line       410     while True:
+14:45:17.848377 line       413         print("Waiting for RFID...")
+14:45:17.848578 line       414         RFID_code = listen_for_rfid(ser)[:12]
+New var:....... RFID_code = '00782B1884CF'
+14:45:26.043463 line       417         profile = session_controller.searchForProfile(RFID_code)
+New var:....... profile = <__main__.AnimalProfile object at 0x7f07500f8c18>
+14:45:26.043788 line       420         if profile != -1:
+14:45:26.043978 line       424             resetAnimalProfileTrialsToday()
+14:45:26.044171 line       425             session_controller.set_profile_list(loadAnimalProfiles(PROFILE_SAVE_DIRECTORY))
+14:45:26.065362 line       426             profile = session_controller.searchForProfile(RFID_code)
+Modified var:.. profile = <__main__.AnimalProfile object at 0x7f0750110f28>
+14:45:26.065472 line       428             if(profile.mouseNumber == "1"):
+14:45:26.065545 line       435             elif(profile.mouseNumber == "2"):
+14:45:26.065626 line       442             elif(profile.mouseNumber == "3"):
+14:45:26.065701 line       449             elif(profile.mouseNumber == "4"):
+14:45:26.065773 line       456             elif(profile.mouseNumber == "5"):
+14:45:26.065843 line       465             arduino_client.serialInterface.flushInput()
+14:45:26.065970 line       466             arduino_client.serialInterface.write(b'A')
+14:45:26.066107 line       469             session_controller.startSession(profile)
+14:45:43.732257 line       471             arduino_client.serialInterface.flush()
+14:45:43.732445 line       475             session_controller.set_profile_list(loadAnimalProfiles(PROFILE_SAVE_DIRECTORY))
+14:45:43.748673 line       476             loadAnimalProfileTrialLimits()
+14:45:43.748843 line       490         ser.reset_input_buffer()
+14:45:43.748953 line       491         ser.reset_output_buffer()
+14:45:43.749050 line       413         print("Waiting for RFID...")
+14:45:43.749150 line       414         RFID_code = listen_for_rfid(ser)[:12]
+14:46:06.418049 line       417         profile = session_controller.searchForProfile(RFID_code)
+Modified var:.. profile = <__main__.AnimalProfile object at 0x7f0750098ac8>
+14:46:06.418457 line       420         if profile != -1:
+14:46:06.418648 line       424             resetAnimalProfileTrialsToday()
+14:46:06.418835 line       425             session_controller.set_profile_list(loadAnimalProfiles(PROFILE_SAVE_DIRECTORY))
+14:46:06.442026 line       426             profile = session_controller.searchForProfile(RFID_code)
+Modified var:.. profile = <__main__.AnimalProfile object at 0x7f0750110d68>
+14:46:06.442137 line       428             if(profile.mouseNumber == "1"):
+14:46:06.442210 line       435             elif(profile.mouseNumber == "2"):
+14:46:06.442280 line       442             elif(profile.mouseNumber == "3"):
+14:46:06.442348 line       449             elif(profile.mouseNumber == "4"):
+14:46:06.442416 line       456             elif(profile.mouseNumber == "5"):
+14:46:06.442484 line       465             arduino_client.serialInterface.flushInput()
+14:46:06.442562 line       466             arduino_client.serialInterface.write(b'A')
+14:46:06.442663 line       469             session_controller.startSession(profile)
+14:46:13.377530 line       471             arduino_client.serialInterface.flush()
+14:46:13.377857 line       475             session_controller.set_profile_list(loadAnimalProfiles(PROFILE_SAVE_DIRECTORY))
+14:46:13.397718 line       476             loadAnimalProfileTrialLimits()
+14:46:13.397845 line       490         ser.reset_input_buffer()
+14:46:13.397926 line       491         ser.reset_output_buffer()
+14:46:13.397999 line       413         print("Waiting for RFID...")
+14:46:13.398071 line       414         RFID_code = listen_for_rfid(ser)[:12]
+14:46:22.750767 line       417         profile = session_controller.searchForProfile(RFID_code)
+Modified var:.. profile = <__main__.AnimalProfile object at 0x7f0750098be0>
+14:46:22.751190 line       420         if profile != -1:
+14:46:22.751380 line       424             resetAnimalProfileTrialsToday()
+14:46:22.751565 line       425             session_controller.set_profile_list(loadAnimalProfiles(PROFILE_SAVE_DIRECTORY))
+14:46:22.774795 line       426             profile = session_controller.searchForProfile(RFID_code)
+Modified var:.. profile = <__main__.AnimalProfile object at 0x7f0750110f98>
+14:46:22.774940 line       428             if(profile.mouseNumber == "1"):
+14:46:22.775038 line       435             elif(profile.mouseNumber == "2"):
+14:46:22.775134 line       442             elif(profile.mouseNumber == "3"):
+14:46:22.775228 line       449             elif(profile.mouseNumber == "4"):
+14:46:22.775324 line       456             elif(profile.mouseNumber == "5"):
+14:46:22.775419 line       465             arduino_client.serialInterface.flushInput()
+14:46:22.775527 line       466             arduino_client.serialInterface.write(b'A')
+14:46:22.775664 line       469             session_controller.startSession(profile)
+14:46:37.340602 line       471             arduino_client.serialInterface.flush()
+14:46:37.340850 line       475             session_controller.set_profile_list(loadAnimalProfiles(PROFILE_SAVE_DIRECTORY))
+14:46:37.360855 line       476             loadAnimalProfileTrialLimits()
+14:46:37.360993 line       490         ser.reset_input_buffer()
+14:46:37.361082 line       491         ser.reset_output_buffer()
+14:46:37.361164 line       413         print("Waiting for RFID...")
+14:46:37.361245 line       414         RFID_code = listen_for_rfid(ser)[:12]
+14:47:32.978672 exception  414         RFID_code = listen_for_rfid(ser)[:12]
+KeyboardInterrupt
+Call ended by exception
