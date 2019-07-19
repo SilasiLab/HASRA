@@ -32,9 +32,9 @@ Servo servo1;
 bool servo1_up_flag = false;
 const int SERVO_SETTLE_DELAY = 300;
 // Higher numbers make the arm go higher
-int SERVO1_UP_POS = 30;
+int SERVO1_UP_POS = 60;
 // Low numbers makehe arm go lower
-int SERVO1_DOWN_POS = 90;
+int SERVO1_DOWN_POS = 125;
 
 int SERVO_PULSE_DELAY = 16;
 int servo1Pos = SERVO1_DOWN_POS;
@@ -117,9 +117,6 @@ int displayPellet() {
     servo1.write(i);
     delay(SERVO_PULSE_DELAY);
   }   
-  digitalWrite(vibrationPin, HIGH);
-  delay(200);
-  digitalWrite(vibrationPin, LOW);
   // Raise arm to display pellet
   for (int i = SERVO1_DOWN_POS; i >= SERVO1_UP_POS; i -= 1) {
     servo1.write(i);
@@ -189,8 +186,9 @@ int zeroStepper_both(){
   digitalWrite(step1_left, HIGH);
   digitalWrite(step2_left, HIGH);
   delay(100);
-  
+  boolean flag = false;
   while((!digitalRead(switchPin1)) || (!digitalRead(switchPin2))){
+    flag = true;
     if (!digitalRead(switchPin1)){digitalWrite(step1_right, LOW);}
     if (!digitalRead(switchPin2)){digitalWrite(step2_right, LOW);}
     delayMicroseconds(500);
@@ -200,6 +198,11 @@ int zeroStepper_both(){
   }
   digitalWrite(step1_sleep, LOW);
   digitalWrite(step2_sleep, LOW);
+  if(flag){
+  digitalWrite(vibrationPin, HIGH);
+  delay(2000);
+  digitalWrite(vibrationPin, LOW);
+  }
   return 0;
 }
 

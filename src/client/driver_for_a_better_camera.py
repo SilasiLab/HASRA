@@ -49,9 +49,9 @@ class FPS_camera:
 class WebcamVideoStream:
     def __init__(self, src=0, width=1280, height=720):
         # If you are under windows system using Dshow as backend
-        self.stream = cv2.VideoCapture(src, cv2.CAP_DSHOW)
+        # self.stream = cv2.VideoCapture(src, cv2.CAP_DSHOW)
         # If not go next line
-        # self.stream = cv2.VideoCapture(src)
+        self.stream = cv2.VideoCapture(src)
         print(self.stream.isOpened())
         self.width = width
         self.height = height

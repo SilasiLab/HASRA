@@ -306,12 +306,6 @@ class SessionController(object):
 
         # Main session loop. Runs until it receives TERM sig from server. Polls
         # the camera queue for GETPEL messages and forwards to server if it receives one.
-        if profile.dominant_hand == "LEFT":
-            self.arduino_client.serialInterface.write(b'1')
-        elif profile.dominant_hand == "RIGHT":
-            self.arduino_client.serialInterface.write(b'2')
-        elif profile.dominant_hand == "BOTH":
-            self.arduino_client.serialInterface.write(b'4')
 
         trial_count = 1
         now = time.time()
