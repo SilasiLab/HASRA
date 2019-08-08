@@ -204,7 +204,6 @@ class GUI:
 			profileIndex = self.find_profile_state_index(i)
 			self.profileStates[profileIndex][4] = self.dists1[i - 1]
 			self.profileStates[profileIndex][5] = self.dists2[i - 1]
-
 			self.save_animal_profile(profileIndex)
 
 	def update_button_onClick(self):

@@ -32,9 +32,9 @@ Servo servo1;
 bool servo1_up_flag = false;
 const int SERVO_SETTLE_DELAY = 300;
 // Higher numbers make the arm go higher
-int SERVO1_UP_POS = 60;
+int SERVO1_UP_POS = 30;
 // Low numbers makehe arm go lower
-int SERVO1_DOWN_POS = 125;
+int SERVO1_DOWN_POS = 100;
 
 int SERVO_PULSE_DELAY = 16;
 int servo1Pos = SERVO1_DOWN_POS;
@@ -46,15 +46,15 @@ const int switchPin1 = 9;
 const int switchPin2 = 10;
 const int IRBreakerPin = A2;
 const int vibrationPin = A1;
+const int digitalSwitchPin = A3;
 
-
-const int step1_left = 4;
+const int step1_left = 2;
 const int step1_right = 3;
-const int step1_sleep = 2;
+const int step1_sleep = 4;
 
-const int step2_left = 7;
+const int step2_left = 5;
 const int step2_right = 6;
-const int step2_sleep = 5;
+const int step2_sleep = 7;
 
 
 
@@ -118,6 +118,7 @@ int displayPellet() {
     delay(SERVO_PULSE_DELAY);
   }   
   // Raise arm to display pellet
+  delay(SERVO_PULSE_DELAY);
   for (int i = SERVO1_DOWN_POS; i >= SERVO1_UP_POS; i -= 1) {
     servo1.write(i);
     delay(SERVO_PULSE_DELAY);
@@ -186,9 +187,8 @@ int zeroStepper_both(){
   digitalWrite(step1_left, HIGH);
   digitalWrite(step2_left, HIGH);
   delay(100);
-  boolean flag = false;
   while((!digitalRead(switchPin1)) || (!digitalRead(switchPin2))){
-    flag = true;
+    digitalWrite(vibrationPin, HIGH);
     if (!digitalRead(switchPin1)){digitalWrite(step1_right, LOW);}
     if (!digitalRead(switchPin2)){digitalWrite(step2_right, LOW);}
     delayMicroseconds(500);
@@ -196,13 +196,9 @@ int zeroStepper_both(){
     if (!digitalRead(switchPin2)){digitalWrite(step2_right, HIGH);}
     delayMicroseconds(500);
   }
+  digitalWrite(vibrationPin, LOW);
   digitalWrite(step1_sleep, LOW);
   digitalWrite(step2_sleep, LOW);
-  if(flag){
-  digitalWrite(vibrationPin, HIGH);
-  delay(2000);
-  digitalWrite(vibrationPin, LOW);
-  }
   return 0;
 }
 
@@ -216,7 +212,11 @@ void setup() {
   while (!Serial) {
     delay(100);
   }
+  pinMode(digitalSwitchPin, OUTPUT);
+  digitalWrite(digitalSwitchPin, LOW);
+  
   pinMode(vibrationPin, OUTPUT);
+  digitalWrite(vibrationPin, LOW);
   zeroServos();
   
   pinMode(step1_sleep, OUTPUT);
@@ -233,8 +233,6 @@ void setup() {
   pinMode(IRBreakerPin, INPUT_PULLUP);
   IRState = digitalRead(IRBreakerPin);
   attachInterrupt(digitalPinToInterrupt(IRBreakerPin), handleIRChange, HIGH);
-    
-  //zeroStepper_both();
   
   // Set LED control pin
   pinMode(ledPin, OUTPUT);
@@ -285,9 +283,7 @@ int startSession() {
         case ('3'):
 
           // Give client a second to respond
-          delay(200);
-          zeroStepper_both();
-         
+          delay(200);   
           stepperDist1 = Serial.read();
             
           delay(200);
@@ -341,20 +337,26 @@ void test_servo(){
 
 void test_stepper(){
   zeroStepper_both();
-  moveStepper_both(10, 10);
+  moveStepper_both(15, 7);
 }
 
 void loop(){
   boolean DEBUG = false;
   if(DEBUG){
     test_stepper();
+    digitalWrite(digitalSwitchPin, HIGH);
+    delay(1000);
+    digitalWrite(digitalSwitchPin, LOW);
+    delay(1000);
     test_servo();
   }
   else{
     if(listenForStartCommand()){
+    digitalWrite(digitalSwitchPin, HIGH);
     digitalWrite(ledPin, LOW);
     startSession();
     Serial.write("TERM\n");
+    digitalWrite(digitalSwitchPin, LOW);
     zeroStepper_both();
     }
   }

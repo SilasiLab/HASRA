@@ -2,8 +2,8 @@
 TEST_RIGHT
 6
 45567
-13
+15
 7
 BOTH
-407
+458
 /home/silasi/HomeCageSinglePellet_server/AnimalProfiles/TEST_RIGHT/

@@ -288,12 +288,14 @@ class SessionController(object):
         self.print_session_start_information(profile, startTime)
 
         vidPath = profile.genVideoPath(startTime) + '.avi'
+        tempPath = os.path.join(os.path.dirname(vidPath), 'temp.avi')
+
         print("saved as :"+vidPath)
         if "TEST" in profile.name:
             print("Its testing")
-            p = Popen(["python", "driver_for_a_better_camera.py", "--c", str(0), "--p", vidPath], stdin=PIPE, stdout=PIPE)
+            p = Popen(["python", "driver_for_a_better_camera.py", "--c", str(0), "--p", tempPath], stdin=PIPE, stdout=PIPE)
         else:
-            p = Popen(["python", "driver_for_a_better_camera.py", "--c", str(0), "--p", vidPath], stdin=PIPE, stdout=PIPE)
+            p = Popen(["python", "driver_for_a_better_camera.py", "--c", str(0), "--p", tempPath], stdin=PIPE, stdout=PIPE)
         # Tell server to move stepper to appropriate position for current profile
         self.arduino_client.serialInterface.write(b'3')
 
@@ -339,6 +341,7 @@ class SessionController(object):
         for line in p.stdout.readlines():
             print(line)
         # Log session information.
+        os.rename(tempPath, vidPath)
         endTime = time.time()
         profile.insertSessionEntry(startTime, endTime, trial_count)
         profile.saveProfile()

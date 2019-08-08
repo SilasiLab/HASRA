@@ -15,6 +15,7 @@ import time
 import inspect
 import ctypes
 import argparse
+import platform
 
 class FPS_camera:
     def __init__(self):
@@ -49,16 +50,21 @@ class FPS_camera:
 class WebcamVideoStream:
     def __init__(self, src=0, width=1280, height=720):
         # If you are under windows system using Dshow as backend
-        # self.stream = cv2.VideoCapture(src, cv2.CAP_DSHOW)
+        if platform.system() == 'Windows':
+            self.stream = cv2.VideoCapture(src, cv2.CAP_DSHOW)
+            ret4 = self.stream.set(cv2.CAP_PROP_EXPOSURE, -11)
         # If not go next line
-        self.stream = cv2.VideoCapture(src)
+        else:
+            self.stream = cv2.VideoCapture(src)
+            ret4 = self.stream.set(cv2.CAP_PROP_EXPOSURE, 0.0001)
         print(self.stream.isOpened())
         self.width = width
         self.height = height
         ret1 = self.stream.set(cv2.CAP_PROP_FRAME_WIDTH, self.width)
         ret2 = self.stream.set(cv2.CAP_PROP_FRAME_HEIGHT, self.height)
         ret3 = self.stream.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)
-        ret4 = self.stream.set(cv2.CAP_PROP_EXPOSURE, -11)
+
+
         ret5 = self.stream.set(cv2.CAP_PROP_AUTOFOCUS, 0)
         ret6 = self.stream.set(cv2.CAP_PROP_BRIGHTNESS, 0.0)
         ret7 = self.stream.set(cv2.CAP_PROP_FPS, 120)
@@ -198,15 +204,20 @@ def record_main(camera_src, video_path, show=False):
     r.stop()
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--c', help='an integer for the camer index', dest='camera_index')
-    parser.add_argument('--p', help='a string', dest='video_path')
+    DEBUG = False
 
-    args = parser.parse_args()
-    camera_index = args.camera_index
-    video_path = args.video_path
+    if not  DEBUG:
+        parser = argparse.ArgumentParser()
+        parser.add_argument('--c', help='an integer for the camer index', dest='camera_index')
+        parser.add_argument('--p', help='a string', dest='video_path')
 
-    record_main(int(camera_index), video_path)
+        args = parser.parse_args()
+        camera_index = args.camera_index
+        video_path = args.video_path
 
+        record_main(int(camera_index), video_path)
+
+    else:
+        record_main(0, '1.avi', show=True)
 
 
