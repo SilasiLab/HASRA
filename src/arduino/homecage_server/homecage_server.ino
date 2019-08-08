@@ -32,7 +32,7 @@ Servo servo1;
 bool servo1_up_flag = false;
 const int SERVO_SETTLE_DELAY = 300;
 // Higher numbers make the arm go higher
-int SERVO1_UP_POS = 30;
+int SERVO1_UP_POS = 33;
 // Low numbers makehe arm go lower
 int SERVO1_DOWN_POS = 100;
 
@@ -343,12 +343,14 @@ void test_stepper(){
 void loop(){
   boolean DEBUG = false;
   if(DEBUG){
-    test_stepper();
     digitalWrite(digitalSwitchPin, HIGH);
-    delay(1000);
-    digitalWrite(digitalSwitchPin, LOW);
-    delay(1000);
-    test_servo();
+//    test_stepper();
+//    digitalWrite(digitalSwitchPin, HIGH);
+//    delay(1000);
+//    digitalWrite(digitalSwitchPin, LOW);
+//    delay(1000);
+//    test_servo();
+    while(1){delay(100);}
   }
   else{
     if(listenForStartCommand()){

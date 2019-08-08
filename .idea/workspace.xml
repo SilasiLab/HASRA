@@ -2,20 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d0609cd-0b84-47be-81bf-56f2da79cf2a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/HomeCageSinglePellet_server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/HomeCageSinglePellet_server.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AnimalProfiles/TEST_RIGHT/Logs/TEST_RIGHT_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/TEST_RIGHT/Logs/TEST_RIGHT_session_history.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AnimalProfiles/TEST_RIGHT/TEST_RIGHT_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/TEST_RIGHT/TEST_RIGHT_save.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/src.iml" beforeDir="false" afterPath="$PROJECT_DIR$/src/.idea/src.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/arduino/homecage_server/homecage_server.ino" beforeDir="false" afterPath="$PROJECT_DIR$/src/arduino/homecage_server/homecage_server.ino" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/debug_log/loadAnimalProfiles.logs" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/debug_log/loadAnimalProfiles.logs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/debug_log/main.logs" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/debug_log/main.logs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/driver_for_a_better_camera.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/driver_for_a_better_camera.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/gui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

@@ -88,8 +88,8 @@ class GUI:
 
 		frame_distance_front2back = Frame(master)
 		for i in range(6):
-			temp_label = Label(frame_distance_front2back, text="distance front 2 back")
-			temp_label.pack(padx=40, side=LEFT)
+			temp_label = Label(frame_distance_front2back, text="distance front 2 back.(F:15 B:0)")
+			temp_label.pack(padx=5, side=LEFT)
 		frame_distance_front2back.pack()
 
 		frame_fb_spin = Frame(master)
@@ -102,8 +102,8 @@ class GUI:
 
 		frame_distance_left2right = Frame(master)
 		for i in range(6):
-			temp_label = Label(frame_distance_left2right, text="distance left 2 right")
-			temp_label.pack(padx=40, side=LEFT)
+			temp_label = Label(frame_distance_left2right, text="distance left 2 right.(R:0 L:15)")
+			temp_label.pack(padx=5, side=LEFT)
 		frame_distance_left2right.pack()
 
 		frame_lr_spin = Frame(master)
@@ -235,9 +235,14 @@ class GUI:
 # we don't want it tying up the parent process. This is bad practice but it's easy
 # so I'm leaving it for now.
 def start_gui_loop(animalProfilePath):
+	cage_index = [item for item in os.getcwd().split(os.sep) if 'homecagesinglepellet' in item.lower()][0].split('_')[-1]
+	if cage_index.isdigit():
+		cage_index = int(cage_index)
+	else:
+		cage_index = 1
 
 	root = Tk()
-	root.title("Cage1")
+	root.title("Cage: %d" % cage_index)
 	gui = GUI(root, animalProfilePath)
 	gui.load_animal_profiles()
 	root.mainloop()
