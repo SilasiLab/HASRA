@@ -14,7 +14,9 @@ from subprocess import PIPE, Popen
 import os
 import datetime
 from driver_for_a_better_camera import *
-import pysnooper
+from tkinter.simpledialog import askinteger, askstring
+from tkinter import Tk
+# import pysnooper
 
 systemCheck.check_directory_structure()
 # Load all configuration information for running the system.
@@ -77,7 +79,6 @@ def resetAnimalProfileTrialsToday():
         mouse5TrialsToday = 0
 
 
-@pysnooper.snoop("debug_log" + os.sep + "loadAnimalProfiles.logs")
 def loadAnimalProfiles(profile_save_directory):
     # Get list of profile folders
     profile_names = os.listdir(profile_save_directory)
@@ -230,6 +231,9 @@ class SessionController(object):
 
         self.profile_list = profile_list
         self.arduino_client = arduino_client
+        parent = Tk()
+        parent.withdraw()
+        self.camera_index = askinteger("Camera index", "Please indicate which camera you are using.", parent=parent)
 
     def set_profile_list(self, profileList):
 
@@ -293,9 +297,9 @@ class SessionController(object):
         print("saved as :"+vidPath)
         if "TEST" in profile.name:
             print("Its testing")
-            p = Popen(["python", "driver_for_a_better_camera.py", "--c", str(0), "--p", tempPath], stdin=PIPE, stdout=PIPE)
+            p = Popen(["python", "driver_for_a_better_camera.py", "--c", str(self.camera_index), "--p", tempPath], stdin=PIPE, stdout=PIPE)
         else:
-            p = Popen(["python", "driver_for_a_better_camera.py", "--c", str(0), "--p", tempPath], stdin=PIPE, stdout=PIPE)
+            p = Popen(["python", "driver_for_a_better_camera.py", "--c", str(self.camera_index), "--p", tempPath], stdin=PIPE, stdout=PIPE)
         # Tell server to move stepper to appropriate position for current profile
         self.arduino_client.serialInterface.write(b'3')
 
@@ -364,6 +368,11 @@ def launch_gui():
 # This function initializes all the high level system components, returning a handle to each one. 
 def sys_init():
     profile_list = loadAnimalProfiles(PROFILE_SAVE_DIRECTORY)
+    # app_window = Tk()
+    # saved_arduino_path = "/dev/ttyUSB0"
+    #
+    # arduino_path = askstring("Arduino Port", "Please input arduino path: (Default is: %s)"%saved_arduino_path)
+    # if arduino_path
     arduino_client = arduinoClient.client("/dev/ttyUSB0", 9600)
     ser = serial.Serial('/dev/ttyUSB1', 9600)
     
@@ -389,7 +398,6 @@ def listen_for_rfid(ser):
             rfid += byte.decode('utf-8')
 
 
-@pysnooper.snoop("debug_log" + os.sep + "main.logs")
 def main():
 
     global mouse1TrialLimit, mouse2TrialLimit, mouse3TrialLimit, mouse4TrialLimit, mouse5TrialLimit

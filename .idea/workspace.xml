@@ -6,9 +6,11 @@
       <change beforePath="$PROJECT_DIR$/AnimalProfiles/TEST_RIGHT/Logs/TEST_RIGHT_session_history.csv" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/TEST_RIGHT/Logs/TEST_RIGHT_session_history.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AnimalProfiles/TEST_RIGHT/TEST_RIGHT_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AnimalProfiles/TEST_RIGHT/TEST_RIGHT_save.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/arduino/homecage_server/homecage_server.ino" beforeDir="false" afterPath="$PROJECT_DIR$/src/arduino/homecage_server/homecage_server.ino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/debug_log/loadAnimalProfiles.logs" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/debug_log/loadAnimalProfiles.logs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/debug_log/main.logs" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/debug_log/main.logs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/gui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/1.avi" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/1.avi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/debug_log/loadAnimalProfiles.logs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/debug_log/main.logs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/driver_for_a_better_camera.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/driver_for_a_better_camera.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,7 +56,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.driver_for_a_better_camera">
     <configuration name="driver_for_a_better_camera" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="HomeCageSinglePellet_server" />
       <option name="INTERPRETER_OPTIONS" value="" />

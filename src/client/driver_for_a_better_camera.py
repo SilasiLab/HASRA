@@ -206,7 +206,7 @@ def record_main(camera_src, video_path, show=False):
 if __name__ == '__main__':
     DEBUG = False
 
-    if not  DEBUG:
+    if not DEBUG:
         parser = argparse.ArgumentParser()
         parser.add_argument('--c', help='an integer for the camer index', dest='camera_index')
         parser.add_argument('--p', help='a string', dest='video_path')
@@ -215,7 +215,7 @@ if __name__ == '__main__':
         camera_index = args.camera_index
         video_path = args.video_path
 
-        record_main(int(camera_index), video_path)
+        record_main(int(camera_index), video_path, show=False)
 
     else:
         record_main(0, '1.avi', show=True)
