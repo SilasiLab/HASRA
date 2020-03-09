@@ -22,17 +22,7 @@ The design allows a single mouse at a time to enter the reaching tube. Upon entr
 	* psutil
 	* multiprocessing
 	* subprocess
-	* pysnooper
-* Flir Spinnaker SDK v1.10.31
-	* libavcodec-ffmpeg56
-	* libavformat-ffmpeg56
-	* libswscale-ffmpeg3
-	* libswresample-ffmpeg1
-	* libavutil-ffmpeg54
-	* libgtkmm-2.4-dev
-	* libusb-1.0-0
 	
-	Note: The Spinnaker dependencies are installed via official Spinnaker SDK install script.
 * Arduino IDE v1.8.5
 
 # **Software Installation:**
