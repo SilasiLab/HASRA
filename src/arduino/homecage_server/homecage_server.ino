@@ -32,15 +32,11 @@ Servo servo1;
 bool servo1_up_flag = false;
 const int SERVO_SETTLE_DELAY = 300;
 // Higher numbers make the arm go higher
-int SERVO1_UP_POS = 28;
+int SERVO1_UP_POS = 98;
 // Low numbers makehe arm go lower
-int SERVO1_DOWN_POS = 100;
+int SERVO1_DOWN_POS = 160;
 
-int SERVO_PULSE_DELAY = 19;
-
-int SERVO_PULSE_DELAY_UP = 19;
-int SERVO_PULSE_DELAY_DOWN = 25;
-
+int SERVO_PULSE_DELAY = 16;
 int servo1Pos = SERVO1_DOWN_POS;
 
 
@@ -81,6 +77,16 @@ void handleIRChange() {
   digitalWrite(ledPin, IRState);
 }
 
+int my_delay(int delay_time){
+    for(int i = 0; i < delay_time; i += 1)
+      {
+          delay(1);
+          if (digitalRead(IRBreakerPin))
+            return 0;
+      }
+     return 1;
+  }
+
 int zeroServos() {
 
   servo1.attach(servo1Pin);
@@ -93,7 +99,7 @@ int zeroServos() {
   servo1Pos = SERVO1_DOWN_POS;
   
   servo1.detach();
-  return 0;
+  return 1;
 
 }
 
@@ -109,7 +115,7 @@ int lowerServo1(){
   servo1Pos = SERVO1_DOWN_POS;
   
   servo1.detach();
-  return 0;
+  return 1;
 }
 
 int displayPellet() {
@@ -118,31 +124,43 @@ int displayPellet() {
 
   // Lower arm to grab pellet.
   for (int i = servo1Pos; i <= SERVO1_DOWN_POS; i += 1) {
+    if (digitalRead(IRBreakerPin)){servo1.detach();return 0;}
     servo1.write(i);
-    delay(SERVO_PULSE_DELAY_UP);
+    //delay(SERVO_PULSE_DELAY);
+    if (my_delay(SERVO_PULSE_DELAY) == 0){servo1.detach();return 0;}
   }   
   // Raise arm to display pellet
-  delay(SERVO_PULSE_DELAY_DOWN);
+  if (my_delay(SERVO_PULSE_DELAY) == 0){servo1.detach();return 0;}
+  
   for (int i = SERVO1_DOWN_POS; i >= SERVO1_UP_POS; i -= 1) {
+    if (digitalRead(IRBreakerPin)){servo1.detach();return 0;}
     servo1.write(i);
-    delay(SERVO_PULSE_DELAY_DOWN);
+    //delay(SERVO_PULSE_DELAY);
+    if (my_delay(SERVO_PULSE_DELAY) == 0){servo1.detach();return 0;}
   }
-  delay(SERVO_SETTLE_DELAY);
+  
+  if (my_delay(SERVO_SETTLE_DELAY) == 0){servo1.detach();return 0;}
+
   servo1Pos = SERVO1_UP_POS;
   servo1_up_flag = true;
   servo1.detach();
-  return 0;
+  return 1;
 }
 
 int moveStepper_both(int targetPos1, int targetPos2) {
   digitalWrite(step1_sleep, HIGH);
   digitalWrite(step2_sleep, HIGH);
-  delay(100);
+  //delay(100);
+  if (my_delay(100) == 0){
+    digitalWrite(step1_sleep, LOW);
+  digitalWrite(step2_sleep, LOW);
+  return 0;}
+  
   int step1 = 0;
   int step2 = 0;
   
-  if(targetPos1 > 0){step1 = -1; digitalWrite(step1_left, LOW);}
-  else{step1 = 1; digitalWrite(step1_left, HIGH);}
+  if(targetPos1 > 0){step1 = -1; digitalWrite(step1_left, HIGH);}
+  else{step1 = 1; digitalWrite(step1_left, LOW);}
   if(targetPos2 > 0){step2 = -1; digitalWrite(step2_left, LOW);}
   else{step2 = 1; digitalWrite(step2_left, HIGH);}
   
@@ -151,6 +169,7 @@ int moveStepper_both(int targetPos1, int targetPos2) {
   
   while((count1 != 0) || (count2 != 0))
   {
+    if (digitalRead(IRBreakerPin)){return 0;}
     if(count1 != 0)
     {
       count1 += step1;
@@ -175,7 +194,7 @@ int moveStepper_both(int targetPos1, int targetPos2) {
   }
   digitalWrite(step1_sleep, LOW);
   digitalWrite(step2_sleep, LOW);
-  return 0;
+  return 1;
 }
 
 
@@ -188,7 +207,7 @@ int zeroStepper_both(){
   digitalWrite(step1_sleep, HIGH);
   digitalWrite(step2_sleep, HIGH);
   delay(100);
-  digitalWrite(step1_left, HIGH);
+  digitalWrite(step1_left, LOW);
   digitalWrite(step2_left, HIGH);
   delay(100);
   while((!digitalRead(switchPin1)) || (!digitalRead(switchPin2))){
@@ -203,7 +222,7 @@ int zeroStepper_both(){
   digitalWrite(vibrationPin, LOW);
   digitalWrite(step1_sleep, LOW);
   digitalWrite(step2_sleep, LOW);
-  return 0;
+  return 1;
 }
 
 
@@ -214,6 +233,7 @@ void setup() {
   // until the connection is ready.
   Serial.begin(9600);
   while (!Serial) {
+    //if (my_delay(100) == 0){return;}
     delay(100);
   }
   pinMode(digitalSwitchPin, OUTPUT);
@@ -242,6 +262,7 @@ void setup() {
   pinMode(ledPin, OUTPUT);
   digitalWrite(ledPin, HIGH);
   Serial.write("READY\n");
+  return;
 }
 
 bool listenForStartCommand() {
@@ -277,20 +298,23 @@ int startSession() {
       switch(cmd){
         
         case ('1'):
-          displayPellet();
+          if(displayPellet() == 0){return 0;}
           break;
           
         case ('2'):
-          displayPellet();
+          if(displayPellet() == 0){return 0;}
           break;
           
         case ('3'):
 
           // Give client a second to respond
-          delay(200);   
+          //delay(200);
+          if (my_delay(200) == 0){return 0;}
+             
           stepperDist1 = Serial.read();
             
-          delay(200);
+          //delay(200);
+          if (my_delay(200) == 0){return 0;} 
           
           stepperDist2 = Serial.read();
 
@@ -298,10 +322,10 @@ int startSession() {
           else{stepperDistInt1 = 10 + stepperDist1 - 'a';}
           if (isDigit(stepperDist2)){stepperDistInt2 = stepperDist2 - '0';}
           else{stepperDistInt2 = 10 + stepperDist2 - 'a';}
-          moveStepper_both(stepperDistInt1, stepperDistInt2);
+          if (moveStepper_both(stepperDistInt1, stepperDistInt2) == 0){return 0;} 
           break;
         case ('4'):
-          displayPellet();
+          if(displayPellet() == 0){return 0;}
           break;
         default:
           break;
@@ -337,24 +361,22 @@ void test_beambreaker(){
 
 void test_servo(){
   displayPellet();
+  delay(1000);
+  zeroServos();
 }
 
 void test_stepper(){
   zeroStepper_both();
-  moveStepper_both(15, 7);
+  moveStepper_both(7, 11);
 }
 
 void loop(){
   boolean DEBUG = false;
   if(DEBUG){
-//    digitalWrite(digitalSwitchPin, HIGH);
     test_stepper();
-//    digitalWrite(digitalSwitchPin, HIGH);
-//    delay(1000);
-//    digitalWrite(digitalSwitchPin, LOW);
-//    delay(1000);
-//    test_servo();
-    while(1){delay(100);}
+    displayPellet();
+
+    digitalWrite(digitalSwitchPin, HIGH);
   }
   else{
     if(listenForStartCommand()){
@@ -363,7 +385,9 @@ void loop(){
     startSession();
     Serial.write("TERM\n");
     digitalWrite(digitalSwitchPin, LOW);
+    zeroServos();
     zeroStepper_both();
+    
     }
   }
   digitalWrite(ledPin, HIGH);  

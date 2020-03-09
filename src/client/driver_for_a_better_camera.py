@@ -16,6 +16,11 @@ import inspect
 import ctypes
 import argparse
 import platform
+import pickle
+import os
+
+
+DETECT_FLAG = False
 
 class FPS_camera:
     def __init__(self):
@@ -49,25 +54,38 @@ class FPS_camera:
 
 class WebcamVideoStream:
     def __init__(self, src=0, width=1280, height=720):
+
+
         # If you are under windows system using Dshow as backend
         if platform.system() == 'Windows':
             self.stream = cv2.VideoCapture(src, cv2.CAP_DSHOW)
-            ret4 = self.stream.set(cv2.CAP_PROP_EXPOSURE, -11)
+            print(self.stream.isOpened())
+            self.width = width
+            self.height = height
+            ret1 = self.stream.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+            ret2 = self.stream.set(cv2.CAP_PROP_FRAME_HEIGHT, 360)
+            # ret1 = self.stream.set(cv2.CAP_PROP_FRAME_WIDTH, self.width)
+            # ret2 = self.stream.set(cv2.CAP_PROP_FRAME_HEIGHT, self.height)
+            ret3 = self.stream.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)
+            ret4 = self.stream.set(cv2.CAP_PROP_EXPOSURE, -3)
+            # ret4 = self.stream.set(cv2.CAP_PROP_EXPOSURE, -11)
         # If not go next line
         else:
             self.stream = cv2.VideoCapture(src)
-            ret4 = self.stream.set(cv2.CAP_PROP_EXPOSURE, 0.0001)
-        print(self.stream.isOpened())
-        self.width = width
-        self.height = height
-        ret1 = self.stream.set(cv2.CAP_PROP_FRAME_WIDTH, self.width)
-        ret2 = self.stream.set(cv2.CAP_PROP_FRAME_HEIGHT, self.height)
-        ret3 = self.stream.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)
+            print(self.stream.isOpened())
+            self.width = width
+            self.height = height
+            ret1 = self.stream.set(cv2.CAP_PROP_FRAME_WIDTH, self.width)
+            ret2 = self.stream.set(cv2.CAP_PROP_FRAME_HEIGHT, self.height)
+            ret3 = self.stream.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)
+            print("camera")
+            ret4 = self.stream.set(cv2.CAP_PROP_EXPOSURE, 0.001)
+
 
 
         ret5 = self.stream.set(cv2.CAP_PROP_AUTOFOCUS, 0)
         ret6 = self.stream.set(cv2.CAP_PROP_BRIGHTNESS, 0.0)
-        ret7 = self.stream.set(cv2.CAP_PROP_FPS, 120)
+        ret7 = self.stream.set(cv2.CAP_PROP_FPS, 60)
         ret8 = self.stream.set(cv2.CAP_PROP_CONTRAST, 0)
         print(ret1, ret2, ret3, ret4, ret5, ret6, ret7, ret8)
 
@@ -124,7 +142,8 @@ class Recoder():
 
     def __init__(self, savePath='test.avi', show=False, vs=None):
         self.fourcc = cv2.VideoWriter_fourcc(*'MJPG')
-        self.writer = cv2.VideoWriter(savePath, self.fourcc, 100.0, (1280, 720), False)
+        # self.writer = cv2.VideoWriter(savePath, self.fourcc, 100.0, (1280, 720), False)
+        self.writer = cv2.VideoWriter(savePath, self.fourcc, 60.0, (640, 360), False)
         self.stopped = False
         self.FPS = FPS_camera()
         self.vs = vs
@@ -133,16 +152,29 @@ class Recoder():
         self.flag = False
         self.process = None
 
+        #  Socket to talk to server
+        # print("Connecting to hello world server…")
+        # self.socket = context.socket(zmq.REQ)
+        # self.socket.connect("tcp://127.0.0.1:5555")
+
     def recording(self):
         self.FPS = self.FPS.start()
         time_str = str(time.time())
+        start_time = datetime.datetime.now()
+        global DETECT_FLAG
+
         while True:
             time_iter_start = datetime.datetime.now()
             if self.stopped:
                 break
+
             frame = self.vs.read()
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            self.writer.write(gray)
+            if not self.show:
+                self.writer.write(gray)
+            if DETECT_FLAG:
+                cv2.imwrite("detection_frame.jpg", gray)
+                DETECT_FLAG = False
             self.FPS.update()
 
             if self.show:
@@ -152,7 +184,7 @@ class Recoder():
                     break
             time_iter_end = datetime.datetime.now()
             iteration = float((time_iter_end - time_iter_start).microseconds) * 1e-6
-            time.sleep(max((0.0075 - iteration), 0))
+            time.sleep(max((1.0 / 60. - iteration), 0))
 
         self.writer.release()
         self.vs.stream.release()
@@ -198,10 +230,15 @@ def record_main(camera_src, video_path, show=False):
     print("[INFO] sampling THREADED frames from webcam...")
     vs = WebcamVideoStream(src=camera_src).start()
     r = Recoder(savePath=video_path, vs=vs, show=show).start()
-    signal=input()
-    print(signal)
-    vs.stop()
-    r.stop()
+    while True:
+        signal = input()
+        if signal == "stop":
+            vs.stop()
+            r.stop()
+            break
+        else:
+            global DETECT_FLAG
+            DETECT_FLAG = True
 
 if __name__ == '__main__':
     DEBUG = False
@@ -210,12 +247,16 @@ if __name__ == '__main__':
         parser = argparse.ArgumentParser()
         parser.add_argument('--c', help='an integer for the camer index', dest='camera_index')
         parser.add_argument('--p', help='a string', dest='video_path')
-
+        parser.add_argument('--t', help='test', dest='test', default='False')
         args = parser.parse_args()
         camera_index = args.camera_index
         video_path = args.video_path
+        test = args.test
+        if test == "True":
+            record_main(int(camera_index), video_path, show=True)
+        else:
+            record_main(int(camera_index), video_path, show=False)
 
-        record_main(int(camera_index), video_path, show=False)
 
     else:
         record_main(0, '1.avi', show=True)

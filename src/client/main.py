@@ -14,10 +14,10 @@ from subprocess import PIPE, Popen
 import os
 import datetime
 from driver_for_a_better_camera import *
-from tkinter.simpledialog import askinteger, askstring
-from tkinter import Tk
-# import pysnooper
-
+from googleDriveManager import is_locked
+import numpy as np
+from detector import Detector
+D = Detector("model/model.h5")
 systemCheck.check_directory_structure()
 # Load all configuration information for running the system.
 # Note: Configuration information for data analysis does not come from here.
@@ -83,7 +83,7 @@ def loadAnimalProfiles(profile_save_directory):
     # Get list of profile folders
     profile_names = os.listdir(profile_save_directory)
     profiles = []
-
+    print(profile_names)
     for profile in profile_names:
 
         # Build save file path
@@ -197,7 +197,7 @@ class AnimalProfile(object):
 
     # This function takes all the information required for an animal's session log entry, and then formats it.
     # Once formatted, it appends the log entry to the animal's session_history.csv file.
-    def insertSessionEntry(self, start_timestamp, end_timestamp, trial_count):
+    def insertSessionEntry(self, start_timestamp, end_timestamp, trial_count, successful_count=0):
 
         # TODO: Is there a better way to create + format strings?
         # session_history = self.log_save_directory + str(self.name) + "_session_history.csv"
@@ -207,17 +207,32 @@ class AnimalProfile(object):
         end_date = time.strftime("%d-%b-%Y", time.localtime(end_timestamp))
         end_time = time.strftime("%H:%M:%S", time.localtime(end_timestamp))
         csv_entry = str(self.session_count) + "," + str(self.name) + "," + str(self.ID) + "," + str(
-            trial_count) + "," + str(self.difficulty_dist_mm1) + "," + str(self.difficulty_dist_mm2) + "," + str(
+            trial_count) + "," + str(successful_count) + "," + str(self.difficulty_dist_mm1) + "," + str(self.difficulty_dist_mm2) + "," + str(
             self.dominant_hand) + "," + start_date + "," + start_time + "," + end_date + "," + end_time + "\n"
+        if not os.path.exists(session_history):
+            with open(session_history, "w") as log:
+                log.write(csv_entry)
+        else:
+            with open(session_history, "a") as log:
+                log.write(csv_entry)
 
-        with open(session_history, "a") as log:
-            log.write(csv_entry)
-
+    def insertDisplay(self, time_stamp_list):
+        csv_file = os.path.join(PROFILE_SAVE_DIRECTORY, str(self.name), 'Logs', str(self.name)+"_display_history.txt")
+        if not os.path.exists(csv_file):
+            with open(csv_file, 'w') as f:
+                for time_stamp in time_stamp_list:
+                    time_string = time_stamp.strftime("%Y/%m/%d,%H:%M:%S")
+                    f.write(time_string + "\n")
+        else:
+            with open(csv_file, 'a') as f:
+                for time_stamp in time_stamp_list:
+                    time_string = time_stamp.strftime("%Y/%m/%d,%H:%M:%S")
+                    f.write(time_string + "\n")
 
 class SessionController(object):
     """
 		A controller for all sessions that occur within the system. A "session" is defined as everything that happens while an animal is in the
-                experiment tube. A session is started when an RFID is read and authorized. The session will continue until the IR beam is reconnected and 
+                experiment tube. A session is started when an RFID is read and authorized. The session will continue until the IR beam is reconnected and
                 the Arduino server sends a signal to indicate this. Sessions record several pieces of information during the session, including video, timestamps, motor actions, etc.
                 The sessions is also responsible for sending requests to the Arduino for motor actions and for spawning a video recording process.
                 A SessionController has the following properties:
@@ -231,9 +246,7 @@ class SessionController(object):
 
         self.profile_list = profile_list
         self.arduino_client = arduino_client
-        parent = Tk()
-        parent.withdraw()
-        self.camera_index = askinteger("Camera index", "Please indicate which camera you are using.", parent=parent)
+        self.predict = True
 
     def set_profile_list(self, profileList):
 
@@ -241,7 +254,7 @@ class SessionController(object):
 
     # This function searches the SessionController's profile_list for a profile whose ID
     # matches the supplied RFID. If a profile is found, it is returned. If no profile is found,
-    # -1 is returned. (Not very pythonic but I have C-like habits.) 
+    # -1 is returned. (Not very pythonic but I have C-like habits.)
     def searchForProfile(self, RFID):
 
         for profile in self.profile_list:
@@ -269,10 +282,10 @@ class SessionController(object):
     # The session remains active until a signal is received from the Arduino server indicating that
     # the IR beam breaker has been reconnected.
     #
-    # Each session forks a process that records video for the duration of the session. 
+    # Each session forks a process that records video for the duration of the session.
     # This function is also responsible for sending a terminate signal to that forked process.
     # This signal is sent by creating a file called 'KILL' in the current working
-    # directory (Not good, but does the job. I was halfway through implementing IPC with sockets 
+    # directory (Not good, but does the job. I was halfway through implementing IPC with sockets
     # but didn't have time to finish).
     #
     # This function is also responsible for telling the Arduino server how to position the stepper motors and
@@ -281,25 +294,26 @@ class SessionController(object):
     # Each session will also log data about itself.
     #
     # On completion, this session will update the <profile> it was running the session for,
-    # clean up any processes it opened, and save all log data. 
+    # clean up any processes it opened, and save all log data.
     #
-    # TODO: This function is pretty bloated and probably harder to read than it needs to be. Better separation 
+    # TODO: This function is pretty bloated and probably harder to read than it needs to be. Better separation
     # of concerns could be easily achieved by splitting it into a few smaller functions.
     def startSession(self, profile):
 
         startTime = time.time()
         profile.session_count += 1
         self.print_session_start_information(profile, startTime)
-
+        successful_count = 0
         vidPath = profile.genVideoPath(startTime) + '.avi'
-        tempPath = os.path.join(os.path.dirname(vidPath), 'temp.avi')
+        tempPath = os.path.join(os.path.dirname(vidPath), 'temp_'+ datetime.datetime.now().strftime("%Y%m%d-%H%M%S") + '.avi')
+
 
         print("saved as :"+vidPath)
         if "TEST" in profile.name:
             print("Its testing")
-            p = Popen(["python", "driver_for_a_better_camera.py", "--c", str(self.camera_index), "--p", tempPath], stdin=PIPE, stdout=PIPE)
+            p = Popen(["python", "driver_for_a_better_camera.py", "--c", str(0), "--p", tempPath, "--t", "True"], stdin=PIPE, stdout=PIPE)
         else:
-            p = Popen(["python", "driver_for_a_better_camera.py", "--c", str(self.camera_index), "--p", tempPath], stdin=PIPE, stdout=PIPE)
+            p = Popen(["python", "driver_for_a_better_camera.py", "--c", str(0), "--p", tempPath, "--t", "False"], stdin=PIPE, stdout=PIPE)
         # Tell server to move stepper to appropriate position for current profile
         self.arduino_client.serialInterface.write(b'3')
 
@@ -314,20 +328,70 @@ class SessionController(object):
         # the camera queue for GETPEL messages and forwards to server if it receives one.
 
         trial_count = 1
-        now = time.time()
+        raise_moment = datetime.datetime.now()
+        display_time_stamp_list = []
+        SEED_FLAG = False
 
+        def check_deetction_frame():
+            try:
+                os.rename("detection_frame.jpg", "detection_frame.jpg")
+                if os.path.getsize("detection_frame.jpg") > 10:
+                    return True
+                return False
+            except OSError as e:
+                return False
+
+        def detect(p):
+            '''
+            Wait for real code
+            :return:
+            '''
+            if os.path.exists("detection_frame.jpg"):
+                os.remove("detection_frame.jpg")
+            p.stdin.write(b"detect\n")
+            p.stdin.flush()
+
+            while not check_deetction_frame():
+                time.sleep(0.1)
+            img = cv2.imread("detection_frame.jpg")
+            print(img.shape)
+            time.sleep(1)
+
+            return D.predict_in_real_use(img)
+
+        time.sleep(6)
         while True:
-
-            if (time.time() - now > 7):
-                if profile.dominant_hand == "LEFT":
+            if self.predict:
+                if (datetime.datetime.now() - raise_moment).seconds >= 4:
+                    # SEED_FLAG = detect(p)
+                    SEED_FLAG = False
+                if not SEED_FLAG:
                     self.arduino_client.serialInterface.write(b'1')
-                elif profile.dominant_hand == "RIGHT":
-                    self.arduino_client.serialInterface.write(b'2')
-                elif profile.dominant_hand == "BOTH":
-                    self.arduino_client.serialInterface.write(b'4')
-
-                now = time.time()
-                trial_count += 1
+                    self.arduino_client.serialInterface.flushOutput()
+                    trial_count += 1
+                    time.sleep(4)
+                    if detect(p):
+                        SEED_FLAG = False # do cycling all the time
+                        if "TEST" in profile.name:
+                            SEED_FLAG = False
+                        raise_moment = datetime.datetime.now()
+                        display_time_stamp_list.append(raise_moment)
+                        successful_count += 1
+                    else:
+                        SEED_FLAG = False
+                print("Total trial: %d, successful trial: %d, Percentage; %.3f" % (trial_count, successful_count, float(successful_count) / float(trial_count)))
+            else:
+                if (datetime.datetime.now() - raise_moment).seconds >= 5:
+                    if profile.dominant_hand == "LEFT":
+                        self.arduino_client.serialInterface.write(b'1')
+                    elif profile.dominant_hand == "RIGHT":
+                        self.arduino_client.serialInterface.write(b'2')
+                    elif profile.dominant_hand == "BOTH":
+                        self.arduino_client.serialInterface.write(b'4')
+                    raise_moment = datetime.datetime.now()
+                    trial_count += 1
+                    display_time_stamp_list.append(raise_moment)
+                    time.sleep(1)
 
             # Check if message has arrived from server, if it has, check if it is a TERM message.
             if self.arduino_client.serialInterface.in_waiting > 0:
@@ -345,43 +409,47 @@ class SessionController(object):
         for line in p.stdout.readlines():
             print(line)
         # Log session information.
-        os.rename(tempPath, vidPath)
+        while is_locked(tempPath):
+            time.sleep(1)
+
+        if trial_count == 0:
+            os.remove(tempPath)
+        else:
+            os.rename(tempPath, vidPath)
         endTime = time.time()
-        profile.insertSessionEntry(startTime, endTime, trial_count)
+        profile.insertSessionEntry(startTime, endTime, trial_count, successful_count)
+        profile.insertDisplay(display_time_stamp_list)
         profile.saveProfile()
         self.print_session_end_information(profile, endTime)
 
 def scale_stepper_dist(distance):
     if distance < 10:
         return str(distance)
-    else:
+    elif distance <= 15:
         return str(hex(distance)).replace('0x', '')
-
-
-# Just a wrapper to launch the configuration GUI in its own process. 
+    else:
+        simple_dict = {16: 'g', 17: 'h', 18: 'i', 19: 'j', 20: 'k'}
+        return simple_dict[distance]
+# Just a wrapper to launch the configuration GUI in its own process.
 def launch_gui():
     gui_process = multiprocessing.Process(target=gui.start_gui_loop, args=(PROFILE_SAVE_DIRECTORY,))
     gui_process.start()
     return gui_process
 
 
-# This function initializes all the high level system components, returning a handle to each one. 
+# This function initializes all the high level system components, returning a handle to each one.
 def sys_init():
+    # print(PROFILE_SAVE_DIRECTORY)
     profile_list = loadAnimalProfiles(PROFILE_SAVE_DIRECTORY)
-    # app_window = Tk()
-    # saved_arduino_path = "/dev/ttyUSB0"
-    #
-    # arduino_path = askstring("Arduino Port", "Please input arduino path: (Default is: %s)"%saved_arduino_path)
-    # if arduino_path
-    arduino_client = arduinoClient.client("/dev/ttyUSB0", 9600)
-    ser = serial.Serial('/dev/ttyUSB1', 9600)
-    
+    arduino_client = arduinoClient.client("COM9", 9600)
+    ser = serial.Serial('COM4', 9600)
+
     guiProcess = launch_gui()
     session_controller = SessionController(profile_list, arduino_client)
     return profile_list, arduino_client, session_controller, ser, guiProcess
 
 
-# This function listens to the open port of a serial object. It waits for <x02> 
+# This function listens to the open port of a serial object. It waits for <x02>
 # to indicate the start of an RFID, if then appends to a string until it detects <x03>, indicating the end
 # of the RFID.
 def listen_for_rfid(ser):
@@ -395,6 +463,7 @@ def listen_for_rfid(ser):
         elif (byte == b'\x03'):
             return rfid
         else:
+            # print(byte)
             rfid += byte.decode('utf-8')
 
 
@@ -405,7 +474,7 @@ def main():
 
     loadAnimalProfileTrialLimits()
     # These are handles to all the main system components.
-    
+
     profile_list, arduino_client, session_controller, ser, guiProcess = sys_init()
 
     # Entry point of the system. This block waits for an RFID to enter the <SERIAL_INTERFACE_PATH> buffer.
@@ -471,6 +540,8 @@ def main():
             arduino_client.serialInterface.write(b'A')
 
             # Start a session on Python client side.
+            # Wait for the mouse to get into the tube.
+            time.sleep(1)
             session_controller.startSession(profile)
             # After the session returns, flush the Arduino serial communication buffer.
             arduino_client.serialInterface.flush()

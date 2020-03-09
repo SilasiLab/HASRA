@@ -34,10 +34,10 @@ def check_directory_structure():
                 for file_name in mousefolder_level_2:
                     if not os.path.exists(os.path.join(mouse_folder, file_name)):
                         os.mkdir(os.path.join(mouse_folder, file_name))
-                session_dir = os.path.join(mouse_folder, 'Logs/MOUSE%d_session_history.csv'%i)
-                assert os.path.exists(session_dir), "Error: %s does not exist"%session_dir
-                txt_dir = os.path.join(mouse_folder, 'MOUSE%d_save.txt'%i)
-                assert os.path.exists(txt_dir),  "Error: %s does not exist"%txt_dir
+                # session_dir = os.path.join(mouse_folder, 'Logs/MOUSE%d_session_history.csv'%i)
+                # assert os.path.exists(session_dir), "Error: %s does not exist"%session_dir
+                # txt_dir = os.path.join(mouse_folder, 'MOUSE%d_save.txt'%i)
+                # assert os.path.exists(txt_dir),  "Error: %s does not exist"%txt_dir
         elif l1 == 'config':
 
             if not os.path.isfile(os.path.join(temp_path, 'trialLimitConfig.txt')):

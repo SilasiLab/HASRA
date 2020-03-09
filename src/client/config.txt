@@ -1,0 +1,32 @@
+COM27
+USB VID:PID=1A86:7523 SER=5 LOCATION=1-2
+1-2
+******************* 
+COM16
+USB VID:PID=1A86:7523 SER=5 LOCATION=1-4
+1-4
+******************* 
+COM1
+USB VID:PID=0000:0000
+None
+******************* 
+COM18
+USB VID:PID=0403:6001 SER=A6024DMNA
+None
+******************* 
+COM23
+USB VID:PID=0403:6001 SER=A9084Y1CA
+None
+******************* 
+COM28
+USB VID:PID=1A86:7523 SER=7 LOCATION=1-6.1.2
+1-6.1.2
+******************* 
+COM19
+USB VID:PID=0403:6001 SER=AH05K4CXA
+None
+******************* 
+COM3
+USB VID:PID=0000:0000
+None
+******************* 

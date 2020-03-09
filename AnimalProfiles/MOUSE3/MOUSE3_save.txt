@@ -1,9 +1,9 @@
-002FBE738260
+00784A162400
 MOUSE3
 3
 86885
-10
-7
+9
+8
 LEFT
-1946
-C:\Users\Silasi Lab\HomeCageSinglePellet_server_2\AnimalProfiles\MOUSE3\
+15081
+D:\HomeCageSinglePellet_server_10\AnimalProfiles\MOUSE3\

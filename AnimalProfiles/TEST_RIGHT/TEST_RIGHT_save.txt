@@ -1,9 +1,9 @@
-00782B1884CF
+0005E6A02162
 TEST_RIGHT
 6
 45567
-15
+0
 7
 BOTH
-484
-/home/silasi/HomeCageSinglePellet_server/AnimalProfiles/TEST_RIGHT/
+1093
+D:\HomeCageSinglePellet_server_10\AnimalProfiles\TEST_RIGHT\

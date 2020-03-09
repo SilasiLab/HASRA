@@ -95,7 +95,7 @@ class GUI:
 		frame_fb_spin = Frame(master)
 		for i in range(6):
 			var = IntVar(value=int(self.dists1[i]))
-			fb_box = Spinbox(frame_fb_spin, from_=0, to=15, command=self.update_dist_fb, textvariable=var)
+			fb_box = Spinbox(frame_fb_spin, from_=0, to=20, command=self.update_dist_fb, textvariable=var)
 			fb_box.pack(padx=40, side=LEFT)
 			self.front_back_box_list.append(fb_box)
 		frame_fb_spin.pack()
