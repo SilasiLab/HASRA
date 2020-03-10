@@ -6,7 +6,6 @@
 
 from tkinter import *
 import os
-import pysnooper
 
 # This is the GUI for configuring AnimalProfiles. It reads profiles from the ~/HomeCageSinglePellet/AnimalProfiles/ directory.
 # It expects to find 5 profiles there and will not work with any other number. Profiles should be named as follows: 
