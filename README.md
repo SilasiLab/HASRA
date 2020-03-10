@@ -11,14 +11,16 @@ The design allows a single mouse at a time to enter the reaching tube. Upon entr
 # **Dependencies:**
 * Ubuntu v16.04 LTS: Kernel version 4.4.19-35 or later
 * Or Windows 10 is recommended, since the backend camera driver performs better that the one on linux in our experiment.
-* Python v3.5.2
-	* pySerial	
-	* numpy
-	* OpenCV v3.4.x
-	* tkinter 
-	* matplotlib
+* Python v3.6.10
+	* pySerial==3.4	
+	* numpy==1.18.1
+	* OpenCV=4.1.2 (A whl file is provided under requirment folder.)
+	* tkinter=8.6.8
+	* matplotlib=3.1.3
 	* Pillow
 	* tqdm
+	* tensorflow
+	* keras
 	* psutil
 	* multiprocessing
 	* subprocess
