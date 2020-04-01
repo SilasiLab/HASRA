@@ -2,7 +2,7 @@
 
 This system allows the user to host up to 5 mice in their home environment and automatically administer the single pellet reaching test to those animals. The system can run unsupervised and continuously for weeks at a time, allowing all 5 mice to perform an unlimited number of single pellet trials at their leisure. 
 
-The design allows a single mouse at a time to enter the reaching tube. Upon entry, the animal’s RFID tag will be read, and if authenticated, a session will start for that animal. A session is defined as everything that happens from the time an animal enters the reaching tube to when they leave the tube. At the start of a session, the animal’s profile will be read and the task difficulty as well as the left and right preference will be automatically adjusted by moving the pellet presentation arm to the appropriate distance both away from the reaching tube and from right to left. Pellets will continue to be presented periodically until the mouse leaves the tube, at which point the session will end. Video and other data is recorded for the duration of each session. At session end, all the data for the session is saved in an organized way. 
+The design allows a single mouse at a time to enter the reaching tube. Upon entry, the animal’s RFID tag will be read, and if authenticated, a session will start for that animal. A session is defined as everything that happens from the time an animal enters the reaching tube to when they leave the tube. At the start of a session, the animal’s profile will be read and the task difficulty as well as the left and right preference will be automatically adjusted by moving the pellet presentation arm to the appropriate distance both away from the reaching tube and from right to left. Pellets will continue to be presented periodically until the mouse leaves the tube, at which point the session will end. Video and other data is recorded for the duration of each session. At session end, all the data for the session is saved in an organized way. We also have an auxiliary function for counting the successful rate of displaying a pellet using MobileNetV2 based on tensorflow and keras.
 
 For further analyse, you can check the repository posted here:
 https://github.com/SilasiLab/HomecageSinglePellet_Manual
@@ -14,7 +14,8 @@ https://github.com/SilasiLab/HomecageSinglePellet_Manual
 # **Dependencies:**
 * Ubuntu v16.04 LTS: Kernel version 4.4.19-35 or later
 * Or Windows 10 is recommended, since the backend camera driver performs better that the one on linux in our experiment.
-* Python v3.6.10
+* Anaconda 3 environment, for the dependancies without a version number, it means there is no specific requirement on it. 
+	* Python==3.6.10
 	* pySerial==3.4	
 	* numpy==1.18.1
 	* OpenCV=4.1.2 (A whl file is provided under requirment folder.)
@@ -31,32 +32,26 @@ https://github.com/SilasiLab/HomecageSinglePellet_Manual
 * Arduino IDE v1.8.5
 
 # **Software Installation:**
-1. Install Ubuntu 16.04 LTS or Windows10 on your machine.
+1. Windows 10 is strongly recommended for a better support of camera driver. Ubuntu 16.04 LTS is alternative.
 2. Install Anaconda. (https://www.anaconda.com/distribution/)
 3. Install the Flir Spinnaker SDK v1.10.31 **INSERT GOOGLE DRIVE LINK TO SPINNAKER SDK HERE**
 4. Install Arduino IDE v1.8.5. (https://www.arduino.cc/en/Main/Software)
 	
 5. Create and configure a virtual environment for installing the HomeCageSinglePellet code.
-	- `conda create -n <yourenvname> python=3.5.2 anaconda`
+	- `conda create -n <yourenvname> python=3.6.10 anaconda`
 	- `conda activate <yourenvname>`
-	- `conda install -c anaconda numpy`
-	- `conda install -c anaconda pyserial`
-	- `conda install -c anaconda tk`
+	- `conda install -c anaconda numpy==1.18.1`
+	- `conda install -c anaconda pyserial==3.4`
+	- `conda install -c anaconda tk==8.6.8`
 	- `conda install -c conda-forge matplotlib`
 	- `conda install tqdm`
 	- `conda install Pillow`
+	- `conda install tensorflow==1.10.0`
+	- `conda install keras==2.2.4`
 	- `pip install psutil`
-	- `pip install pysnooper`
-	
-6. For opencv, we need to download whl file first. https://www.lfd.uci.edu/~gohlke/pythonlibs/#opencv and download `opencv_python‑3.4.6+contrib‑cp35‑cp35m‑win_amd64.whl`
-	Open a terminal, go in to the directory containing this file.
-	- `pip install ./opencv_python‑3.4.6+contrib‑cp35‑cp35m‑win_amd64.whl`
+	- `pip install /path/to/HomeCageSinglePellet_server/requirment/opencv_python-4.1.2+contrib-cp36-cp36m-win_amd64.whl`
 
-7. Download the HCSP source code from https://github.com/SilasiLab/HomeCageSinglePellet and unpack it.
-8. Optional (Only if you want to use the analysis features): Install Deeplabcut using the Anaconda based pip installation method. (https://github.com/AlexEMG/DeepLabCut/blob/master/docs/installation.md)
-9. Optional (Only if you want to use the anaylsis features): Move the file `HomeCageSinglePellet/src/analysis/HCSP_analyze.py` into `~/.conda/envs/DLC2/lib/python3.6/site-packages/deeplabcut` (Where DLC2 is the name of the anaconda virtual environment where you installed Deeplabcut).
-10. Optional (Only if you want to use the anaylsis features): Download our pretrained DLC2 network for automatically extracting reach attempts from your videos. **INSERT GOOGLE DRIVE LINK TO NETWORK HERE**
-11. Done!
+7. `git clone https://github.com/SilasiLab/HomeCageSinglePellet_server.git`
 	
 	
 # **Assembly:**
@@ -68,28 +63,30 @@ https://github.com/SilasiLab/HomeCageSinglePellet_server/blob/master/Homecage%20
 
 # **Usage**:
 ### **Running the Device**
-1. Enter the virtual environment that the system was installed in by typing `source activate <my_env>` into a terminal.
+1. Enter the virtual environment that the system was installed in by typing `conda activate <my_env>` into a terminal.
 
-2. Use `cd` to navigate to HomeCageSinglePellet_server/src/client/ and then run `python -B genProfiles.py`. The text prompts will walk you through entering your new animals into the system.
+2. Optional: Use `cd` to navigate to` HomeCageSinglePellet_server/src/client/` and then run `python -B genProfiles.py`. The text prompts will walk you through entering your new animals into the system. Since the folder and the file are already inclued in this repo, this step is optional.
 
 3. Open HomeCageSinglePellet_server/config/config.txt and set the system configuration you want.
 
-4. Enter HomeCageSinglePellet_server/src/client/ and run `python -B main.py`
+4. 
+5. Enter HomeCageSinglePellet_server/src/client/ and run `python main.py`
 
-5. In the same folder, open another terminal and activate the virtual environment again, modify the cage ID in the script googleDriveManager.py, then run `python googleDriveManager.py`
+6. OPtional: If you have a google file stream mounted on this computer, you can choose to upload all the viedos and log files to google drive. In the same folder, open another terminal and activate the virtual environment again, modify the cage ID in the script googleDriveManager.py, then run `python googleDriveManager.py`
 
-6. To test that everything is running correctly, block the IR beam breaker with something
+7. To test that everything is running correctly, block the IR beam breaker with something
 	and scan one of the system’s test tags. If a session starts properly, it’s working.
 
-7. To shut the system down cleanly; 
+8. To shut the system down cleanly; 
 
 	- Ensure no sessions are currently running. 
 	- Press the quit button on the GUI.
 	- Ctrl+c out of the program running in the terminal.
 NB.
-1. Arduino needs to be USB0 , and RFID reader needs to be USB1. You can see connected USB devices with terminal command:
+1. 
+* In linux: Arduino needs to be USB0 , and RFID reader needs to be USB1. You can see connected USB devices with terminal command:
 ls /dev/tty*
-
+* For windows: You can use the command `mode` in the terminal to check the port name of each device connected to the computer.  
 
 
 
