@@ -69,8 +69,15 @@ https://github.com/SilasiLab/HomeCageSinglePellet_server/blob/master/Homecage%20
 
 3. Open HomeCageSinglePellet_server/config/config.txt and set the system configuration you want.
 
-4. 
-5. Enter HomeCageSinglePellet_server/src/client/ and run `python main.py`
+4. Find the COM port ids for Arduino and RFID reader, using `mode` command in terminal.
+(In linux: Arduino needs to be USB0 , and RFID reader needs to be USB1. You can see connected USB devices with terminal command:
+ls /dev/tty* and You need to replace the COMs in main.py -> `sys_init()` function manually.) 
+  
+5. Open a termanal and run following command:
+* `cd /your/path/to/HomeCageSinglePellet_server/src/client/`
+* `conda activate YourEnvironment` replace YourEnvironment by the name of your environment.
+* `python main.py COM-arduino COM-RFID` replace COM-arduino and COM-RFID by the COM ids of Arduino and RFID respectively.
+
 
 6. OPtional: If you have a google file stream mounted on this computer, you can choose to upload all the viedos and log files to google drive. In the same folder, open another terminal and activate the virtual environment again, modify the cage ID in the script googleDriveManager.py, then run `python googleDriveManager.py`
 
@@ -82,11 +89,7 @@ https://github.com/SilasiLab/HomeCageSinglePellet_server/blob/master/Homecage%20
 	- Ensure no sessions are currently running. 
 	- Press the quit button on the GUI.
 	- Ctrl+c out of the program running in the terminal.
-NB.
-1. 
-* In linux: Arduino needs to be USB0 , and RFID reader needs to be USB1. You can see connected USB devices with terminal command:
-ls /dev/tty*
-* For windows: You can use the command `mode` in the terminal to check the port name of each device connected to the computer.  
+
 
 
 
