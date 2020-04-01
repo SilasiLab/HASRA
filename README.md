@@ -19,7 +19,7 @@ The design allows a single mouse at a time to enter the reaching tube. Upon entr
 	* matplotlib=3.1.3
 	* Pillow
 	* tqdm
-	* tensorflow
+	* tensorflow=1.10
 	* keras
 	* psutil
 	* multiprocessing
