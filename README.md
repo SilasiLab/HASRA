@@ -84,10 +84,12 @@ Since there could be mutiple cage running on the same computer and they can also
 In the same folder, open another terminal and activate the virtual environment again, modify the cage ID in the script googleDriveManager.py, then run `python googleDriveManager.py \path\to\your\cloud\drive\folder`.
 The videos and the log files will be stored in `your cloud drive\homecage_id_sync`.
 
-7. To test that everything is running correctly, block the IR beam breaker with something
-	and scan one of the system’s test tags. If a session starts properly, it’s working.
+7. You need to put in the RFID tag numbers manually into the profiles. Take mouse 1 as an instance, you need to replace the first line in `HomeCageSinglePellet_server\AnimalProfiles\MOUSE1\MOUSE1_save.txt`. If you do not know your tag number, don't worry. You can scan it on the RFID reader, it will be printed in the Terminal as `[tag number] not recognized`.
 
-8. To shut the system down cleanly; 
+8. To test that everything is running correctly, block the IR beam breaker with something
+	and scan one of the system’s test tags. If a session starts properly, it’s working. You will also be able to find out hom many pellets have been succefully displayed out of current displays we have as it is shown in the terminal too. 
+
+9. To shut the system down cleanly; 
 
 	- Ensure no sessions are currently running. 
 	- Press the quit button on the GUI.
