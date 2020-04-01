@@ -17,6 +17,8 @@ from driver_for_a_better_camera import *
 from googleDriveManager import is_locked
 import numpy as np
 from detector import Detector
+import sys
+
 D = Detector("model/model.h5")
 systemCheck.check_directory_structure()
 # Load all configuration information for running the system.
@@ -441,8 +443,14 @@ def launch_gui():
 def sys_init():
     # print(PROFILE_SAVE_DIRECTORY)
     profile_list = loadAnimalProfiles(PROFILE_SAVE_DIRECTORY)
-    arduino_client = arduinoClient.client("COM9", 9600)
-    ser = serial.Serial('COM4', 9600)
+    if len(sys.argv) == 3:
+        COM1 = str(sys.argv[1])
+        COM2 = str(sys.argv[2])
+    else:
+        COM1 = '1'
+        COM2 = '2'
+    arduino_client = arduinoClient.client("COM" + COM1, 9600)
+    ser = serial.Serial('COM' + COM2, 9600)
 
     guiProcess = launch_gui()
     session_controller = SessionController(profile_list, arduino_client)
