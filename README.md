@@ -74,12 +74,15 @@ https://github.com/SilasiLab/HomeCageSinglePellet_server/blob/master/Homecage%20
 ls /dev/tty* and You need to replace the COMs in main.py -> `sys_init()` function manually.) 
   
 5. Open a termanal and run following command:
-* `cd /your/path/to/HomeCageSinglePellet_server/src/client/`
+* `cd \your\path\to\HomeCageSinglePellet_server\src\client\`
 * `conda activate YourEnvironment` replace YourEnvironment by the name of your environment.
 * `python main.py COM-arduino COM-RFID` replace COM-arduino and COM-RFID by the COM ids of Arduino and RFID respectively.
 
 
-6. OPtional: If you have a google file stream mounted on this computer, you can choose to upload all the viedos and log files to google drive. In the same folder, open another terminal and activate the virtual environment again, modify the cage ID in the script googleDriveManager.py, then run `python googleDriveManager.py`
+6. OPtional: If you have a google file stream mounted on this computer, you can choose to upload all the viedos and log files to google drive. You need firstly find out the local path to this google drive folder, in this case it is: `G:\Shared drives\SilasiLabGdrive`.
+Since there could be mutiple cage running on the same computer and they can also be stored in the same google cloud folder. You can add a suffix to the project foler name by changing the root folder name from `HomeCageSinglePellet_server` to `HomeCageSinglePellet_server_id`(replace the id by your id) 
+In the same folder, open another terminal and activate the virtual environment again, modify the cage ID in the script googleDriveManager.py, then run `python googleDriveManager.py \path\to\your\cloud\drive\folder`.
+The videos and the log files will be stored in `your cloud drive\homecage_id_sync`.
 
 7. To test that everything is running correctly, block the IR beam breaker with something
 	and scan one of the system’s test tags. If a session starts properly, it’s working.
@@ -91,54 +94,10 @@ ls /dev/tty* and You need to replace the COMs in main.py -> `sys_init()` functio
 	- Ctrl+c out of the program running in the terminal.
 
 
-
-
-
-
-
-### **Analysis**:
-
-A high level analysis script is provided that runs the data for all animals through a long analysis pipeline. The functions performed on each video include;
-
-* Analyze with Deeplabcut2.
-* Identify all reaching attempts and record frame indexes where reaches occur.
-* Compute 3D trajectory of reaches and estimate magnitude of movement in millimeters.
-* Cut videos to remove any footage not within the bounds of a reaching event.
-* Neatly package data for each analyzed video in a descriptively named folder within the animals ./Analyses/ directory.
-
-![](https://raw.githubusercontent.com/SilasiLab/HomeCageSinglePellet/master/resources/Images/reach.gif)
-
-This analysis is started by entering the HomeCageSinglePellet/src/analysis/ directory and running
-`bash analyze_videos.sh <CONFIG_PATH> <VIDEO_DIRECTORY> <NETWORK_NAME>`
-
-This script takes the following input;
-
-**CONFIG_PATH** = Full path to config.yaml file in root directory of DLC2 project.
-![alt text](https://raw.githubusercontent.com/SilasiLab/HomeCageSinglePellet/master/resources/Images/CONFIG_PATH_ANALYSIS.png)
-
-**VIDEO_DIRECTORY** = Full path to directory containing videos you want to analyze. (e.g <~/HomeCageSinglePellet/AnimalProfiles/MOUSE1/Videos/>)
-
-**NETWORK_NAME** = Full name of DLC2 network you want to use to analyze videos. (e.g <DeepCut_res
-net50_HomeCageSinglePelletNov18shuffle1_950000>)
-
-
-Another script (`HomeCageSinglePellet/src/analysis/scoreTrials.py`) is provided for manually categorizing reaches once they have been identified in the step detailed above. This script opens a GUI that allows the user to select an animal and browse through all the videos that have been analyzed for that animal. (In the video list, blue videos indicate videos where reaches were detected by the analysis software. Beige videos indicate videos where no reaches were detected. Green videos indicate videos that have already been manually scored). When users select a video from the list, the video window will display the first detected reach in a loop. It will also display the "reach count" (e.g 1/16) to indicate how many reaches the video contains and which one is currently being viewed. The user can then use the mouse or a hotkey to place the current reach into a category. The video window will then jump to the next reach. This repeats until all the reaches for a given video are scored, at which point the category information will be saved. 
-<img width="800" height="400" src="https://raw.githubusercontent.com/SilasiLab/HomeCageSinglePellet/master/resources/Images/SCORING_GUI_1.png">
-<img width="800" height="400" src="https://raw.githubusercontent.com/SilasiLab/HomeCageSinglePellet/master/resources/Images/SCORING_GUI_2.png">
-
-**Note:** All the analysis functions read and write all their data to/from `HomeCageSinglePellet/AnimalProfiles/<animal_name>/Analyses/`. Information for each video is saved in a unique folder whose name includes video creation date, animal RFID, cage number and session number. (e.g `2019-01-25_14:36:31_002FBE737B99_67465_5233`). Each of these folders will contain the raw video, the deeplabcut output from analyzing the video (.h5 and .csv formats). In addition, if >=1 reaches were found in the video, the folder will contain a file named date_time_rfid_cage_number_session_number_reaches.txt (e.g `2019-01-25_14:36:31_002FBE737B99_67465_5233_reaches.txt`). This file contains the start and stop frame indexes of each reach in the video and (x,y,z) vectors for each reach. In addition, once a video has been scored manually using `scoreTrials.py`, a file named date_time_rfid_cage_number_session_number_reaches_scored.txt (e.g `2019-01-25_14:36:31_002FBE737B99_67465_5233_reaches_scored.txt`) will be added to the video's folder. This file is the same as date_time_rfid_cage_number_session_number_reaches.txt, except that it also contains a category identifier for every reach.
-
-
 # **Troubleshooting**:
 
 * Is everything plugged in?
 * Shutting the system down incorrectly will often cause the camera and camera software to enter a bad state.
-	* Check if the light on the camera is solid green. If it is, unplug the camera and plug it back in.
-	* Check the HomeCageSinglePellet/src/client/ directory for a file named KILL. If this file exists, delete it.
-	* Make sure the camera is plugged into a USB 3.0 or greater port and that it is not sharing a USB bridge with too many 			other devices (I.e if you have 43 devices plugged into the back of the computer and none in the front, plug the 		camera into the front).
 * Make sure you are in the correct virtual environment.
 * Make sure the HomeCageSinglePellet/config/config.txt file contains the correct configuration. (If the file gets deleted it will be replaced by a default version at system start)
 * Make sure there are 1 to 5 profiles in the HomeCageSinglePellet/AnimalProfiles/ directory. Ensure these profiles contain all 		the appropriate files and that the save.txt file for each animal contains the correct information. 
-* Make sure that the Arduino mounted as device ttyUSB0 and that the RFID reader mounted as ttyUSB1 in /dev/. If they mounted 
-differently, rebooting and attaching them in the correct order will fix the problem.
-
