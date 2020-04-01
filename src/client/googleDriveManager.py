@@ -210,5 +210,8 @@ if __name__ == '__main__':
         cage_index = int(cage_index)
     else:
         cage_index = 1
-    gdrive_local = sys.argv[1]
-    googleDriveManager(interval=300, min_interval=5, cage_id=cage_index, mice_n=5, gdrive_local=gdrive_local)
+    if len(sys.argv) > 1:
+        gdrive_local = sys.argv[1]
+        googleDriveManager(interval=300, min_interval=5, cage_id=cage_index, mice_n=5, gdrive_local=gdrive_local)
+    else:
+        googleDriveManager(interval=300, min_interval=5, cage_id=cage_index, mice_n=5)
