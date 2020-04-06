@@ -34,10 +34,9 @@ https://github.com/SilasiLab/HomecageSinglePellet_Manual
 # **Software Installation:**
 1. Windows 10 is strongly recommended for a better support of camera driver. Ubuntu 16.04 LTS is alternative.
 2. Install Anaconda. (https://www.anaconda.com/distribution/)
-3. Install the Flir Spinnaker SDK v1.10.31 **INSERT GOOGLE DRIVE LINK TO SPINNAKER SDK HERE**
-4. Install Arduino IDE v1.8.5. (https://www.arduino.cc/en/Main/Software)
+3. Install Arduino IDE v1.8.5. (https://www.arduino.cc/en/Main/Software)
 	
-5. Create and configure a virtual environment for installing the HomeCageSinglePellet code.
+4. Create and configure a virtual environment for installing the HomeCageSinglePellet code.
 	- `conda create -n <yourenvname> python=3.6.10 anaconda`
 	- `conda activate <yourenvname>`
 	- `conda install -c anaconda numpy==1.18.1`
@@ -51,7 +50,7 @@ https://github.com/SilasiLab/HomecageSinglePellet_Manual
 	- `pip install psutil`
 	- `pip install /path/to/HomeCageSinglePellet_server/requirment/opencv_python-4.1.2+contrib-cp36-cp36m-win_amd64.whl`
 
-7. `git clone https://github.com/SilasiLab/HomeCageSinglePellet_server.git`
+5. `git clone https://github.com/SilasiLab/HomeCageSinglePellet_server.git`
 	
 	
 # **Assembly:**
