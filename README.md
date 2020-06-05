@@ -98,7 +98,6 @@ The videos and the log files will be stored in `your cloud drive\homecage_id_syn
 # **Troubleshooting**:
 
 * Is everything plugged in?
-* Shutting the system down incorrectly will often cause the camera and camera software to enter a bad state.
 * Make sure you are in the correct virtual environment.
 * Make sure the HomeCageSinglePellet/config/config.txt file contains the correct configuration. (If the file gets deleted it will be replaced by a default version at system start)
-* Make sure there are 1 to 5 profiles in the HomeCageSinglePellet/AnimalProfiles/ directory. Ensure these profiles contain all 		the appropriate files and that the save.txt file for each animal contains the correct information. 
+* Make sure there are 1 to 5 profiles in the HomeCageSinglePellet/AnimalProfiles/ directory. Ensure these profiles contain all the appropriate files and that the save.txt file for each animal contains the correct information. 
