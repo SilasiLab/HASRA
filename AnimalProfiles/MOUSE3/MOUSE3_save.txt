@@ -1,9 +1,0 @@
-00784A162400
-MOUSE3
-3
-86885
-9
-8
-LEFT
-15081
-D:\HomeCageSinglePellet_server_10\AnimalProfiles\MOUSE3\

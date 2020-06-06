@@ -1,9 +1,0 @@
-0005E6A01754
-MOUSE5
-5
-86885
-0
-7
-BOTH
-21053
-C:\Users\Silasi Lab\HomeCageSinglePellet_server_10\AnimalProfiles\MOUSE5\

@@ -1,9 +1,0 @@
-0005E6A02162
-TEST_RIGHT
-6
-45567
-0
-7
-BOTH
-1093
-D:\HomeCageSinglePellet_server_10\AnimalProfiles\TEST_RIGHT\

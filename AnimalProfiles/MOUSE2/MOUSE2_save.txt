@@ -1,9 +1,0 @@
-002FBE723DDE
-MOUSE2
-2
-86885
-9
-7
-RIGHT
-15588
-D:\HomeCageSinglePellet_server_10\AnimalProfiles\MOUSE2\

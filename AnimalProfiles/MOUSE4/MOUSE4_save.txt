@@ -1,9 +1,0 @@
-0005E69F1B67
-MOUSE4
-4
-86885
-9
-8
-RIGHT
-19777
-D:\HomeCageSinglePellet_server_10\AnimalProfiles\MOUSE4\

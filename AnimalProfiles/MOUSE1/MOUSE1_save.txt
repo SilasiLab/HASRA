@@ -1,9 +1,0 @@
-0005E69F7509
-MOUSE1
-1
-86885
-0
-7
-RIGHT
-14481
-C:\Users\Silasi Lab\HomeCageSinglePellet_server_10\AnimalProfiles\MOUSE1\
