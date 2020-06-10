@@ -80,7 +80,7 @@ ls /dev/tty* and You need to replace the COMs in main.py -> `sys_init()` functio
 
 6. Optional: If you have a google file stream mounted on this computer, you can choose to upload all the viedos and log files to google drive. You need firstly find out the local path to this google drive folder, in this case it is: `G:\Shared drives\SilasiLabGdrive`.
 Since there could be mutiple cage running on the same computer and they can also be stored in the same google cloud folder. You can add a suffix to the project foler name by changing the root folder name from `HomeCageSinglePellet_server` to `HomeCageSinglePellet_server_id`(replace the id by your id) 
-In the same folder, open another terminal and activate the virtual environment again, modify the cage ID in the script googleDriveManager.py, then run `python googleDriveManager.py \path\to\your\cloud\drive\folder`.
+In the same folder, open another terminal and activate the virtual environment again, then run `python googleDriveManager.py \path\to\your\cloud\drive\folder`.
 The videos and the log files will be stored in `your cloud drive\homecage_id_sync`.
 
 7. You need to put in the RFID tag numbers manually into the profiles. Take mouse 1 as an instance, you need to replace the first line in `HomeCageSinglePellet_server\AnimalProfiles\MOUSE1\MOUSE1_save.txt`. If you do not know your tag number, don't worry. You can scan it on the RFID reader, it will be printed in the Terminal as `[tag number] not recognized`.
