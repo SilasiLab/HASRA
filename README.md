@@ -48,7 +48,7 @@ https://github.com/SilasiLab/HomecageSinglePellet_Manual
 	- `conda install tensorflow==1.10.0`
 	- `conda install keras==2.2.4`
 	- `pip install psutil`
-	- `pip install /path/to/HASRA/requirment/opencv_python-4.1.2+contrib-cp36-cp36m-win_amd64.whl`
+	- `pip install /path/to/HASRA/dependencies/opencv_python-4.1.2+contrib-cp36-cp36m-win_amd64.whl`
 
 5. `git clone https://github.com/SilasiLab/HomeCageSinglePellet_server.git`
 	
