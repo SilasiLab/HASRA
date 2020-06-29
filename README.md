@@ -48,11 +48,15 @@ https://github.com/SilasiLab/HomecageSinglePellet_Manual
 	- `conda install tensorflow==1.10.0`
 	- `conda install keras==2.2.4`
 	- `pip install psutil`
-	- `pip install /path/to/HASRA/dependencies/opencv_python-4.1.2+contrib-cp36-cp36m-win_amd64.whl`
+	
 
 5. `git clone https://github.com/SilasiLab/HomeCageSinglePellet_server.git`
-	
-	
+6. `pip install /path/to/HASRA/dependencies/opencv_python-4.1.2+contrib-cp36-cp36m-win_amd64.whl`
+7. Add ID of cage to the name of folder as postfix. (Rname the folder of the downloaded reporsitory as HASRA_[id]).
+8. Create folders and profiles of the animals by running the  `genProfiles.py `
+	- `conda activate [name of your environment]`
+	- `cd /path/to/HASRA/src/client`
+	- `python genProfiles.py`
 # **Assembly:**
 
 The detailed assembly manual can be found here:
