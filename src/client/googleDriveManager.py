@@ -103,7 +103,9 @@ def googleDriveManager(interval=20, min_interval=10, cage_id=1, mice_n=4, gdrive
     for dir_item in check_dir_list:
         if not os.path.exists(dir_item):
             try:
+                print(dir_item)
                 os.mkdir(dir_item)
+
             except:
                 raise (IOError, "Failed at making directories.")
 
@@ -204,8 +206,9 @@ def is_locked(filepath):
     return locked
 
 if __name__ == '__main__':
+    print(os.getcwd())
     cage_index = [item for item in os.getcwd().split(os.sep)
-                  if 'HASRA' in item.lower()][0].split('_')[-1]
+                  if 'hasra' in item.lower()][0].split('_')[-1]
     if cage_index.isdigit():
         cage_index = int(cage_index)
     else:
