@@ -205,7 +205,7 @@ def is_locked(filepath):
 
 if __name__ == '__main__':
     cage_index = [item for item in os.getcwd().split(os.sep)
-                  if 'homecagesinglepellet' in item.lower()][0].split('_')[-1]
+                  if 'HASRA' in item.lower()][0].split('_')[-1]
     if cage_index.isdigit():
         cage_index = int(cage_index)
     else:
